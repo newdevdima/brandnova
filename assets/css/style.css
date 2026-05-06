@@ -578,6 +578,10 @@ body {
 }
 
 .service .link-card:is(:hover, :focus) ion-icon { color: hsl(var(--color)); }
+.service ion-icon {
+  height: 35px;
+  width: 35px;
+}
 
 
 
