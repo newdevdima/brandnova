@@ -528,6 +528,7 @@ body {
 }
 
 .service-card {
+  cursor: pointer;
   height: 100%;
   background-color: var(--white);
   padding-block-end: 40px;
@@ -928,7 +929,7 @@ body {
   color: var(--white);
   font-size: 18px;
   padding: 16px;
-  border-radius: var(--radius-8);
+  border-radius: 30px;
   z-index: 4;
   visibility: hidden;
   opacity: 0;
@@ -1192,7 +1193,6 @@ body {
    * HEADER
    */
 
-  .header { padding-block-start: 47px; }
 
   .nav-open-btn,
   .overlay,
@@ -1434,7 +1434,7 @@ body {
    * SERVICE
    */
 
-  .service .grid-list { grid-template-columns: repeat(4, 1fr); }
+  .service .grid-list { grid-template-columns: repeat(3, 1fr); }
 
   .service-card .h3 { --fs-3: 2rem; }
 
@@ -1468,4 +1468,101 @@ body {
 
   .blog-card .card-title { --fs-4: 2.4rem; }
 
+}
+
+/* 
+Contact
+ */
+.contact {
+  display: flex;
+  background-color: var(--white);
+  gap:40px;
+  padding-inline : 40px;
+}
+
+.container-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+
+.container-left {
+  padding: 42px;
+  background-color: var(--ghost-white);
+  flex: auto;
+  border-radius: 32px;
+  box-shadow: 5px 5px 8px 8px rgba(0,0,0,0.08);
+}
+
+.field-contact {
+  background-color: var(--majorelle-blue);
+  color: var(--white);
+  font-size: var(--fs-9);
+  min-height: 60px;
+  padding-inline: 20px;
+  border-radius: var(--radius-8);
+  margin-block-end: 20px;
+  outline: 3px solid transparent;
+  outline-offset: 0;
+  transition: var(--transition-1);
+  place-items: inherit;
+}
+
+.field-contact::placeholder {color: inherit;}
+
+.field-contact-textarea {
+  width: 100%;
+  background-color: var(--majorelle-blue);
+  color: var(--white);
+  font-size: var(--fs-9);
+  min-height: 150px;
+  padding: 20px;
+  border-radius: var(--radius-8);
+  margin-block-end: 20px; 
+  outline: 3px solid transparent;
+  outline-offset: 0;
+  transition: var(--transition-1);
+  place-items: inherit;
+}
+
+.field-contact-textarea::placeholder {color: inherit;}
+
+.contact .section-title { 
+  margin-block: 20px 70px;
+  font-weight: bolder;
+}
+
+.contact-first-form {
+  display: flex;
+  flex-direction: row;
+  gap:20px
+}
+
+.input-container{
+  flex: auto;
+}
+
+.input-label {
+  font-weight: bold;
+  font-size: large;
+}
+
+.contact-contact {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.contact ion-icon {
+  font-size: 30px;
+  --ionicon-stroke-width:44px;
+}
+
+.contact-contact-container {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
 }
