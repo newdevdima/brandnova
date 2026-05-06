@@ -582,6 +582,24 @@ body {
   height: 35px;
   width: 35px;
 }
+.compass-icon {
+ color : #029687 
+}
+.laptop-icon {
+  color :#6e0fd4;
+}
+.pricetag-icon{
+ color :#d1b603 
+}
+.git-icon{
+  color : #08d181;
+}
+.megaphone-icon {
+  color :#0666c7;
+}
+.cash-icon {
+  color : #e65010;
+}
 
 
 
