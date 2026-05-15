@@ -1252,7 +1252,15 @@ body {
     transition: var(--transition-1);
   }
 
-  .navbar-link:is(:hover, :focus)::before { width: 100%; }
+    .navbar-link:is(:hover, :focus)::before,
+    .navbar-link.active::before {
+        width: 100%;
+    }
+
+    .navbar-link:is(:hover, :focus),
+    .navbar-link.active {
+        color: var(--raisin-black-1);
+    }
 
   .header .btn { display: inline-flex; }
 
@@ -1587,4 +1595,38 @@ Contact
   display: flex;
   flex-direction: column;
   gap: 17px;
+}
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.breadcrumb a {
+    position: relative;
+    color: var(--cool-gray);
+    transition: 0.3s;
+}
+
+.breadcrumb a::before {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    border-radius: 5px;
+    background-color: var(--majorelle-blue);
+    transition: 0.3s;
+}
+
+.breadcrumb a.active {
+    color: var(--raisin-black-1);
+}
+
+.breadcrumb a.active::before {
+    width: 100%;
 }

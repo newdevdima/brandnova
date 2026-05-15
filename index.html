@@ -30,7 +30,6 @@
   <link rel="preload" as="image" href="./assets/images/hero-banner.png">
 
 </head>
-
 <body id="top">
 
   <!-- 
@@ -55,7 +54,7 @@
         <ul class="navbar-list">
 
           <li class="navbar-item">
-            <a href="#home" class="navbar-link" data-nav-link>Home</a>
+            <a href="#home" class="navbar-link" data-nav-link>Acceuil</a>
           </li>
 
           <li class="navbar-item">
@@ -98,11 +97,9 @@
 
   <main>
     <article>
-
       <!-- 
         - #HERO
       -->
-
       <section class="section hero" id="home" aria-label="hero">
         <div class="container">
 
@@ -133,12 +130,9 @@
 
         </div>
       </section>
-
-
       <!-- 
         - #SERVICE
       -->
-
       <section class="section service" id="service" aria-label="service">
         <div class="container">
 
@@ -184,7 +178,7 @@
                 </div>
 
                 <h3 class="h3">
-                  <a href="#" class="card-title">Pay Per Click (PPC)</a>
+                  <a href="services/ppc.html" class="card-title">Pay Per Click (PPC)</a>
                 </h3>
 
               </div>
@@ -235,12 +229,9 @@
 
         </div>
       </section>
-
-
       <!-- 
         - #FEATURE
       -->
-
       <section class="section feature" id="feature" aria-label="feature">
         <div class="container">
 
@@ -319,12 +310,9 @@
 
         </div>
       </section>
-
-
       <!-- 
         - #PROJECT
       -->
-
       <section class="section project" id="project" aria-label="project">
         <div class="container">
 
@@ -459,12 +447,9 @@
 
         </div>
       </section>
-
-
       <!-- 
         - #NEWSLETTER
       -->
-
       <section class="section newsletter has-bg-image" aria-label="newsletter"
         style="background-image: url('./assets/images/newsletter-bg.jpg')">
         <div class="container">
@@ -494,12 +479,9 @@
 
         </div>
       </section>
-
-
       <!-- 
         - #BLOG
       -->
-
       <section class="section blog" id="blog" aria-label="blog">
         <div class="container">
 
@@ -936,6 +918,34 @@
 
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script>
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll(".navbar-link");
+
+      window.addEventListener("scroll", () => {
+
+          let current = "";
+
+          sections.forEach(section => {
+              const sectionTop = section.offsetTop;
+              const sectionHeight = section.clientHeight;
+
+              if (pageYOffset >= sectionTop - 200) {
+                  current = section.getAttribute("id");
+              }
+          });
+
+          navLinks.forEach(link => {
+              link.classList.remove("active");
+
+              if (link.getAttribute("href") === `#${current}`) {
+                  link.classList.add("active");
+              }
+          });
+
+      });
+  </script>
 
 </body>
 
