@@ -91,10 +91,6 @@
     </div>
   </header>
 
-
-
-
-
   <main>
     <article>
       <!-- 
@@ -150,7 +146,7 @@
                 </div>
 
                 <h3 class="h3">
-                  <a href="#" class="card-title">Optimisation pour les moteurs de recherche</a>
+                  <a href="./services/optimisationMoteursRecherche.html" class="card-title">Optimisation pour les moteurs de recherche</a>
                 </h3>
 
               </div>
@@ -164,7 +160,7 @@
                 </div>
 
                 <h3 class="h3">
-                  <a href="#" class="card-title">Web & Mobile Development</a>
+                  <a href="./services/webAndMobileDeveloppement.html" class="card-title">Web & Mobile Development</a>
                 </h3>
 
               </div>
@@ -192,7 +188,7 @@
                 </div>
 
                 <h3 class="h3">
-                  <a href="#" class="card-title">Publicités Réseaux Sociaux</a>
+                  <a href="./services/publiciteReseauSociaux.html" class="card-title">Publicités Réseaux Sociaux</a>
                 </h3>
 
               </div>
@@ -206,7 +202,7 @@
                 </div>
 
                 <h3 class="h3">
-                  <a href="#" class="card-title">Marketing Réseaux Sociaux</a>
+                  <a href="./services/marketingReseauxSociaux.html" class="card-title">Marketing Réseaux Sociaux</a>
                 </h3>
 
               </div>
@@ -220,7 +216,7 @@
                 </div>
 
                 <h3 class="h3">
-                  <a href="#" class="card-title">Développement de Marque</a>
+                  <a href="./services/developpementDeMarque.html" class="card-title">Développement de Marque</a>
                 </h3>
 
               </div>
@@ -466,9 +462,11 @@
             <h2 class="h2 section-title">Subscribe newslater get latest updates and deals</h2>
 
             <form action="" class="newsletter-form">
-              <input type="email" name="email_address" placeholder="Enter your mail" required class="email-field">
+                <label>
+                    <input type="email" name="email_address" placeholder="Enter your mail" required class="email-field">
+                </label>
 
-              <button type="submit" class="btn btn-secondary has-before has-after">
+                <button type="submit" class="btn btn-secondary has-before has-after">
                 <span class="span">Subscribe</span>
 
                 <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
@@ -640,28 +638,129 @@
               </div>
             </div>
         </div>
-        <div class="container-left"> 
-          <h3 class="h2 section-title text-center">Être en contact</h3>
-          <div>
-            <div class="contact-first-form">
-              <div class="input-container">
-                <label for="Nom" class="input-label">Nom</label>
-                <input type="text" name="Nom" placeholder="Votre Nom" required class="field-contact">
-              </div>
-              <div class="input-container">
-                <label for="Prenom" class="input-label">Prenom</label>
-                <input type="text" name="Prenom" placeholder="Votre Prenom" required class="field-contact">
-              </div>
-            </div>
-            <label for="Email" class="input-label">Email</label>
-            <input type="email" name="email_address" placeholder="Votre Email" required class="field-contact">
-            <label for="Message" class="input-label">Message</label>
-            <textarea name="message" id="message" class="field-contact-textarea" placeholder="Votre message"></textarea>
-            <button type="submit" class="btn btn-secondary has-before has-after">
-              <span class="span">Envoyer</span>
-            </button>
+        <div class="container-left">
+
+              <h3 class="h2 section-title text-center">
+                  Être en contact
+              </h3>
+
+              <form action="contact.php" method="POST" class="contact-form">
+
+                  <!-- NOM + PRENOM -->
+
+                  <div class="contact-first-form">
+
+                      <div class="input-container">
+
+                          <label for="nom" class="input-label">
+                              Nom
+                          </label>
+
+                          <input
+                                  type="text"
+                                  id="nom"
+                                  name="nom"
+                                  placeholder="Votre Nom"
+                                  required
+                                  class="field-contact"
+                          >
+
+                      </div>
+
+                      <div class="input-container">
+
+                          <label for="prenom" class="input-label">
+                              Prénom
+                          </label>
+
+                          <input
+                                  type="text"
+                                  id="prenom"
+                                  name="prenom"
+                                  placeholder="Votre Prénom"
+                                  required
+                                  class="field-contact"
+                          >
+
+                      </div>
+
+                  </div>
+
+                  <!-- EMAIL -->
+
+                  <div class="input-container">
+
+                      <label for="email" class="input-label">
+                          Email
+                      </label>
+
+                      <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              placeholder="Votre Email"
+                              required
+                              class="field-contact"
+                      >
+
+                  </div>
+
+                  <!-- TELEPHONE -->
+
+                  <div class="input-container">
+
+                      <label for="telephone" class="input-label">
+                          Téléphone
+                      </label>
+
+                      <input
+                              type="tel"
+                              id="telephone"
+                              name="telephone"
+                              placeholder="+336 00 00 00 00"
+                              class="field-contact"
+                      >
+
+                  </div>
+
+                  <!-- MESSAGE -->
+
+                  <div class="input-container">
+
+                      <label for="message" class="input-label">
+                          Message
+                      </label>
+
+                      <textarea
+                              name="message"
+                              id="message"
+                              class="field-contact-textarea"
+                              placeholder="Votre message..."
+                              required
+                      ></textarea>
+
+                  </div>
+
+                  <!-- BUTTON -->
+
+                  <div class="contact-btn-wrapper">
+
+                      <button
+                              type="submit"
+                              class="btn btn-secondary has-before has-after"
+                      >
+
+        <span class="span">
+          Envoyer le message
+        </span>
+
+                      </button>
+
+                  </div>
+
+              </form>
+
           </div>
-        </div>
       </section>
 
     </article>

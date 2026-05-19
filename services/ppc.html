@@ -16,6 +16,7 @@
       - custom css link
     -->
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/servicesStyle.css">
 
     <!--
       - google font link
@@ -27,7 +28,7 @@
     <!--
       - preload images
     -->
-    <link rel="preload" as="image" href="../assets/images/hero-banner.png">
+    <link rel="preload" as="image" href="../assets/images/Pay-Per-Click-Ad.png">
 
 </head>
 
@@ -55,11 +56,11 @@
             <ul class="navbar-list">
 
                 <li class="navbar-item">
-                    <a href="#home" class="navbar-link" data-nav-link>Acceuil</a>
+                    <a href="../index.html#home" class="navbar-link" data-nav-link>Acceuil</a>
                 </li>
 
                 <li class="navbar-item">
-                    <a href="#service" class="navbar-link" data-nav-link>Services</a>
+                    <a href="../index.html#service" class="navbar-link" data-nav-link>Services</a>
                 </li>
 
                 <!-- <li class="navbar-item">
@@ -67,15 +68,15 @@
                 </li> -->
 
                 <li class="navbar-item">
-                    <a href="#project" class="navbar-link" data-nav-link>Portfolio</a>
+                    <a href="../index.html#project" class="navbar-link" data-nav-link>Portfolio</a>
                 </li>
 
                 <li class="navbar-item">
-                    <a href="#blog" class="navbar-link" data-nav-link>A propos</a>
+                    <a href="../index.html#blog" class="navbar-link" data-nav-link>A propos</a>
                 </li>
 
                 <li class="navbar-item">
-                    <a href="#contact" class="navbar-link" data-nav-link>Contact</a>
+                    <a href="../index.html#contact" class="navbar-link" data-nav-link>Contact</a>
                 </li>
             </ul>
 
@@ -85,7 +86,7 @@
             <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
         </button>
 
-        <a href="#contact" class="btn btn-primary has-before has-after">Consulter Nous 👋</a>
+        <a href="../index.html#contact" class="btn btn-primary has-before has-after">Consulter Nous 👋</a>
 
         <div class="overlay" data-nav-toggler data-overlay></div>
 
@@ -98,13 +99,11 @@
 
 <main>
     <article>
-
-
         <!-- HERO PPC -->
         <section class="section hero">
             <div class="breadcrumb">
 
-                <a href="../index.html">Services</a>
+                <a href="../index.html#service" class="breadcrumb">Services</a>
 
                 <span>></span>
 
@@ -122,67 +121,99 @@
                         Attirez des clients qualifiés rapidement grâce à des campagnes optimisées et rentables.
                     </p>
 
-                    <a href="#contact" class="btn btn-primary has-before has-after">
+                    <a href="../index.html#contact" class="btn btn-primary has-before has-after">
                         Demander un devis
                     </a>
                 </div>
                 <figure class="hero-banner">
-                    <img src="../assets/images/hero-banner.png" width="794" height="637" alt="hero banner" class="w-100">
+                    <img src="../assets/images/herobanner_ppc.png" class="img-width" alt="hero banner" >
                 </figure>
             </div>
         </section>
 
         <!-- STATS -->
-        <section class="section">
-            <div class="container text-center">
-                <div class="wrapper">
+        <section class="section stats-section">
+            <div class="container">
 
-                    <div class="reveal reveal-delay-1">
-                        <div class="counter" data-target="120182299">0</div>
-                        <p>Impressions générées</p>
+                <div class="stats-grid">
+
+                    <div class="stat-card reveal reveal-delay-1">
+                        <div class="counter" data-target="120">0</div>
+                        <p>Millions d’impressions</p>
                     </div>
 
-                    <div class="reveal reveal-delay-2">
-                        <div class="counter" data-target="700">0</div>
+                    <div class="stat-card reveal reveal-delay-2">
+                        <div class="counter" data-target="850">0</div>
                         <p>Campagnes lancées</p>
                     </div>
 
-                    <div class="reveal reveal-delay-3">
-                        <div class="counter" data-target="80">0</div>
-                        <p>Clients satisfaits</p>
+                    <div class="stat-card reveal reveal-delay-3">
+                        <div class="counter" data-target="97">0</div>
+                        <p>% Clients satisfaits</p>
                     </div>
 
                 </div>
+
             </div>
         </section>
 
         <!-- PPC SECTIONS -->
-        <section class="section">
+        <section class="section ppc-section">
             <div class="container">
 
-                <div class="ppc-card reveal">
-                    <h4>Stratégie sur mesure</h4>
-                    <p>Nous analysons votre marché et vos objectifs pour créer des campagnes performantes.</p>
-                </div>
+                <div class="ppc-grid">
 
-                <div class="ppc-card reveal">
-                    <h4>Optimisation continue</h4>
-                    <p>Nous ajustons vos campagnes en temps réel pour maximiser votre ROI.</p>
-                </div>
+                    <div class="service-card"
+                         style="
+                         --color: 174, 77%, 50%">
+                        <div class="ppc-icon"><svg width="50px" height="50px" viewBox="0 0 64 64" id="fill" xmlns="http://www.w3.org/2000/svg" fill="#5fb0c4" stroke="#5fb0c4"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><polygon points="23 23 23 21 13 11 13 8 8 3 8 8 3 8 8 13 11 13 21 23 23 23" style="fill:#57e8ea"></polygon><polygon points="41 41 41 43 51 53 51 56 56 61 56 56 61 56 56 51 53 51 43 41 41 41" style="fill:#57e8ea"></polygon><polygon points="27.749 52.464 26.335 51.05 12.192 51.05 10.071 48.929 3 48.929 6.536 52.464 3 56 10.071 56 12.192 53.879 26.335 53.879 27.749 52.464" style="fill:#57e8ea"></polygon><circle cx="32" cy="32" r="25" style="fill:#e5e6eb"></circle><path d="M41.192,22.808A13,13,0,1,1,22.808,41.192l-8.486,8.486A25,25,0,0,0,49.678,14.322Z" style="fill:#d9dae2"></path><circle cx="32" cy="32" r="19" style="fill:#5fb0c4"></circle><path d="M36.243,27.757a6,6,0,0,1-8.486,8.486l-9.192,9.192a19,19,0,1,0,26.87-26.87Z"></path><circle cx="32" cy="32" r="13" style="fill:#e5e6eb"></circle><path d="M32,45a13,13,0,0,0,9.192-22.192L22.808,41.192A12.956,12.956,0,0,0,32,45Z" style="fill:#d9dae2"></path><circle cx="32" cy="32" r="6" style="fill:#5fb0c4"></circle><path d="M32,38a6,6,0,0,0,4.243-10.243l-8.486,8.486A5.985,5.985,0,0,0,32,38Z"></path><circle cx="32" cy="32" r="2" style="fill:#fff"></circle><polygon points="32 32 32 29 46 15 46 11 53 4 53 11 60 11 53 18 49 18 35 32 32 32" style="fill:#2dd0f0"></polygon><path d="M53.542,17.458,53,18H51.475A24.038,24.038,0,1,1,46,12.525V11l.542-.542a26.023,26.023,0,1,0,7,7Z"></path></g></svg></div>
+                        <h4>Stratégie sur mesure</h4>
+                        <p>
+                            Nous analysons votre marché et vos objectifs pour créer des campagnes ultra performantes.
+                        </p>
+                    </div>
 
-                <div class="ppc-card reveal">
-                    <h4>Ciblage précis</h4>
-                    <p>Atteignez les bonnes personnes au bon moment avec des audiences qualifiées.</p>
-                </div>
+                    <div class="service-card"
+                         style="
+                         --color: 200, 77%, 50%">
+                        <div class="ppc-icon">
+                            <svg width="50px" height="50px" viewBox="0 0 64 64" id="fill" xmlns="http://www.w3.org/2000/svg" fill="#1a94e0"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><rect height="14" style="fill:#cfcfd9" width="6" x="4" y="47"></rect><rect height="20" style="fill:#cfcfd9" width="6" x="14" y="41"></rect><rect height="26" style="fill:#cfcfd9" width="6" x="24" y="35"></rect><rect height="30" style="fill:#cfcfd9" width="6" x="34" y="31"></rect><rect height="35" style="fill:#cfcfd9" width="6" x="44" y="26"></rect><rect height="42" style="fill:#cfcfd9" width="6" x="54" y="19"></rect><rect height="40" style="fill:#d9dae2" width="4" x="54" y="19"></rect><rect height="33" style="fill:#d9dae2" width="4" x="44" y="26"></rect><rect height="28" style="fill:#d9dae2" width="4" x="34" y="31"></rect><rect height="24" style="fill:#d9dae2" width="4" x="24" y="35"></rect><rect height="18" style="fill:#d9dae2" width="4" x="14" y="41"></rect><rect height="12" style="fill:#d9dae2" width="4" x="4" y="47"></rect><polygon points="53 3 54.314 5.663 57.253 6.09 55.127 8.163 55.629 11.09 53 9.708 50.371 11.09 50.873 8.163 48.747 6.09 51.686 5.663 53 3" style="fill:#94c7f2"></polygon><polygon points="38 11 41 14 34 21 21 21 6 36 9 39 23 25 36 25 44 17 47 20 47 11 38 11" style="fill:#0468ad"></polygon><path d="M41,14l-7,7H21L6,36l3,3L23,25H36l5-5a4.242,4.242,0,0,0,0-6Z" style="fill:#027de5"></path><polygon points="5 52 5 48 9 48 5 52" style="fill:#fff"></polygon><polygon points="15 46 15 42 19 42 15 46" style="fill:#fff"></polygon><polygon points="25 40 25 36 29 36 25 40" style="fill:#fff"></polygon><polygon points="35 36 35 32 39 32 35 36" style="fill:#fff"></polygon><polygon points="45 31 45 27 49 27 45 31" style="fill:#fff"></polygon><polygon points="55 24 55 20 59 20 55 24" style="fill:#fff"></polygon><path d="M10,62H4a1,1,0,0,1-1-1V47a1,1,0,0,1,1-1h6a1,1,0,0,1,1,1V61A1,1,0,0,1,10,62ZM5,60H9V48H5Z"></path><path d="M20,62H14a1,1,0,0,1-1-1V41a1,1,0,0,1,1-1h6a1,1,0,0,1,1,1V61A1,1,0,0,1,20,62Zm-5-2h4V42H15Z"></path><path d="M30,62H24a1,1,0,0,1-1-1V35a1,1,0,0,1,1-1h6a1,1,0,0,1,1,1V61A1,1,0,0,1,30,62Zm-5-2h4V36H25Z"></path><path d="M40,62H34a1,1,0,0,1-1-1V31a1,1,0,0,1,1-1h6a1,1,0,0,1,1,1V61A1,1,0,0,1,40,62Zm-5-2h4V32H35Z"></path><path d="M50,62H44a1,1,0,0,1-1-1V26a1,1,0,0,1,1-1h6a1,1,0,0,1,1,1V61A1,1,0,0,1,50,62Zm-5-2h4V27H45Z"></path><path d="M60,62H54a1,1,0,0,1-1-1V19a1,1,0,0,1,1-1h6a1,1,0,0,1,1,1V61A1,1,0,0,1,60,62Zm-5-2h4V20H55Z"></path><path d="M55.629,12.09a1.015,1.015,0,0,1-.466-.114L53,10.838l-2.163,1.138a1,1,0,0,1-1.451-1.055L49.8,8.512l-1.75-1.706A1,1,0,0,1,48.6,5.1l2.417-.352L52.1,2.558a1.04,1.04,0,0,1,1.792,0l1.083,2.191L57.4,5.1a1,1,0,0,1,.555,1.705L56.2,8.512l.413,2.409a1,1,0,0,1-.985,1.169ZM53,8.708a1,1,0,0,1,.466.115l.835.439-.159-.93a1,1,0,0,1,.287-.885l.675-.658-.933-.136a1,1,0,0,1-.753-.548L53,5.259l-.418.846a1,1,0,0,1-.753.548l-.933.136.675.658a1,1,0,0,1,.287.885l-.159.93.835-.439A1,1,0,0,1,53,8.708Z"></path></g></svg>                        </div>
+                        <h4>Optimisation continue</h4>
+                        <p>
+                            Nous ajustons vos campagnes en temps réel pour maximiser votre retour sur investissement.
+                        </p>
+                    </div>
 
-                <div class="ppc-card reveal">
-                    <h4>Reporting clair</h4>
-                    <p>Recevez des rapports détaillés et compréhensibles sur vos performances.</p>
-                </div>
+                    <div class="service-card"
+                         style="
+                         --color: 130, 77%, 50%">
+                        <div class="ppc-icon"><svg width="50px" height="50px" viewBox="0 0 64 64" id="fill" xmlns="http://www.w3.org/2000/svg" fill="#1bb14f"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M37,3A23.993,23.993,0,0,0,18.152,41.848L3,57l4,4L22.152,45.848A24,24,0,1,0,37,3Z" style="fill:#e5e6eb"></path><rect height="5.657" style="fill:#28c347" transform="translate(-34.755 23.094) rotate(-45)" width="15.556" x="2.722" y="50.672"></rect><rect height="2.828" transform="translate(-35.169 24.094) rotate(-45)" width="15.556" x="3.722" y="53.086"></rect><circle cx="37" cy="27" r="20" style="fill:#d9dae2"></circle><circle cx="37" cy="27" r="19" style="fill:#f9fafa"></circle><rect height="2" style="fill:#fff" width="27" x="24" y="33"></rect><rect height="8" style="fill:#64e86d" width="4" x="27" y="26"></rect><rect height="14" style="fill:#64e86d" width="4" x="35" y="20"></rect><rect height="16" style="fill:#64e86d" width="4" x="43" y="18"></rect><path d="M52.938,9.062A24,24,0,0,1,19.062,42.938,24,24,0,1,0,52.938,9.062Z" style="fill:#cfcfd9"></path><path d="M16,48l2,2,4.156-4.156a23.946,23.946,0,0,1-2.12-1.88Z" style="fill:#d9dae2"></path><path d="M37,7A20,20,0,1,0,57,27,20.023,20.023,0,0,0,37,7Zm0,38A18,18,0,1,1,55,27,18.021,18.021,0,0,1,37,45Z"></path><path d="M37,2A25.028,25.028,0,0,0,12,27a24.715,24.715,0,0,0,4.827,14.758L2.293,56.293a1,1,0,0,0,0,1.414l4,4a1,1,0,0,0,1.414,0L22.241,47.173A24.721,24.721,0,0,0,37,52,25,25,0,0,0,37,2ZM7,59.586,4.414,57,14,47.414,16.586,50ZM37,50a22.754,22.754,0,0,1-14.229-4.938,1,1,0,0,0-1.326.079L18,48.586,15.414,46l3.445-3.445a1,1,0,0,0,.078-1.326A22.757,22.757,0,0,1,14,27,23,23,0,1,1,37,50Z"></path></g></svg></div>
+                        <h4>Ciblage précis</h4>
+                        <p>
+                            Touchez les bonnes personnes au bon moment grâce à des audiences qualifiées.
+                        </p>
+                    </div>
 
-                <div class="ppc-card reveal">
-                    <h4>Accompagnement complet</h4>
-                    <p>De la création à l’optimisation, nous gérons tout pour vous.</p>
+                    <div class="service-card"
+                         style="
+                         --color: 100, 77%, 50%">
+                        <div class="ppc-icon"><svg  width="50px" height="50px" viewBox="0 0 64 64" id="fill" xmlns="http://www.w3.org/2000/svg" fill="#aae594"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><circle cx="32" cy="32" r="24" style="fill:#f1f2f9"></circle><path d="M32,32V8A24,24,0,0,1,49,48.941Z" style="fill:#fcfcfc"></path><path d="M47.938,14.062A24,24,0,0,1,14.062,47.938,24,24,0,1,0,47.938,14.062Z" style="fill:#f7f7f7"></path><rect height="18" style="fill:#75de0d" width="6" x="3" y="43"></rect><rect height="16" style="fill:#75de0d" width="6" x="13" y="40"></rect><rect height="12" style="fill:#75de0d" width="6" x="23" y="35"></rect><path d="M32,32V3A29,29,0,0,1,61,32Z" style="fill:#1ff702"></path><path d="M32,32H25a7,7,0,0,1,7-7Z" style="fill:#fff"></path><path d="M32,2a1,1,0,0,0-1,1V7.025a24.976,24.976,0,0,0-18,41.2V44.944A22.984,22.984,0,0,1,31,9.025V32a.994.994,0,0,0,.294.708h0L47.561,48.919A22.944,22.944,0,0,1,19,50.96v2.386A24.985,24.985,0,0,0,56.975,33H61a1,1,0,0,0,1-1A30.034,30.034,0,0,0,32,2ZM48.974,47.5,34.42,33H54.975A22.912,22.912,0,0,1,48.974,47.5ZM33,31V4.018A28.035,28.035,0,0,1,59.982,31Z"></path></g></svg></div>
+                        <h4>Reporting clair</h4>
+                        <p>
+                            Recevez des rapports détaillés et faciles à comprendre sur vos performances.
+                        </p>
+                    </div>
+
+                    <div class="service-card"
+                         style="
+                         --color: 50, 77%, 50%">
+                        <div class="ppc-icon"><svg width="50px" height="50px" viewBox="0 0 64 64" id="fill" xmlns="http://www.w3.org/2000/svg" fill="#eedd20"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><rect height="22" style="fill:#d9dae2" width="4" x="30" y="39"></rect><polygon points="47 59 32 51 17 59 15 55 32 46 49 55 47 59" style="fill:#cfcfd9"></polygon><rect height="34" style="fill:#e5e6eb" width="50" x="7" y="7"></rect><rect height="34" style="fill:#d9dae2" width="50" x="7" y="7"></rect><path d="M7,7H57a0,0,0,0,1,0,0V7A34,34,0,0,1,23,41H7a0,0,0,0,1,0,0V7A0,0,0,0,1,7,7Z" style="fill:#e5e6eb"></path><circle cx="19" cy="21" r="4" style="fill:#e2c403"></circle><rect height="4" style="fill:#e2c403" width="6" x="43" y="21"></rect><rect height="4" style="fill:#e2c403" width="6" x="43" y="29"></rect><path d="M19.707,33.707l-1.414-1.414,8-8A1,1,0,0,1,27,24h3.586l4.707-4.707,1.414,1.414-5,5A1,1,0,0,1,31,26H27.414Z" style="fill:#e2c403"></path><polygon points="31 17 39 17 39 25 31 17" style="fill:#e2c403"></polygon><rect height="6" width="58" x="3" y="3"></rect><rect height="6" style="fill:#e09c0b" width="50" x="7" y="3"></rect><polygon points="9 17 9 11 15 11 9 17" style="fill:#fff"></polygon><path d="M61,2H3A1,1,0,0,0,2,3V9a1,1,0,0,0,1,1H6V41a1,1,0,0,0,1,1H29v4.457L14.532,54.116a1,1,0,0,0-.427,1.331l2,4a1,1,0,0,0,1.366.436L29,53.734V61a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V53.734l11.529,6.149a1,1,0,0,0,1.366-.436l2-4a1,1,0,0,0-.427-1.331L35,46.457V42H57a1,1,0,0,0,1-1V10h3a1,1,0,0,0,1-1V3A1,1,0,0,0,61,2ZM8,8V4H56V8ZM4,4H6V8H4ZM33,60H31V52.667l1-.533,1,.533Zm13.564-2.365L32.471,50.117a1.007,1.007,0,0,0-.942,0L17.436,57.635l-1.105-2.208L32,47.132l15.669,8.3ZM33,45.4l-.532-.282a1.006,1.006,0,0,0-.936,0L31,45.4V42h2ZM56,40H8V10H56ZM60,8H58V4h2Z"></path></g></svg></div>
+                        <h4>Accompagnement complet</h4>
+                        <p>
+                            De la création à l’optimisation, notre équipe gère tout pour vous.
+                        </p>
+                    </div>
+
                 </div>
 
             </div>
@@ -191,16 +222,19 @@
         <!-- CTA -->
         <section class="section cta-section reveal">
             <div class="container text-center">
+
                 <h2>Prêt à booster votre croissance ?</h2>
-                <p>Lancez dès aujourd’hui des campagnes qui convertissent vraiment.</p>
-                <a href="#contact" class="btn btn-primary">
+
+                <p>
+                    Lancez dès aujourd’hui des campagnes Google Ads qui génèrent de vrais résultats.
+                </p>
+
+                <a href="../index.html#contact" class="btn-primary btn">
                     Commencer maintenant
                 </a>
+
             </div>
         </section>
-
-
-
 
     </article>
 </main>
@@ -456,7 +490,38 @@
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    const counters = document.querySelectorAll(".counter");
 
+    counters.forEach(counter => {
+
+        counter.innerText = "0";
+
+        const updateCounter = () => {
+
+            const target = +counter.getAttribute("data-target");
+            const current = +counter.innerText;
+
+            const increment = target / 100;
+
+            if(current < target){
+
+                counter.innerText = `${Math.ceil(current + increment)}`;
+
+                setTimeout(updateCounter, 20);
+
+            } else {
+
+                counter.innerText = target;
+
+            }
+
+        };
+
+        updateCounter();
+
+    });
+</script>
 </body>
 
 </html>

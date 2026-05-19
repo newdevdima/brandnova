@@ -342,6 +342,10 @@ body {
 
 .header .btn { display: none; }
 
+.header{
+    background-color:white;
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -452,8 +456,8 @@ body {
 /*-----------------------------------*\
   #HERO
 \*-----------------------------------*/
-
-.hero { padding-block-start: calc(var(--section-padding) + 60px); }
+/*here*/
+.hero { padding-block-start: calc(var(--section-padding)); }
 
 .hero .container {
   display: grid;
@@ -508,10 +512,6 @@ body {
   background-color: var(--color);
   color: var(--white);
 }
-
-
-
-
 
 /*-----------------------------------*\
   #SERVICE
@@ -1578,55 +1578,3 @@ Contact
   font-size: large;
 }
 
-.contact-contact {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: bold;
-  font-size: 17px;
-}
-
-.contact ion-icon {
-  font-size: 30px;
-  --ionicon-stroke-width:44px;
-}
-
-.contact-contact-container {
-  display: flex;
-  flex-direction: column;
-  gap: 17px;
-}
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 40px;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.breadcrumb a {
-    position: relative;
-    color: var(--cool-gray);
-    transition: 0.3s;
-}
-
-.breadcrumb a::before {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 3px;
-    border-radius: 5px;
-    background-color: var(--majorelle-blue);
-    transition: 0.3s;
-}
-
-.breadcrumb a.active {
-    color: var(--raisin-black-1);
-}
-
-.breadcrumb a.active::before {
-    width: 100%;
-}
