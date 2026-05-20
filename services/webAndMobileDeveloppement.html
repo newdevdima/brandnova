@@ -42,167 +42,157 @@
 <!-- HEADER -->
 
 <header class="header" data-header>
-
     <div class="container">
 
-        <a href="../index.html" class="logo">
-            Brandnova
-        </a>
+        <a href="#" class="logo">Brandnova</a>
 
         <nav class="navbar" data-navbar>
 
             <div class="wrapper">
+                <a href="#" class="logo">Brandnova</a>
 
-                <a href="../index.html" class="logo">
-                    Brandnova
-                </a>
-
-                <button class="nav-close-btn"
-                        aria-label="close menu"
-                        data-nav-toggler>
-
-                    <ion-icon name="close-outline"></ion-icon>
-
+                <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
+                    <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
                 </button>
-
             </div>
 
             <ul class="navbar-list">
 
                 <li class="navbar-item">
-                    <a href="../index.html#home"
-                       class="navbar-link">
-                        Acceuil
-                    </a>
+                    <a href="../index.html#home" class="navbar-link" data-nav-link>Home</a>
+                </li>
+
+                <li class="navbar-item dropdown">
+                    <a href="../index.html#service">
+                        <button class="navbar-link dropdown-toggle">
+
+                            Services
+
+                            <ion-icon name="chevron-down-outline" class="hidden-desktop"></ion-icon>
+
+                        </button> </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a href="optimisationMoteursRecherche.html" class="dropdown-link">
+                                SEO & Référencement
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="ppc.html" class="dropdown-link">
+                                PPC
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="webAndMobileDeveloppement.html" class="dropdown-link">
+                                Développement Web & Mobile
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="publiciteReseauSociaux.html" class="dropdown-link">
+                                Publicité Digitale
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="marketingReseauxSociaux.html" class="dropdown-link">
+                                Marketing Réseaux Sociaux
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="developpementDeMarque.html" class="dropdown-link">
+                                Développement de Marque
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <!-- <li class="navbar-item">
+                  <a href="#feature" class="navbar-link" data-nav-link>Features</a>
+                </li> -->
+
+                <li class="navbar-item">
+                    <a href="../index.html#project" class="navbar-link" data-nav-link>Portfolio</a>
                 </li>
 
                 <li class="navbar-item">
-                    <a href="../index.html#service"
-                       class="navbar-link active-link">
-                        Services
-                    </a>
+                    <a href="../index.html#blog" class="navbar-link" data-nav-link>A propos</a>
                 </li>
 
                 <li class="navbar-item">
-                    <a href="../index.html#project"
-                       class="navbar-link">
-                        Portfolio
-                    </a>
+                    <a href="../index.html#contact" class="navbar-link" data-nav-link>Contact</a>
                 </li>
-
-                <li class="navbar-item">
-                    <a href="../index.html#contact"
-                       class="navbar-link">
-                        Contact
-                    </a>
-                </li>
-
             </ul>
 
         </nav>
 
-        <button class="nav-open-btn"
-                aria-label="open menu"
-                data-nav-toggler>
-
-            <ion-icon name="menu-outline"></ion-icon>
-
+        <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+            <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
         </button>
 
-        <a href="../index.html#contact"
-           class="btn btn-primary has-before has-after">
+        <a href="../index.html#contact" class="btn btn-primary has-before has-after">Consulter Nous 👋</a>
 
-            Consulter Nous 👋
-
-        </a>
+        <div class="overlay" data-nav-toggler data-overlay></div>
 
     </div>
-
 </header>
-
-
-
 
 
 <main>
 
     <article>
-
-        <!-- HERO -->
-
-        <section class="section hero webdev-hero">
-
+        <div class="section-div">
             <div class="breadcrumb">
 
-                <a href="../index.html#service">
-                    Services
-                </a>
+                <a href="../index.html#service" class="breadcrumb">Services</a>
 
                 <span>></span>
 
-                <a href="web-mobile-development.html"
-                   class="active">
-
-                    Web & Mobile Development
-
-                </a>
+                <a href="webAndMobileDeveloppement.html" class="active">Web & Mobile Development</a>
 
             </div>
 
+            <!-- HERO -->
+            <section class="section hero" aria-label="hero">
             <div class="container">
 
-                <div class="hero-content reveal">
+                <div class="hero-content">
 
-                    <h1 class="h1 hero-title">
-
-                        Création de sites web &
-                        applications mobiles modernes
-
+                    <h1 class="h1 hero-title"><span class="has-before">Création de sites web &</span>applications mobiles modernes
                     </h1>
 
                     <p class="hero-text">
-
                         Nous développons des plateformes web performantes,
                         applications mobiles intuitives et expériences digitales
                         pensées pour convertir vos visiteurs en clients.
-
                     </p>
 
-                    <div class="hero-btn-wrapper">
+                    <div class="wrapper">
+                        <a href="#" class="btn btn-primary has-before has-after">Démarrer votre projet</a>
 
-                        <a href="../index.html#contact"
-                           class="btn btn-primary">
-
-                            Démarrer votre projet
-
-                        </a>
-
+                        <!-- <button class="hero-btn" aria-label="Brandnova promo">
+                          <ion-icon name="play-outline" aria-hidden="true"></ion-icon>
+                          <span class="span">Consulter Nos Offres</span>
+                        </button> -->
                     </div>
 
                 </div>
 
-
-
-
-
-                <!-- IMAGE PLACE -->
-
-                <figure class="hero-banner reveal">
-
-                    <img src="../assets/images/herobannerdevweb.png"
-                         alt="Développement web moderne"
-                         class="img-width">
-
+                <figure class="hero-banner">
+                    <img src="../assets/images/herobannerdevweb.png" width="794" height="637" alt="hero banner" class="w-100">
                 </figure>
 
             </div>
-
         </section>
 
-
-
-
-
+        </div>
         <!-- STATS -->
 
         <section class="section stats-section">
@@ -548,7 +538,7 @@
                             <div class="insta-card">
 
                                 <figure class="post-banner">
-                                    <img src="./assets/images/insta-post-1.jpg" width="77" height="63" loading="lazy"
+                                    <img src="../assets/images/insta-post-1.jpg" width="77" height="63" loading="lazy"
                                          alt="instagram post" class="img-cover">
                                 </figure>
 
@@ -563,7 +553,7 @@
                             <div class="insta-card">
 
                                 <figure class="post-banner">
-                                    <img src="./assets/images/insta-post-2.jpg" width="77" height="63" loading="lazy"
+                                    <img src="../assets/images/insta-post-2.jpg" width="77" height="63" loading="lazy"
                                          alt="instagram post" class="img-cover">
                                 </figure>
 
@@ -578,7 +568,7 @@
                             <div class="insta-card">
 
                                 <figure class="post-banner">
-                                    <img src="./assets/images/insta-post-3.jpg" width="77" height="63" loading="lazy"
+                                    <img src="../assets/images/insta-post-3.jpg" width="77" height="63" loading="lazy"
                                          alt="instagram post" class="img-cover">
                                 </figure>
 
@@ -593,7 +583,7 @@
                             <div class="insta-card">
 
                                 <figure class="post-banner">
-                                    <img src="./assets/images/insta-post-4.jpg" width="77" height="63" loading="lazy"
+                                    <img src="../assets/images/insta-post-4.jpg" width="77" height="63" loading="lazy"
                                          alt="instagram post" class="img-cover">
                                 </figure>
 
@@ -608,7 +598,7 @@
                             <div class="insta-card">
 
                                 <figure class="post-banner">
-                                    <img src="./assets/images/insta-post-5.jpg" width="77" height="63" loading="lazy"
+                                    <img src="../assets/images/insta-post-5.jpg" width="77" height="63" loading="lazy"
                                          alt="instagram post" class="img-cover">
                                 </figure>
 
@@ -623,7 +613,7 @@
                             <div class="insta-card">
 
                                 <figure class="post-banner">
-                                    <img src="./assets/images/insta-post-6.jpg" width="77" height="63" loading="lazy"
+                                    <img src="../assets/images/insta-post-6.jpg" width="77" height="63" loading="lazy"
                                          alt="instagram post" class="img-cover">
                                 </figure>
 

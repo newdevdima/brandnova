@@ -457,7 +457,7 @@ body {
   #HERO
 \*-----------------------------------*/
 /*here*/
-.hero { padding-block-start: calc(var(--section-padding)); }
+.hero { padding-block-start: calc(var(--section-padding) + 30px); }
 
 .hero .container {
     display: grid;
@@ -768,6 +768,10 @@ body {
   #BLOG
 \*-----------------------------------*/
 
+/*-----------------------------------*\
+  #BLOG
+\*-----------------------------------*/
+
 .blog { background-color: var(--ghost-white); }
 
 .blog .section-title { margin-block: 20px 70px; }
@@ -839,6 +843,7 @@ body {
 }
 
 .blog-card .card-title:is(:hover, :focus) { color: var(--majorelle-blue); }
+
 
 
 
@@ -1810,4 +1815,74 @@ Contact
     .container-left .btn {
         width: 100%;
     }
+    .breadcrumb{
+        padding-left: 10px !important;
+    }
+}
+/* style pour le menu */
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width: 769px){
+
+    .dropdown-menu{
+        display: none !important;
+    }
+    .hidden-desktop{
+        display: none !important;
+    }
+    .breadcrumb{
+        padding-left: 80px !important;
+    }
+
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px){
+
+    .dropdown{
+        width: 100%;
+    }
+
+    .dropdown-toggle{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        background: none;
+        border: none;
+
+        color: white;
+        font-size: 1.6rem;
+        padding: 14px 0;
+
+        cursor: pointer;
+    }
+
+    .dropdown-menu{
+        display: none;
+        padding-left: 15px;
+        margin-top: 10px;
+    }
+
+    .dropdown.active .dropdown-menu{
+        display: block;
+    }
+
+    .dropdown-link{
+        display: block;
+        padding: 12px 0;
+        color: #dcdcdc;
+        font-size: 1.5rem;
+    }
+    .breadcrumb{
+        padding-left: 10px !important;
+    }
+
 }

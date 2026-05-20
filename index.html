@@ -37,58 +37,106 @@
   -->
 
   <header class="header" data-header>
-    <div class="container">
+      <div class="container">
 
-      <a href="#" class="logo">Brandnova</a>
-
-      <nav class="navbar" data-navbar>
-
-        <div class="wrapper">
           <a href="#" class="logo">Brandnova</a>
 
-          <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
-            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+          <nav class="navbar" data-navbar>
+
+              <div class="wrapper">
+                  <a href="#" class="logo">Brandnova</a>
+
+                  <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
+                      <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+                  </button>
+              </div>
+
+              <ul class="navbar-list">
+
+                  <li class="navbar-item">
+                      <a href="#home" class="navbar-link" data-nav-link>Home</a>
+                  </li>
+
+                  <li class="navbar-item dropdown">
+                      <a href="#service">
+                      <button class="navbar-link dropdown-toggle">
+
+                          Services
+
+                          <ion-icon name="chevron-down-outline" class="hidden-desktop"></ion-icon>
+
+                      </button> </a>
+
+                      <ul class="dropdown-menu">
+
+                          <li>
+                              <a href="services/optimisationMoteursRecherche.html" class="dropdown-link">
+                                  SEO & Référencement
+                              </a>
+                          </li>
+
+                          <li>
+                              <a href="services/ppc.html" class="dropdown-link">
+                                  PPC
+                              </a>
+                          </li>
+
+                          <li>
+                              <a href="services/webAndMobileDeveloppement.html" class="dropdown-link">
+                                  Développement Web & Mobile
+                              </a>
+                          </li>
+
+                          <li>
+                              <a href="services/publiciteReseauSociaux.html" class="dropdown-link">
+                                  Publicité Digitale
+                              </a>
+                          </li>
+
+                          <li>
+                              <a href="services/marketingReseauxSociaux.html" class="dropdown-link">
+                                  Marketing Réseaux Sociaux
+                              </a>
+                          </li>
+
+                          <li>
+                              <a href="services/developpementDeMarque.html" class="dropdown-link">
+                                  Développement de Marque
+                              </a>
+                          </li>
+
+                      </ul>
+
+                  </li>
+
+                  <!-- <li class="navbar-item">
+                    <a href="#feature" class="navbar-link" data-nav-link>Features</a>
+                  </li> -->
+
+                  <li class="navbar-item">
+                      <a href="#project" class="navbar-link" data-nav-link>Portfolio</a>
+                  </li>
+
+                  <li class="navbar-item">
+                      <a href="#blog" class="navbar-link" data-nav-link>A propos</a>
+                  </li>
+
+                  <li class="navbar-item">
+                      <a href="#contact" class="navbar-link" data-nav-link>Contact</a>
+                  </li>
+              </ul>
+
+          </nav>
+
+          <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+              <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
           </button>
-        </div>
 
-        <ul class="navbar-list">
+          <a href="#contact" class="btn btn-primary has-before has-after">Consulter Nous 👋</a>
 
-          <li class="navbar-item">
-            <a href="#home" class="navbar-link" data-nav-link>Home</a>
-          </li>
+          <div class="overlay" data-nav-toggler data-overlay></div>
 
-          <li class="navbar-item">
-            <a href="#service" class="navbar-link" data-nav-link>Services</a>
-          </li>
-
-          <!-- <li class="navbar-item">
-            <a href="#feature" class="navbar-link" data-nav-link>Features</a>
-          </li> -->
-
-          <li class="navbar-item">
-            <a href="#project" class="navbar-link" data-nav-link>Portfolio</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="#blog" class="navbar-link" data-nav-link>A propos</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="#contact" class="navbar-link" data-nav-link>Contact</a>
-          </li>
-        </ul>
-
-      </nav>
-
-      <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
-        <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
-      </button>
-
-      <a href="#contact" class="btn btn-primary has-before has-after">Consulter Nous 👋</a>
-
-      <div class="overlay" data-nav-toggler data-overlay></div>
-
-    </div>
+      </div>
   </header>
 
   <main>
@@ -146,7 +194,7 @@
                 </div>
 
                 <h3 class="h3">
-                  <a href="./services/optimisationMoteursRecherche.html" class="card-title">Optimisation pour les moteurs de recherche</a>
+                  <a href="services/optimisationMoteursRecherche.html" class="card-title">Optimisation pour les moteurs de recherche</a>
                 </h3>
 
               </div>
@@ -160,7 +208,7 @@
                 </div>
 
                 <h3 class="h3">
-                  <a href="./services/webAndMobileDeveloppement.html" class="card-title">Web & Mobile Development</a>
+                  <a href="services/webAndMobileDeveloppement.html" class="card-title">Web & Mobile Development</a>
                 </h3>
 
               </div>
@@ -188,7 +236,7 @@
                 </div>
 
                 <h3 class="h3">
-                  <a href="./services/publiciteReseauSociaux.html" class="card-title">Publicités Réseaux Sociaux</a>
+                  <a href="services/publiciteReseauSociaux.html" class="card-title">Publicités Réseaux Sociaux</a>
                 </h3>
 
               </div>
@@ -202,7 +250,7 @@
                 </div>
 
                 <h3 class="h3">
-                  <a href="./services/marketingReseauxSociaux.html" class="card-title">Marketing Réseaux Sociaux</a>
+                  <a href="services/marketingReseauxSociaux.html" class="card-title">Marketing Réseaux Sociaux</a>
                 </h3>
 
               </div>
@@ -216,7 +264,7 @@
                 </div>
 
                 <h3 class="h3">
-                  <a href="./services/developpementDeMarque.html" class="card-title">Développement de Marque</a>
+                  <a href="services/developpementDeMarque.html" class="card-title">Développement de Marque</a>
                 </h3>
 
               </div>
@@ -475,140 +523,24 @@
         <section class="section blog" id="blog" aria-label="blog">
             <div class="container">
 
-                <p class="section-subtitle text-center has-before">Blog Post</p>
-
                 <h2 class="h2 section-title text-center">
-                    Popular <span class="has-before">blog post</span>
+                    À <span class="has-before">Propos</span>
                 </h2>
 
                 <ul class="blog-list">
 
                     <li>
-                        <div class="blog-card large">
-
-                            <figure class="card-banner">
-                                <img src="./assets/images/blog-1.jpg" width="644" height="363" loading="lazy"
-                                     alt="Godaddy user flow solution..." class="img-cover">
-                            </figure>
-
-                            <div class="card-content">
-
-                                <div class="wrapper">
-                                    <a href="#" class="tag">Development</a>
-
-                                    <a href="#" class="publish-date">
-                                        <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                                        <span class="span">July 22, 2022</span>
-                                    </a>
-                                </div>
-
-                                <h3>
-                                    <a href="#" class="card-title">Godaddy user flow solution...</a>
-                                </h3>
-
-                                <p class="card-text">
-                                    At Brandnova we specialize in designing, building, shipping and scaling beautifu. At Brandnova we
-                                    specialize in designing,
-                                    building, shipping and scaling beautiful.
-                                </p>
-
-                            </div>
-
-                        </div>
+                        <img src="./assets/images/aboutusImage.jpg"  loading="lazy"
+                             alt="Godaddy user flow solution..." class="img-cover">
                     </li>
-
-                    <li>
-                        <div class="blog-card">
-
-                            <figure class="card-banner">
-                                <img src="./assets/images/blog-2.jpg" width="202" height="162" loading="lazy"
-                                     alt="Godaddy user flow solution for every individual" class="img-cover">
-                            </figure>
-
-                            <div class="card-content">
-
-                                <div class="wrapper">
-                                    <a href="#" class="tag">Development</a>
-
-                                    <a href="#" class="publish-date">
-                                        <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                                        <span class="span">July 21, 2020</span>
-                                    </a>
-                                </div>
-
-                                <h3 class="h3">
-                                    <a href="#" class="card-title">Godaddy user flow solution for every individual</a>
-                                </h3>
-
-                            </div>
-
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="blog-card">
-
-                            <figure class="card-banner">
-                                <img src="./assets/images/blog-3.png" width="202" height="162" loading="lazy"
-                                     alt="Business solution for every individual" class="img-cover">
-                            </figure>
-
-                            <div class="card-content">
-
-                                <div class="wrapper">
-                                    <a href="#" class="tag">Development</a>
-
-                                    <a href="#" class="publish-date">
-                                        <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                                        <span class="span">July 21, 2020</span>
-                                    </a>
-                                </div>
-
-                                <h3 class="h3">
-                                    <a href="#" class="card-title">Business solution for every individual</a>
-                                </h3>
-
-                            </div>
-
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="blog-card">
-
-                            <figure class="card-banner">
-                                <img src="./assets/images/blog-4.png" width="202" height="162" loading="lazy"
-                                     alt="How to gain pro experience ar figma update version" class="img-cover">
-                            </figure>
-
-                            <div class="card-content">
-
-                                <div class="wrapper">
-                                    <a href="#" class="tag">Development</a>
-
-                                    <a href="#" class="publish-date">
-                                        <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                                        <span class="span">July 21, 2020</span>
-                                    </a>
-                                </div>
-
-                                <h3 class="h3">
-                                    <a href="#" class="card-title">How to gain pro experience ar figma update version</a>
-                                </h3>
-
-                            </div>
-
-                        </div>
-                    </li>
-
+                    <div class="card-content">
+                        <p>Chez <strong>BrandNova</strong>, nous accompagnons les entreprises dans leur transformation digitale en proposant des solutions innovantes, performantes et adaptées à leurs objectifs. Nous combinons stratégie, créativité et expertise technique pour concevoir des sites web, des identités de marque et des outils numériques qui renforcent la visibilité, optimisent la communication et soutiennent la croissance de nos clients. <br>
+                            Depuis notre création, notre mission est d’aider chaque entreprise à se démarquer dans un environnement numérique en constante évolution. Grâce à une approche fondée sur l’écoute, la collaboration et la recherche de l’excellence, nous développons des solutions sur mesure qui transforment les idées en projets concrets et durables. Chez <strong>BrandNova</strong> , nous mettons la technologie et l’innovation au service de votre réussite.</p>
+                    </div>
                 </ul>
-
             </div>
         </section>
+
       <section class="section contact" id="contact" aria-label="contact">
         <div class="container-right">
             <div class="h2 section-title">Contacter Nous</div>
@@ -1030,7 +962,23 @@
 
       });
   </script>
+  <!-- script pour le menu -->
+  <script>
+      const dropdowns = document.querySelectorAll(".dropdown");
 
+          dropdowns.forEach(dropdown => {
+
+              const toggle = dropdown.querySelector(".dropdown-toggle");
+
+              toggle.addEventListener("click", () => {
+
+                  if (window.innerWidth <= 768) {
+
+                      dropdown.classList.toggle("active");
+              }
+          });
+      });
+  </script>
 </body>
 
 </html>

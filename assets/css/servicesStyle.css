@@ -1,5 +1,5 @@
 .breadcrumb {
-    padding-left: 50px;
+    padding-left: 0px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -153,3 +153,11 @@
 .webdev-hero{
     margin-bottom: 0 !important;
 }
+
+.section-div{
+    padding-top: 150px;
+}
+.section.hero{
+    padding-top: 0 !important;
+}
+
