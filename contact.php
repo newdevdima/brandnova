@@ -1,9 +1,9 @@
 <?php
 
 $host = "127.0.0.1";
-$dbname = "u574796069_BRANDNOVA";
-$username = "u574796069_brandnova";
-$password = "BrandNova@2026227";
+$dbname = "";
+$username = "";
+$password = "";
 
 try {
 
@@ -17,36 +17,42 @@ try {
 
 } catch(PDOException $e){
 
-    die("Erreur connexion : " . $e->getMessage());
-
-}
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-    $nom = htmlspecialchars($_POST['nom']);
-    $prenom = htmlspecialchars($_POST['prenom']);
-    $email = htmlspecialchars($_POST['email']);
-    $telephone = htmlspecialchars($_POST['telephone']);
-    $message = htmlspecialchars($_POST['message']);
-
-    $sql = "INSERT INTO contacts
-            (nom, prenom, email, telephone, message)
-            VALUES
-            (:nom, :prenom, :email, :telephone, :message)";
-
-    $stmt = $pdo->prepare($sql);
-
-    $stmt->execute([
-
-        ':nom' => $nom,
-        ':prenom' => $prenom,
-        ':email' => $email,
-        ':telephone' => $telephone,
-        ':message' => $message
-
+    echo json_encode([
+        "success" => false,
+        "message" => $e->getMessage()
     ]);
 
-    echo "Message enregistré avec succès.";
-
+    exit;
 }
-?>
+
+$data = json_decode(file_get_contents("php://input"), true);
+
+$nom = htmlspecialchars($data['nom']);
+$prenom = htmlspecialchars($data['prenom']);
+$email = htmlspecialchars($data['email']);
+$telephone = htmlspecialchars($data['telephone']);
+$message = htmlspecialchars($data['message']);
+
+$sql = "INSERT INTO contacts
+(nom, prenom, email, telephone, message)
+VALUES
+(:nom, :prenom, :email, :telephone, :message)";
+
+$stmt = $pdo->prepare($sql);
+
+$success = $stmt->execute([
+
+    ':nom' => $nom,
+    ':prenom' => $prenom,
+    ':email' => $email,
+    ':telephone' => $telephone,
+    ':message' => $message
+
+]);
+
+echo json_encode([
+    "success" => $success,
+    "message" => $success
+        ? "Message envoyé avec succès"
+        : "Erreur lors de l'envoi"
+]);

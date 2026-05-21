@@ -844,7 +844,19 @@ body {
 
 .blog-card .card-title:is(:hover, :focus) { color: var(--majorelle-blue); }
 
+.form-message{
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: 600;
+}
 
+.form-message.success{
+    color: #22c55e;
+}
+
+.form-message.error{
+    color: #ef4444;
+}
 
 
 
