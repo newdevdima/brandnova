@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Madrid — Calendario</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+        :root{
+            --gold:       #c8a84b;
+            --gold-light: #e8c96a;
+            --gold-dark:  #9a7a2a;
+            --gold-dim:   rgba(200,168,75,.15);
+            --gold-glow:  rgba(200,168,75,.35);
+            --white:      #f5f0e8;
+            --white-pure: #ffffff;
+            --bg:         #0a0c10;
+            --surface:    #111318;
+            --surface-2:  #181c24;
+            --border:     rgba(200,168,75,.2);
+            --border-h:   rgba(200,168,75,.45);
+            --ink:        #e8e0d0;
+            --ink-2:      #9a9080;
+            --ink-3:      #4a4540;
+            --shadow:     rgba(0,0,0,.6);
+            --shadow-gold:rgba(200,168,75,.25);
+            --ff-title:   'Bebas Neue', 'Impact', sans-serif;
+            --ff-label:   'Barlow Condensed', sans-serif;
+            --ff-body:    'Barlow', sans-serif;
+            --radius:     12px;
+            --radius-sm:  7px;
+        }
+
+        html{font-size:10px;scroll-behavior:smooth;}
+
+        body{
+            font-family:var(--ff-body);
+            background:var(--bg);
+            color:var(--ink);
+            min-height:100vh;
+            overflow-x:hidden;
+        }
+
+        /* ── Noise + diagonal stripe texture ── */
+        body::before{
+            content:'';
+            position:fixed;inset:0;z-index:0;pointer-events:none;
+            background:
+                    repeating-linear-gradient(
+                            -55deg,
+                            transparent,
+                            transparent 40px,
+                            rgba(200,168,75,.018) 40px,
+                            rgba(200,168,75,.018) 41px
+                    ),
+                    radial-gradient(ellipse 90% 50% at 50% -10%, rgba(200,168,75,.12) 0%, transparent 55%);
+        }
+
+        /* ── Floating particles (stars) ── */
+        .star{
+            position:fixed;pointer-events:none;z-index:0;
+            width:2px;height:2px;border-radius:50%;
+            background:var(--gold);
+            animation:twinkle ease-in-out infinite;
+        }
+        @keyframes twinkle{
+            0%,100%{opacity:.1;transform:scale(1);}
+            50%    {opacity:.8;transform:scale(1.8);}
+        }
+
+        /* ── PAGE HEADER ── */
+        .page-header{
+            position:relative;z-index:2;
+            text-align:center;
+            padding:56px 20px 30px;
+            overflow:hidden;
+        }
+
+        /* Crest watermark */
+        .page-header::before{
+            content:'⚽';
+            position:absolute;
+            top:50%;left:50%;
+            transform:translate(-50%,-50%) scale(1);
+            font-size:28rem;
+            opacity:.025;
+            pointer-events:none;
+            z-index:0;
+            filter:grayscale(1);
+        }
+
+        .club-badge{
+            display:inline-flex;align-items:center;gap:14px;
+            margin-bottom:10px;
+            position:relative;z-index:1;
+        }
+        .badge-crown{
+            font-size:3.2rem;
+            filter:drop-shadow(0 0 12px var(--gold));
+            animation:crownPulse 3s ease-in-out infinite;
+        }
+        @keyframes crownPulse{
+            0%,100%{filter:drop-shadow(0 0 8px var(--gold));}
+            50%    {filter:drop-shadow(0 0 22px var(--gold-light));}
+        }
+
+        .club-name{
+            font-family:var(--ff-title);
+            font-size:clamp(4rem,10vw,8.5rem);
+            letter-spacing:.08em;
+            line-height:.9;
+            position:relative;z-index:1;
+            background:linear-gradient(160deg, var(--gold-light) 0%, var(--gold) 40%, var(--gold-dark) 80%);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+            filter:drop-shadow(0 0 30px rgba(200,168,75,.3));
+        }
+
+        .club-sub{
+            font-family:var(--ff-label);
+            font-size:clamp(1.2rem,2vw,1.6rem);
+            font-weight:600;
+            letter-spacing:.45em;
+            color:var(--ink-2);
+            text-transform:uppercase;
+            margin-top:6px;
+            position:relative;z-index:1;
+        }
+
+        /* Gold divider */
+        .gold-divider{
+            display:flex;align-items:center;justify-content:center;gap:14px;
+            margin:20px auto 0;max-width:400px;
+            position:relative;z-index:1;
+        }
+        .gold-divider::before,
+        .gold-divider::after{
+            content:'';flex:1;height:1px;
+            background:linear-gradient(90deg,transparent,var(--gold),transparent);
+        }
+        .gold-divider .diamond{
+            width:8px;height:8px;
+            background:var(--gold);
+            transform:rotate(45deg);
+            box-shadow:0 0 10px var(--gold-glow);
+        }
+
+        /* Hala Madrid ribbon */
+        .hala-madrid{
+            font-family:var(--ff-title);
+            font-size:clamp(1.6rem,3vw,2.4rem);
+            letter-spacing:.25em;
+            color:var(--gold-dark);
+            opacity:.6;
+            margin-top:10px;
+            position:relative;z-index:1;
+        }
+
+        /* ── YEAR NAV ── */
+        .year-nav{
+            display:flex;align-items:center;justify-content:center;gap:24px;
+            position:relative;z-index:2;
+            margin-bottom:44px;
+        }
+        .year-btn{
+            width:44px;height:44px;
+            background:var(--surface);
+            border:1.5px solid var(--border);
+            border-radius:50%;
+            display:grid;place-items:center;
+            font-size:2rem;color:var(--gold);
+            cursor:pointer;
+            transition:all .2s;
+            box-shadow:0 2px 12px rgba(0,0,0,.5);
+        }
+        .year-btn:hover{
+            background:var(--gold-dim);
+            border-color:var(--gold);
+            box-shadow:0 0 20px var(--gold-glow);
+            transform:scale(1.1);
+        }
+        .year-display{
+            font-family:var(--ff-title);
+            font-size:3rem;letter-spacing:.1em;
+            color:var(--gold);
+            min-width:100px;text-align:center;
+            text-shadow:0 0 20px var(--gold-glow);
+        }
+
+        /* ── CALENDAR GRID ── */
+        .calendar-grid{
+            position:relative;z-index:2;
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:20px;
+            max-width:1360px;
+            margin:0 auto;
+            padding:0 28px 70px;
+        }
+        @media(max-width:1100px){.calendar-grid{grid-template-columns:repeat(3,1fr);}}
+        @media(max-width:760px) {.calendar-grid{grid-template-columns:repeat(2,1fr);gap:14px;padding:0 14px 50px;}}
+        @media(max-width:460px) {.calendar-grid{grid-template-columns:1fr;}}
+
+        /* ── MONTH CARD ── */
+        .month-card{
+            background:var(--surface);
+            border:1px solid var(--border);
+            border-radius:var(--radius);
+            overflow:hidden;
+            box-shadow:0 4px 24px rgba(0,0,0,.55);
+            transition:transform .25s,box-shadow .25s,border-color .25s;
+            animation:cardIn .5s ease both;
+            position:relative;
+        }
+        .month-card::before{
+            content:'';
+            position:absolute;top:0;left:0;right:0;height:1px;
+            background:linear-gradient(90deg,transparent,var(--gold),transparent);
+            opacity:0;
+            transition:opacity .25s;
+        }
+        .month-card:hover{
+            transform:translateY(-5px);
+            border-color:var(--border-h);
+            box-shadow:0 12px 40px rgba(0,0,0,.7), 0 0 20px var(--gold-glow);
+        }
+        .month-card:hover::before{opacity:1;}
+
+        @keyframes cardIn{
+            from{opacity:0;transform:translateY(24px);}
+            to  {opacity:1;transform:translateY(0);}
+        }
+        .month-card:nth-child(1) {animation-delay:.04s}
+        .month-card:nth-child(2) {animation-delay:.08s}
+        .month-card:nth-child(3) {animation-delay:.12s}
+        .month-card:nth-child(4) {animation-delay:.16s}
+        .month-card:nth-child(5) {animation-delay:.20s}
+        .month-card:nth-child(6) {animation-delay:.24s}
+        .month-card:nth-child(7) {animation-delay:.28s}
+        .month-card:nth-child(8) {animation-delay:.32s}
+        .month-card:nth-child(9) {animation-delay:.36s}
+        .month-card:nth-child(10){animation-delay:.40s}
+        .month-card:nth-child(11){animation-delay:.44s}
+        .month-card:nth-child(12){animation-delay:.48s}
+
+        /* Month header */
+        .month-header{
+            padding:14px 16px 10px;
+            background:linear-gradient(135deg, var(--surface-2), var(--surface));
+            border-bottom:1px solid var(--border);
+            display:flex;align-items:center;justify-content:space-between;
+        }
+        .month-name{
+            font-family:var(--ff-title);
+            font-size:2rem;
+            letter-spacing:.06em;
+            color:var(--gold);
+            text-shadow:0 0 14px var(--gold-glow);
+            line-height:1;
+        }
+        .month-num{
+            font-family:var(--ff-title);
+            font-size:3.2rem;
+            line-height:1;
+            color:rgba(200,168,75,.12);
+            letter-spacing:-.02em;
+        }
+
+        /* Day-of-week row */
+        .dow-row{
+            display:grid;grid-template-columns:repeat(7,1fr);
+            padding:8px 8px 4px;
+            gap:2px;
+        }
+        .dow-cell{
+            text-align:center;
+            font-family:var(--ff-label);
+            font-size:1.05rem;font-weight:700;
+            letter-spacing:.06em;
+            text-transform:uppercase;
+            color:var(--ink-3);
+            padding:3px 0;
+        }
+        .dow-cell.weekend{color:var(--gold-dark);}
+
+        /* Days grid */
+        .days-grid{
+            display:grid;grid-template-columns:repeat(7,1fr);
+            gap:2px;
+            padding:0 8px 12px;
+        }
+
+        .day-cell{
+            border-radius:var(--radius-sm);
+            min-height:42px;
+            cursor:pointer;
+            position:relative;
+            transition:transform .15s,box-shadow .15s,background .2s;
+            display:flex;flex-direction:column;
+            align-items:center;overflow:hidden;
+        }
+        .day-cell:hover{
+            transform:scale(1.1);
+            z-index:3;
+            box-shadow:0 4px 18px rgba(0,0,0,.6), 0 0 10px var(--gold-glow);
+        }
+        .day-cell.empty{cursor:default;pointer-events:none;}
+
+        .day-num{
+            font-family:var(--ff-label);
+            font-size:1.25rem;font-weight:700;
+            color:var(--ink);
+            padding:5px 4px 2px;
+            z-index:1;position:relative;line-height:1;
+        }
+        .day-cell.today .day-num{color:var(--bg);}
+        .day-cell.today::after{
+            content:'';
+            position:absolute;top:4px;left:50%;transform:translateX(-50%);
+            width:27px;height:27px;border-radius:50%;
+            background:linear-gradient(135deg,var(--gold-light),var(--gold));
+            z-index:0;
+            box-shadow:0 0 12px var(--gold-glow);
+        }
+        .day-cell.today .day-num{z-index:1;}
+
+        .day-note-preview{
+            font-family:var(--ff-body);
+            font-size:.9rem;
+            color:var(--ink-2);
+            text-align:center;
+            padding:0 2px 3px;
+            overflow:hidden;max-height:24px;
+            white-space:nowrap;text-overflow:ellipsis;
+            width:100%;z-index:1;
+        }
+        .day-cell.weekend .day-num{color:var(--gold-dark);}
+
+        /* ── Day color classes ── */
+        .dc-none     {background:transparent;}
+        .dc-gold     {background:rgba(200,168,75,.28);}
+        .dc-white    {background:rgba(245,240,232,.13);}
+        .dc-navy     {background:rgba(30,50,100,.5);}
+        .dc-red      {background:rgba(200,30,30,.35);}
+        .dc-black    {background:rgba(255,255,255,.06);}
+        .dc-silver   {background:rgba(160,160,180,.22);}
+        .dc-green    {background:rgba(34,140,60,.3);}
+        .dc-sky      {background:rgba(50,160,220,.28);}
+
+        /* ── MODAL ── */
+        .modal-overlay{
+            position:fixed;inset:0;z-index:1000;
+            background:rgba(0,0,0,.75);
+            backdrop-filter:blur(10px);
+            -webkit-backdrop-filter:blur(10px);
+            display:grid;place-items:center;
+            padding:20px;
+            opacity:0;pointer-events:none;
+            transition:opacity .25s;
+        }
+        .modal-overlay.open{opacity:1;pointer-events:all;}
+
+        .modal{
+            background:var(--surface);
+            border:1px solid var(--border-h);
+            border-radius:16px;
+            padding:38px 34px 30px;
+            width:100%;max-width:440px;
+            box-shadow:0 30px 90px rgba(0,0,0,.8), 0 0 40px var(--gold-glow);
+            transform:translateY(30px) scale(.95);
+            transition:transform .3s cubic-bezier(.34,1.56,.64,1), opacity .25s;
+            opacity:0;
+            position:relative;overflow:hidden;
+        }
+        .modal::before{
+            content:'';
+            position:absolute;top:0;left:0;right:0;height:3px;
+            background:linear-gradient(90deg, var(--gold-dark), var(--gold-light), var(--gold-dark));
+        }
+        /* Corner crest watermark */
+        .modal::after{
+            content:'⭐';
+            position:absolute;bottom:-10px;right:-10px;
+            font-size:8rem;opacity:.04;pointer-events:none;
+        }
+        .modal-overlay.open .modal{
+            transform:translateY(0) scale(1);
+            opacity:1;
+        }
+
+        .modal-date{
+            font-family:var(--ff-title);
+            font-size:2.6rem;
+            letter-spacing:.05em;
+            color:var(--gold);
+            text-align:center;
+            margin-bottom:6px;
+            text-shadow:0 0 20px var(--gold-glow);
+            line-height:1.1;
+        }
+        .modal-date .month-label{
+            font-size:1.6rem;
+            color:var(--ink-2);
+            letter-spacing:.12em;
+            display:block;
+            margin-top:2px;
+        }
+
+        .modal-divider{
+            height:1px;
+            background:linear-gradient(90deg,transparent,var(--gold),transparent);
+            margin:16px 0 20px;
+        }
+
+        /* Section label */
+        .section-label{
+            font-family:var(--ff-label);
+            font-size:1.15rem;font-weight:700;
+            letter-spacing:.18em;
+            text-transform:uppercase;
+            color:var(--ink-3);
+            margin-bottom:12px;
+            display:flex;align-items:center;gap:8px;
+        }
+        .section-label::before{
+            content:'';display:block;
+            width:16px;height:2px;
+            background:var(--gold);
+            flex-shrink:0;
+        }
+
+        /* Color swatches */
+        .color-swatches{
+            display:flex;flex-wrap:wrap;gap:10px;
+            margin-bottom:24px;
+        }
+        .swatch{
+            width:34px;height:34px;
+            border-radius:var(--radius-sm);
+            cursor:pointer;
+            border:2px solid transparent;
+            transition:transform .18s,box-shadow .18s,border-color .18s;
+            position:relative;
+            flex-shrink:0;
+        }
+        .swatch:hover{transform:scale(1.2);box-shadow:0 4px 14px rgba(0,0,0,.5);}
+        .swatch.selected{
+            border-color:var(--gold);
+            box-shadow:0 0 0 3px var(--gold-dim), 0 0 12px var(--gold-glow);
+        }
+        .swatch.selected::after{
+            content:'✓';
+            position:absolute;inset:0;display:grid;place-items:center;
+            font-size:1.3rem;font-weight:700;color:var(--gold);
+        }
+        /* Swatch fills */
+        .swatch.dc-none  {background:var(--surface-2);border:2px dashed rgba(200,168,75,.3);}
+        .swatch.dc-gold  {background:linear-gradient(135deg,#c8a84b,#e8c96a);}
+        .swatch.dc-white {background:rgba(245,240,232,.5);border:1px solid rgba(255,255,255,.2);}
+        .swatch.dc-navy  {background:#1e3264;}
+        .swatch.dc-red   {background:#c81e1e;}
+        .swatch.dc-black {background:#1a1a1a;border:1px solid rgba(255,255,255,.15);}
+        .swatch.dc-silver{background:linear-gradient(135deg,#a0a0b4,#c8c8d8);}
+        .swatch.dc-green {background:#1a8c3c;}
+        .swatch.dc-sky   {background:#2290d4;}
+
+        /* Textarea */
+        .note-textarea{
+            width:100%;
+            background:var(--surface-2);
+            border:1px solid rgba(200,168,75,.25);
+            border-radius:var(--radius-sm);
+            padding:14px 16px;
+            font-family:var(--ff-body);
+            font-size:1.4rem;
+            color:var(--ink);
+            resize:vertical;
+            min-height:110px;
+            outline:none;
+            transition:border-color .2s,box-shadow .2s;
+            line-height:1.6;
+        }
+        .note-textarea:focus{
+            border-color:var(--gold);
+            box-shadow:0 0 0 3px var(--gold-dim);
+        }
+        .note-textarea::placeholder{
+            color:var(--ink-3);
+            font-style:italic;
+        }
+
+        /* Actions */
+        .modal-actions{
+            display:flex;gap:12px;margin-top:22px;
+        }
+        .btn-save{
+            flex:1;
+            background:linear-gradient(135deg,var(--gold-dark),var(--gold),var(--gold-light));
+            background-size:200% 100%;
+            background-position:100% 0;
+            color:var(--bg);
+            border:none;border-radius:var(--radius-sm);
+            padding:13px 20px;
+            font-family:var(--ff-label);
+            font-size:1.5rem;font-weight:700;
+            letter-spacing:.1em;
+            text-transform:uppercase;
+            cursor:pointer;
+            transition:background-position .3s,box-shadow .2s,transform .15s;
+            box-shadow:0 4px 20px rgba(200,168,75,.35);
+        }
+        .btn-save:hover{
+            background-position:0 0;
+            box-shadow:0 6px 28px rgba(200,168,75,.55);
+            transform:translateY(-1px);
+        }
+        .btn-save:active{transform:translateY(0);}
+        .btn-cancel{
+            background:transparent;
+            color:var(--ink-2);
+            border:1px solid var(--border);
+            border-radius:var(--radius-sm);
+            padding:13px 20px;
+            font-family:var(--ff-label);
+            font-size:1.5rem;font-weight:600;
+            letter-spacing:.08em;
+            text-transform:uppercase;
+            cursor:pointer;
+            transition:border-color .2s,color .2s;
+        }
+        .btn-cancel:hover{border-color:var(--gold);color:var(--gold);}
+
+        /* ── Trophy counter (bottom-right) ── */
+        .trophy-bar{
+            position:fixed;bottom:24px;right:24px;z-index:10;
+            background:var(--surface);
+            border:1px solid var(--border);
+            border-radius:40px;
+            padding:10px 18px;
+            display:flex;align-items:center;gap:10px;
+            box-shadow:0 6px 28px rgba(0,0,0,.55), 0 0 16px var(--gold-glow);
+        }
+        .trophy-bar .trophy-icon{font-size:2rem;}
+        .trophy-bar .trophy-text{
+            font-family:var(--ff-label);
+            font-size:1.2rem;font-weight:700;letter-spacing:.1em;
+            text-transform:uppercase;color:var(--ink-2);
+            line-height:1.2;
+        }
+        .trophy-bar .trophy-num{
+            font-family:var(--ff-title);
+            font-size:2.2rem;color:var(--gold);
+            text-shadow:0 0 12px var(--gold-glow);
+            line-height:1;
+        }
+
+        @media(max-width:480px){
+            .modal{padding:28px 18px 22px;}
+            .modal-date{font-size:2rem;}
+            .trophy-bar{bottom:14px;right:14px;}
+        }
+    </style>
+</head>
+<body>
+
+<!-- Stars -->
+<script>
+    for(let i=0;i<55;i++){
+        const s=document.createElement('div');
+        s.className='star';
+        s.style.cssText=`left:${Math.random()*100}vw;top:${Math.random()*100}vh;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*5}s;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;opacity:${.1+Math.random()*.4}`;
+        document.body.appendChild(s);
+    }
+</script>
+
+<!-- Header -->
+<header class="page-header">
+    <div class="club-badge">
+        <span class="badge-crown">👑</span>
+    </div>
+    <div class="club-name">REAL MADRID</div>
+    <div class="club-sub">Club de Fútbol · Calendario Oficial</div>
+    <div class="gold-divider"><div class="diamond"></div></div>
+    <div class="hala-madrid">HALA MADRID Y NADA MÁS</div>
+</header>
+
+<!-- Year nav -->
+<div class="year-nav">
+    <button class="year-btn" id="prevYear">‹</button>
+    <div class="year-display" id="navYear">2025</div>
+    <button class="year-btn" id="nextYear">›</button>
+</div>
+
+<!-- Calendar -->
+<div class="calendar-grid" id="calendarGrid"></div>
+
+<!-- Trophy bar -->
+<div class="trophy-bar">
+    <span class="trophy-icon">🏆</span>
+    <div>
+        <div class="trophy-text">Notes</div>
+        <div class="trophy-num" id="noteCount">0</div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <div class="modal-date" id="modalDate">
+            <span class="month-label" id="modalMonthLabel"></span>
+        </div>
+        <div class="modal-divider"></div>
+
+        <div class="section-label">Couleur du jour</div>
+        <div class="color-swatches" id="colorSwatches">
+            <div class="swatch dc-none"  data-color="dc-none"  title="Aucune"></div>
+            <div class="swatch dc-gold"  data-color="dc-gold"  title="Or Real Madrid"></div>
+            <div class="swatch dc-white" data-color="dc-white" title="Blanc (maillot)"></div>
+            <div class="swatch dc-navy"  data-color="dc-navy"  title="Bleu nuit"></div>
+            <div class="swatch dc-red"   data-color="dc-red"   title="Rouge victoire"></div>
+            <div class="swatch dc-black" data-color="dc-black" title="Noir"></div>
+            <div class="swatch dc-silver"data-color="dc-silver"title="Argent"></div>
+            <div class="swatch dc-green" data-color="dc-green" title="Pelouse"></div>
+            <div class="swatch dc-sky"   data-color="dc-sky"   title="Ciel de Madrid"></div>
+        </div>
+
+        <div class="section-label">Note du match / jour</div>
+        <textarea class="note-textarea" id="noteTextarea" placeholder="Score, événement, souvenir…"></textarea>
+
+        <div class="modal-actions">
+            <button class="btn-cancel" id="btnCancel">Annuler</button>
+            <button class="btn-save"   id="btnSave">Guardar ⚽</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ────────────────────────────────────────
+    //  State
+    // ────────────────────────────────────────
+    const STORAGE_KEY = 'rm_cal_v1';
+    let currentYear = new Date().getFullYear();
+    let data = {};
+    let activeKey = null;
+    let selectedColor = 'dc-none';
+
+    const MONTHS = [
+        'Enero','Febrero','Marzo','Abril','Mayo','Junio',
+        'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'
+    ];
+    const MONTHS_FR = [
+        'Janvier','Février','Mars','Avril','Mai','Juin',
+        'Juillet','Août','Septembre','Octobre','Novembre','Décembre'
+    ];
+    const DAYS = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+
+    function load(){
+        try{ data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+        catch(e){ data = {}; }
+    }
+    function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+    function pad(n){ return String(n).padStart(2,'0'); }
+
+    // ────────────────────────────────────────
+    //  Render
+    // ────────────────────────────────────────
+    function buildCalendar(){
+        const grid = document.getElementById('calendarGrid');
+        grid.innerHTML = '';
+        document.getElementById('navYear').textContent = currentYear;
+
+        const today = new Date();
+        const ty=today.getFullYear(), tm=today.getMonth(), td=today.getDate();
+
+        for(let m=0;m<12;m++){
+            const card = document.createElement('div');
+            card.className = 'month-card';
+
+            // Header
+            const hdr = document.createElement('div');
+            hdr.className = 'month-header';
+            hdr.innerHTML = `
+      <div class="month-name">${MONTHS[m].toUpperCase()}</div>
+      <div class="month-num">${pad(m+1)}</div>`;
+            card.appendChild(hdr);
+
+            // DOW
+            const dowRow = document.createElement('div');
+            dowRow.className = 'dow-row';
+            DAYS.forEach((d,i)=>{
+                const c=document.createElement('div');
+                c.className='dow-cell'+(i>=5?' weekend':'');
+                c.textContent=d;
+                dowRow.appendChild(c);
+            });
+            card.appendChild(dowRow);
+
+            // Days
+            const daysGrid = document.createElement('div');
+            daysGrid.className = 'days-grid';
+
+            const firstRaw = new Date(currentYear, m, 1).getDay();
+            const firstMon = firstRaw===0 ? 6 : firstRaw-1;
+            const daysInMonth = new Date(currentYear, m+1, 0).getDate();
+
+            for(let e=0;e<firstMon;e++){
+                const ec=document.createElement('div');
+                ec.className='day-cell empty';
+                daysGrid.appendChild(ec);
+            }
+
+            for(let d=1;d<=daysInMonth;d++){
+                const key=`${currentYear}-${pad(m+1)}-${pad(d)}`;
+                const entry=data[key]||{note:'',color:'dc-none'};
+                const dayIdx=(firstMon+d-1)%7;
+                const isWeekend=dayIdx>=5;
+                const isToday=(currentYear===ty&&m===tm&&d===td);
+
+                const cell=document.createElement('div');
+                cell.className=`day-cell ${entry.color||'dc-none'}${isWeekend?' weekend':''}${isToday?' today':''}`;
+                cell.dataset.key=key;
+
+                const num=document.createElement('div');
+                num.className='day-num';
+                num.textContent=d;
+                cell.appendChild(num);
+
+                if(entry.note){
+                    const prev=document.createElement('div');
+                    prev.className='day-note-preview';
+                    prev.textContent=entry.note;
+                    cell.appendChild(prev);
+                }
+
+                cell.addEventListener('click',()=>openModal(key,m));
+                daysGrid.appendChild(cell);
+            }
+
+            card.appendChild(daysGrid);
+            grid.appendChild(card);
+        }
+
+        // Update trophy count
+        const noteCount = Object.values(data).filter(e=>e.note||e.color!=='dc-none').length;
+        document.getElementById('noteCount').textContent = noteCount;
+    }
+
+    // ────────────────────────────────────────
+    //  Modal
+    // ────────────────────────────────────────
+    function openModal(key, monthIdx){
+        activeKey=key;
+        const [y,m,d]=key.split('-');
+        const entry=data[key]||{note:'',color:'dc-none'};
+
+        const dateObj=new Date(+y,+m-1,+d);
+        const dayName=dateObj.toLocaleDateString('fr-FR',{weekday:'long'});
+
+        document.getElementById('modalDate').childNodes[0].textContent =
+            `${dayName.charAt(0).toUpperCase()+dayName.slice(1)} ${+d}`;
+        document.getElementById('modalMonthLabel').textContent =
+            `${MONTHS_FR[+m-1].toUpperCase()}  ·  ${y}`;
+
+        document.getElementById('noteTextarea').value=entry.note||'';
+        selectedColor=entry.color||'dc-none';
+        document.querySelectorAll('.swatch').forEach(sw=>{
+            sw.classList.toggle('selected',sw.dataset.color===selectedColor);
+        });
+
+        document.getElementById('modalOverlay').classList.add('open');
+        setTimeout(()=>document.getElementById('noteTextarea').focus(),320);
+    }
+
+    function closeModal(){
+        document.getElementById('modalOverlay').classList.remove('open');
+        activeKey=null;
+    }
+
+    function saveModal(){
+        if(!activeKey)return;
+        const note=document.getElementById('noteTextarea').value.trim();
+        if(note||selectedColor!=='dc-none'){
+            data[activeKey]={note,color:selectedColor};
+        } else {
+            delete data[activeKey];
+        }
+        save();
+        buildCalendar();
+        closeModal();
+    }
+
+    // ────────────────────────────────────────
+    //  Events
+    // ────────────────────────────────────────
+    document.getElementById('btnSave').addEventListener('click',saveModal);
+    document.getElementById('btnCancel').addEventListener('click',closeModal);
+    document.getElementById('modalOverlay').addEventListener('click',e=>{
+        if(e.target===document.getElementById('modalOverlay'))closeModal();
+    });
+    document.getElementById('colorSwatches').addEventListener('click',e=>{
+        const sw=e.target.closest('.swatch');
+        if(!sw)return;
+        selectedColor=sw.dataset.color;
+        document.querySelectorAll('.swatch').forEach(s=>s.classList.toggle('selected',s===sw));
+    });
+    document.getElementById('prevYear').addEventListener('click',()=>{currentYear--;buildCalendar();});
+    document.getElementById('nextYear').addEventListener('click',()=>{currentYear++;buildCalendar();});
+    document.addEventListener('keydown',e=>{
+        if(e.key==='Escape')closeModal();
+        if(e.key==='Enter'&&e.ctrlKey&&activeKey)saveModal();
+    });
+
+    // ────────────────────────────────────────
+    //  Init
+    // ────────────────────────────────────────
+    load();
+    buildCalendar();
+</script>
+</body>
+</html>

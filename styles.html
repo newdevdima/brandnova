@@ -1,10 +1,420 @@
+
+<!--files = {-->
+<!--"img1": "/mnt/user-data/uploads/téléchargement__2_.jpg",-->
+<!--"img2": "/mnt/user-data/uploads/void_stiles.jpg",-->
+<!--"img3": "/mnt/user-data/uploads/Dylan_O_Brien_as_Stiles_Stilinski___TeenWolf__VOID_Stiles__Nogitsune__Stiles_Stilinski__mieczyslaw_stilinski__SaveTeenWolf.jpg",-->
+<!--"img4": "/mnt/user-data/uploads/_GIRLFRlENDISM.jpg",-->
+<!--"img5": "/mnt/user-data/uploads/Dylan_O_Brien_Stiles_Stilinski_Teen_Wolf_The_Maze_Runner_celebrity_crush_movie_actor_boyfriend_men_written_by_women__dylanobrien__TeenWolf__MazeRunner__CelebrityCrush__HollywoodHeartthrob.jpg",-->
+<!--"img6": "/mnt/user-data/uploads/téléchargement__1_.jpg",-->
+<!--"img7": "/mnt/user-data/uploads/téléchargement.jpg",-->
+<!--}-->
+
+<!--b64 = {}-->
+<!--for k, path in files.items():-->
+<!--with open(path, "rb") as f:-->
+<!--b64[k] = "data:image/jpeg;base64," + base64.b64encode(f.read()).decode()-->
+
+<!--print("Images loaded OK")-->
+
+<!--# Month header bg images (cycle through 7 for 12 months)-->
+<!--month_img_keys = ["img1","img2","img3","img4","img5","img6","img7","img1","img2","img3","img4","img5"]-->
+
+<!--# Build JS array string-->
+<!--month_imgs_js = "const MONTH_IMGS = [\n"-->
+<!--for k in month_img_keys:-->
+<!--month_imgs_js += f'  "{b64[k]}",\n'-->
+<!--month_imgs_js += "];"-->
+
+<!--# Strip photos html-->
+<!--strip_html = ""-->
+<!--for k in ["img7","img5","img4","img3","img2","img6","img1"]:-->
+<!--strip_html += f'<img class="strip-img" src="{b64[k]}" alt="Stiles">\n'-->
+
+<!--# Write the file in parts to avoid f-string brace issues-->
+<!--with open("/mnt/user-data/outputs/calendrier_stiles.html", "w", encoding="utf-8") as f:-->
+
+<!--f.write(f"""-->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stiles Stilinski — Teen Wolf Calendar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        :root{{
+            --red:#8b1a1a;--red-deep:#5c0e0e;--red-glow:rgba(139,26,26,.45);
+            --amber:#c97a1a;--amber-dim:rgba(201,122,26,.2);
+            --bg:#060608;--surface:#0d0d10;--surface-2:#121216;
+            --border:rgba(139,26,26,.28);--border-h:rgba(139,26,26,.6);
+            --ink:#d8d0c8;--ink-2:#7a7068;--ink-3:#3a3530;
+            --white:#ece8e0;--shadow:rgba(0,0,0,.8);--shadow-red:rgba(139,26,26,.3);
+            --ff-title:'Cinzel',serif;--ff-body:'Crimson Pro',serif;
+            --radius:10px;--radius-sm:6px;
+        }}
+        html{font-size:10px;scroll-behavior:smooth;}
+        body{font-family:var(--ff-body);background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden;}
+        body::before{
+            content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+            background:
+                    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(139,26,26,.2) 0%,transparent 55%),
+                    radial-gradient(ellipse 50% 30% at 20% 80%,rgba(201,122,26,.08) 0%,transparent 50%),
+                    radial-gradient(ellipse 60% 40% at 80% 60%,rgba(139,26,26,.1) 0%,transparent 50%);
+        }
+        body::after{
+            content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.055;
+            background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+        }
+        .ff{position:fixed;pointer-events:none;z-index:0;border-radius:50%;background:#c97a1a;animation:ffloat linear infinite;}
+        @keyframes ffloat{0%{opacity:0;transform:translateY(0) scale(1);}20%{opacity:.7;}80%{opacity:.3;}100%{{opacity:0;transform:translateY(-80px) scale(.3);}
+
+        /* ── HEADER ── */
+        .page-header{position:relative;z-index:2;text-align:center;padding:60px 20px 30px;overflow:hidden;}
+        .hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden;}
+        .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:brightness(.18) saturate(.6);}
+        .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,6,8,.1) 0%,rgba(6,6,8,.55) 60%,rgba(6,6,8,1) 100%);}
+        .header-inner{position:relative;z-index:1;}
+        .rune-ring{position:absolute;border-radius:50%;border:1px solid rgba(139,26,26,.25);pointer-events:none;animation:spinRune linear infinite;top:50%;left:50%;}}
+        @keyframes spinRune{from{transform:translate(-50%,-50%) rotate(0deg);}to{transform:translate(-50%,-50%) rotate(360deg);}}
+        .rune-ring-1{width:300px;height:300px;animation-duration:30s;border-style:dashed;}
+        .rune-ring-2{width:420px;height:420px;animation-duration:50s;animation-direction:reverse;border-color:rgba(201,122,26,.12);}
+        .show-title{font-family:var(--ff-title);font-size:clamp(1.1rem,2vw,1.5rem);font-weight:600;letter-spacing:.45em;color:var(--red);text-transform:uppercase;margin-bottom:10px;opacity:.9;}
+        .char-name{font-family:var(--ff-title);font-size:clamp(3.2rem,10vw,7rem);font-weight:900;letter-spacing:.04em;line-height:.9;background:linear-gradient(160deg,#c97a1a 0%,#e8a03a 30%,#8b1a1a 70%,#5c0e0e 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 28px rgba(139,26,26,.5));}
+        .char-sub{font-family:var(--ff-body);font-style:italic;font-size:clamp(1.2rem,2vw,1.6rem);color:var(--ink-2);letter-spacing:.2em;margin-top:10px;}
+        .header-quote{font-family:var(--ff-body);font-style:italic;font-size:clamp(1.2rem,2vw,1.5rem);color:var(--ink-2);max-width:480px;margin:16px auto 0;opacity:.7;line-height:1.65;}
+        .photo-strip{display:flex;justify-content:center;gap:10px;margin:26px auto 0;padding:0 20px;max-width:880px;flex-wrap:wrap;position:relative;z-index:1;}
+        .strip-img{width:88px;height:108px;object-fit:cover;border-radius:4px;border:1.5px solid rgba(139,26,26,.4);filter:grayscale(.4) brightness(.85);transition:filter .3s,transform .3s,box-shadow .3s,border-color .3s;flex-shrink:0;}
+        .strip-img:hover{filter:grayscale(0) brightness(1);transform:scale(1.1) translateY(-6px);box-shadow:0 10px 30px rgba(139,26,26,.5);border-color:var(--red);z-index:2;}
+        .blood-divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:20px auto 0;max-width:480px;position:relative;z-index:1;}
+        .blood-divider::before,.blood-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent);}
+        .blood-divider .sym{font-size:1.4rem;color:var(--red);filter:drop-shadow(0 0 8px var(--red-glow));}
+
+        /* ── YEAR NAV ── */
+        .year-nav{display:flex;align-items:center;justify-content:center;gap:24px;position:relative;z-index:2;margin-bottom:40px;}
+        .year-btn{width:44px;height:44px;background:var(--surface);border:1px solid var(--border);border-radius:50%;display:grid;place-items:center;font-size:2rem;color:var(--red);cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.6);font-family:var(--ff-title);}
+        .year-btn:hover{background:rgba(139,26,26,.2);border-color:var(--red);box-shadow:0 0 20px var(--red-glow);transform:scale(1.1);}
+        .year-display{font-family:var(--ff-title);font-size:2.8rem;letter-spacing:.1em;color:var(--red);min-width:100px;text-align:center;text-shadow:0 0 20px var(--red-glow);}
+
+        /* ── CALENDAR GRID ── */
+        .calendar-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1360px;margin:0 auto;padding:0 24px 70px;}
+        @media(max-width:1100px){.calendar-grid{grid-template-columns:repeat(3,1fr);}
+        @media(max-width:760px){.calendar-grid{grid-template-columns:repeat(2,1fr);gap:12px;padding:0 12px 50px;}}
+        @media(max-width:460px){.calendar-grid{grid-template-columns:1fr;}}
+
+        /* ── MONTH CARD ── */
+        .month-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.7);transition:transform .25s,box-shadow .25s,border-color .25s;animation:cardIn .5s ease both;position:relative;}
+        .month-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:0;transition:opacity .25s;}
+        .month-card:hover{transform:translateY(-4px);border-color:var(--border-h);box-shadow:0 10px 35px rgba(0,0,0,.8),0 0 18px var(--red-glow);}
+        .month-card:hover::before{opacity:1;}
+        @keyframes cardIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+        .month-card:nth-child(1){animation-delay:.04s}.month-card:nth-child(2){animation-delay:.08s}
+        .month-card:nth-child(3){animation-delay:.12s}.month-card:nth-child(4){animation-delay:.16s}
+        .month-card:nth-child(5){animation-delay:.20s}.month-card:nth-child(6){animation-delay:.24s}
+        .month-card:nth-child(7){animation-delay:.28s}.month-card:nth-child(8){animation-delay:.32s}
+        .month-card:nth-child(9){animation-delay:.36s}.month-card:nth-child(10){animation-delay:.40s}
+        .month-card:nth-child(11){animation-delay:.44s}.month-card:nth-child(12){animation-delay:.48s}
+
+        .month-header{padding:12px 14px 10px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);min-height:56px;display:flex;align-items:center;justify-content:space-between;}
+        .month-header-bg{position:absolute;inset:0;background-size:cover;background-position:center 25%;filter:brightness(.22) saturate(.45);}
+        .month-name{font-family:var(--ff-title);font-size:1.65rem;font-weight:700;letter-spacing:.06em;color:var(--ink);text-shadow:0 0 12px var(--red-glow);position:relative;z-index:1;line-height:1;}
+        .month-num-bg{font-family:var(--ff-title);font-size:3rem;line-height:1;color:rgba(139,26,26,.14);position:relative;z-index:1;}
+
+        .dow-row{display:grid;grid-template-columns:repeat(7,1fr);padding:6px 7px 3px;gap:2px;}
+        .dow-cell{text-align:center;font-family:var(--ff-title);font-size:.88rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);padding:3px 0;}
+        .dow-cell.weekend{color:rgba(139,26,26,.45);}
+
+        .days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:0 7px 10px;}
+        .day-cell{border-radius:var(--radius-sm);min-height:40px;cursor:pointer;position:relative;transition:transform .15s,box-shadow .15s;display:flex;flex-direction:column;align-items:center;overflow:hidden;}
+        .day-cell:hover{transform:scale(1.1);z-index:3;box-shadow:0 4px 16px rgba(0,0,0,.6),0 0 8px var(--red-glow);}
+        .day-cell.empty{cursor:default;pointer-events:none;}
+        .day-num{font-family:var(--ff-title);font-size:1.15rem;font-weight:600;color:var(--ink);padding:4px 3px 2px;z-index:1;position:relative;line-height:1;}
+        .day-cell.today .day-num{color:var(--bg);z-index:1;}
+        .day-cell.today::after{content:'';position:absolute;top:3px;left:50%;transform:translateX(-50%);width:26px;height:26px;border-radius:50%;background:var(--red);z-index:0;box-shadow:0 0 12px var(--red-glow);}
+        .day-cell.weekend .day-num{color:rgba(139,26,26,.65);}
+        .day-note-preview{font-family:var(--ff-body);font-size:.88rem;color:var(--ink-2);text-align:center;padding:0 2px 3px;overflow:hidden;max-height:22px;white-space:nowrap;text-overflow:ellipsis;width:100%;z-index:1;}
+
+        .dc-none{background:transparent;}
+        .dc-blood{background:rgba(139,26,26,.38);}
+        .dc-ember{background:rgba(201,122,26,.3);}
+        .dc-moonlit{background:rgba(60,80,140,.32);}
+        .dc-wolfs{background:rgba(40,40,40,.62);}
+        .dc-ash{background:rgba(100,100,110,.24);}
+        .dc-teal{background:rgba(20,120,110,.3);}
+        .dc-void{background:rgba(10,10,20,.72);}
+        .dc-purple{background:rgba(100,30,140,.32);}
+
+        /* ── MODAL ── */
+        .modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s;}}
+        .modal-overlay.open{opacity:1;pointer-events:all;}}
+        .modal{background:var(--surface);border:1px solid var(--border-h);border-radius:14px;padding:38px 32px 28px;width:100%;max-width:450px;box-shadow:0 30px 90px rgba(0,0,0,.9),0 0 50px var(--red-glow);transform:translateY(28px) scale(.95);transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .25s;opacity:0;position:relative;overflow:hidden;}
+        .modal::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red-deep),var(--red),var(--amber),var(--red));}
+        .modal-overlay.open .modal{transform:translateY(0) scale(1);opacity:1;}
+        .modal-corner-img{position:absolute;top:12px;right:14px;width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center 10%;border:2px solid rgba(139,26,26,.5);opacity:.55;filter:grayscale(.25);}
+        .modal-date{font-family:var(--ff-title);font-size:2.4rem;letter-spacing:.04em;color:var(--ink);text-align:center;margin-bottom:4px;line-height:1.1;padding-right:60px;}
+        .modal-month{font-family:var(--ff-body);font-style:italic;font-size:1.4rem;color:var(--red);text-align:center;letter-spacing:.12em;margin-bottom:4px;}
+        .modal-divider{height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent);margin:14px 0 18px;}
+        .section-label{font-family:var(--ff-title);font-size:1rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+        .section-label::before{content:'';display:block;width:14px;height:1.5px;background:var(--red);flex-shrink:0;}
+        .color-swatches{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:22px;}
+        .swatch{width:32px;height:32px;border-radius:var(--radius-sm);cursor:pointer;border:2px solid transparent;transition:transform .18s,box-shadow .18s,border-color .18s;position:relative;flex-shrink:0;}
+        .swatch:hover{{transform:scale(1.25);box-shadow:0 3px 12px rgba(0,0,0,.5);}
+        .swatch.selected{{border-color:var(--ink);box-shadow:0 0 0 3px rgba(139,26,26,.25),0 0 12px var(--red-glow);}
+        .swatch.selected::after{{content:'✓';position:absolute;inset:0;display:grid;place-items:center;font-size:1.2rem;font-weight:700;color:var(--ink);}
+        .swatch.dc-none{background:var(--surface-2);border:2px dashed rgba(139,26,26,.3);}
+        .swatch.dc-blood{background:#8b1a1a;}
+        .swatch.dc-ember{background:#c97a1a;}
+        .swatch.dc-moonlit{background:#3c508c;}
+        .swatch.dc-wolfs{background:#282828;border:1px solid rgba(255,255,255,.1);}
+        .swatch.dc-ash{background:#646470;}
+        .swatch.dc-teal{background:#14786e;}
+        .swatch.dc-void{background:#0a0a14;border:1px solid rgba(100,100,200,.2);}
+        .swatch.dc-purple{background:#641e8c;}
+        .note-textarea{width:100%;background:var(--surface-2);border:1px solid rgba(139,26,26,.3);border-radius:var(--radius-sm);padding:13px 15px;font-family:var(--ff-body);font-size:1.45rem;color:var(--ink);resize:vertical;min-height:100px;outline:none;line-height:1.6;transition:border-color .2s,box-shadow .2s;}}
+        .note-textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(139,26,26,.15);}
+        .note-textarea::placeholder{color:var(--ink-3);font-style:italic;}
+        .modal-actions{display:flex;gap:12px;margin-top:20px;}
+        .btn-save{flex:1;background:linear-gradient(135deg,var(--red-deep),var(--red));color:var(--ink);border:none;border-radius:var(--radius-sm);padding:13px 20px;font-family:var(--ff-title);font-size:1.4rem;font-weight:700;letter-spacing:.1em;cursor:pointer;transition:opacity .2s,transform .15s,box-shadow .2s;box-shadow:0 4px 20px rgba(139,26,26,.4);}
+        .btn-save:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 8px 28px rgba(139,26,26,.5);}
+        .btn-cancel{background:transparent;color:var(--ink-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px 20px;font-family:var(--ff-title);font-size:1.4rem;font-weight:600;letter-spacing:.08em;cursor:pointer;transition:border-color .2s,color .2s;}
+        .btn-cancel:hover{border-color:var(--red);color:var(--ink);}
+
+        /* ── Moon bar ── */
+        .moon-bar{position:fixed;bottom:22px;right:22px;z-index:10;background:var(--surface);border:1px solid var(--border);border-radius:40px;padding:10px 18px;display:flex;align-items:center;gap:10px;box-shadow:0 6px 28px rgba(0,0,0,.7),0 0 16px var(--red-glow);}
+        .moon-bar .moon-icon{font-size:2rem;}
+        .moon-bar .moon-label{font-family:var(--ff-title);font-size:1.05rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);line-height:1.2;}
+        .moon-bar .moon-num{font-family:var(--ff-title);font-size:2.2rem;color:var(--red);text-shadow:0 0 12px var(--red-glow);line-height:1;}
+        @media(max-width:480px){
+            .modal{padding:28px 18px 22px;}
+            .modal-date{font-size:1.9rem;padding-right:50px;}
+            .moon-bar{bottom:12px;right:12px;}
+        }}}
+    </style>
 </head>
 <body>
-$END$
+
+<script>
+    for(let i=0;i<28;i++){{
+        const f=document.createElement('div');f.className='ff';
+        const sz=1+Math.random()*2;
+        f.style.cssText='left:'+Math.random()*100+'vw;bottom:'+Math.random()*30+'vh;width:'+sz+'px;height:'+sz+'px;animation-duration:'+(4+Math.random()*6)+'s;animation-delay:'+Math.random()*6+'s;';
+        document.body.appendChild(f);
+    }}
+</script>
+
+<header class="page-header">
+    <div class="hero-bg"><img src="{b64['img1']}" alt="hero"></div>
+    <div class="rune-ring rune-ring-1"></div>
+    <div class="rune-ring rune-ring-2"></div>
+    <div class="header-inner">
+        <div class="show-title">Teen Wolf · Beacon Hills</div>
+        <div class="char-name">STILES STILINSKI</div>
+        <div class="char-sub">Mieczysław · The Nogitsune · Pack Human</div>
+        <div class="blood-divider"><span class="sym">⬡</span></div>
+        <p class="header-quote">"Je ne peux pas me battre. Je ne peux pas courir aussi vite.<br>Mais je peux penser."</p>
+        <div class="photo-strip">
+            {strip_html}
+        </div>
+        <div class="blood-divider" style="margin-top:20px"><span class="sym">🐺</span></div>
+    </div>
+</header>
+
+<div class="year-nav">
+    <button class="year-btn" id="prevYear">&#8249;</button>
+    <div class="year-display" id="navYear">2025</div>
+    <button class="year-btn" id="nextYear">&#8250;</button>
+</div>
+
+<div class="calendar-grid" id="calendarGrid"></div>
+
+<div class="moon-bar">
+    <span class="moon-icon">🌙</span>
+    <div>
+        <div class="moon-label">Notes</div>
+        <div class="moon-num" id="noteCount">0</div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <img class="modal-corner-img" src="{b64['img2']}" alt="Void Stiles">
+        <div class="modal-date" id="modalDate"></div>
+        <div class="modal-month" id="modalMonth"></div>
+        <div class="modal-divider"></div>
+        <div class="section-label">Couleur du jour</div>
+        <div class="color-swatches" id="colorSwatches">
+            <div class="swatch dc-none"    data-color="dc-none"    title="Aucune"></div>
+            <div class="swatch dc-blood"   data-color="dc-blood"   title="Sang"></div>
+            <div class="swatch dc-ember"   data-color="dc-ember"   title="Braise"></div>
+            <div class="swatch dc-moonlit" data-color="dc-moonlit" title="Clair de lune"></div>
+            <div class="swatch dc-wolfs"   data-color="dc-wolfs"   title="Loup"></div>
+            <div class="swatch dc-ash"     data-color="dc-ash"     title="Cendres"></div>
+            <div class="swatch dc-teal"    data-color="dc-teal"    title="Sorcière"></div>
+            <div class="swatch dc-void"    data-color="dc-void"    title="Void / Nogitsune"></div>
+            <div class="swatch dc-purple"  data-color="dc-purple"  title="Magie"></div>
+        </div>
+        <div class="section-label">Note</div>
+        <textarea class="note-textarea" id="noteTextarea" placeholder="Événement, souvenir, épisode…"></textarea>
+        <div class="modal-actions">
+            <button class="btn-cancel" id="btnCancel">Annuler</button>
+            <button class="btn-save"   id="btnSave">Enregistrer 🐺</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const STORAGE_KEY = 'stiles_cal_v1';
+    let currentYear = new Date().getFullYear();
+    let data = {};
+    let activeKey = null;
+    let selectedColor = 'dc-none';
+
+    const MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+    const MONTHS_EN = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+    const DAYS = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+    {month_imgs_js}
+
+    function load() {{ try {{ data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }} catch(e) {{ data = {}; }} }}
+    function save() {{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }}
+    function pad(n) {{ return String(n).padStart(2,'0'); }}
+
+    function buildCalendar() {{
+        const grid = document.getElementById('calendarGrid');
+        grid.innerHTML = '';
+        document.getElementById('navYear').textContent = currentYear;
+        const today = new Date();
+        const ty = today.getFullYear(), tm = today.getMonth(), td = today.getDate();
+
+        for (let m = 0; m < 12; m++) {{
+            const card = document.createElement('div');
+            card.className = 'month-card';
+
+            const hdr = document.createElement('div');
+            hdr.className = 'month-header';
+            const bgDiv = document.createElement('div');
+            bgDiv.className = 'month-header-bg';
+            bgDiv.style.backgroundImage = 'url(' + MONTH_IMGS[m] + ')';
+            hdr.appendChild(bgDiv);
+            const nameEl = document.createElement('div');
+            nameEl.className = 'month-name';
+            nameEl.textContent = MONTHS_EN[m];
+            hdr.appendChild(nameEl);
+            const numEl = document.createElement('div');
+            numEl.className = 'month-num-bg';
+            numEl.textContent = pad(m+1);
+            hdr.appendChild(numEl);
+            card.appendChild(hdr);
+
+            const dowRow = document.createElement('div');
+            dowRow.className = 'dow-row';
+            DAYS.forEach((d, i) => {{
+                const c = document.createElement('div');
+                c.className = 'dow-cell' + (i >= 5 ? ' weekend' : '');
+                c.textContent = d;
+                dowRow.appendChild(c);
+            }});
+            card.appendChild(dowRow);
+
+            const daysGrid = document.createElement('div');
+            daysGrid.className = 'days-grid';
+            const firstRaw = new Date(currentYear, m, 1).getDay();
+            const firstMon = firstRaw === 0 ? 6 : firstRaw - 1;
+            const dim = new Date(currentYear, m + 1, 0).getDate();
+
+            for (let e = 0; e < firstMon; e++) {{
+                const ec = document.createElement('div');
+                ec.className = 'day-cell empty';
+                daysGrid.appendChild(ec);
+            }}
+            for (let d = 1; d <= dim; d++) {{
+                const key = currentYear + '-' + pad(m+1) + '-' + pad(d);
+                const entry = data[key] || { note: '', color: 'dc-none' };
+                const dayIdx = (firstMon + d - 1) % 7;
+                const isWeekend = dayIdx >= 5;
+                const isToday = (currentYear === ty && m === tm && d === td);
+                const cell = document.createElement('div');
+                cell.className = 'day-cell ' + (entry.color || 'dc-none') + (isWeekend ? ' weekend' : '') + (isToday ? ' today' : '');
+                cell.dataset.key = key;
+                const num = document.createElement('div');
+                num.className = 'day-num';
+                num.textContent = d;
+                cell.appendChild(num);
+                if (entry.note) {{
+                    const prev = document.createElement('div');
+                    prev.className = 'day-note-preview';
+                    prev.textContent = entry.note;
+                    cell.appendChild(prev);
+                }}
+                cell.addEventListener('click', () => openModal(key, m));
+                daysGrid.appendChild(cell);
+            }}
+            card.appendChild(daysGrid);
+            grid.appendChild(card);
+        }}
+        const nc = Object.values(data).filter(e => e.note || e.color !== 'dc-none').length;
+        document.getElementById('noteCount').textContent = nc;
+    }}
+
+    function openModal(key, mIdx) {{
+        activeKey = key;
+        const parts = key.split('-');
+        const y = parts[0], m = parts[1], d = parts[2];
+        const entry = data[key] || {
+            note: '',
+            color: 'dc-none'
+        };
+        const dateObj = new Date(+y, +m - 1, +d);
+        const dayName = dateObj.toLocaleDateString('fr-FR', {
+            weekday: 'long'
+        });
+        document.getElementById('modalDate').textContent = dayName.charAt(0).toUpperCase() + dayName.slice(1) + ' ' + (+d);
+        document.getElementById('modalMonth').textContent = MONTHS_FR[+m - 1].toUpperCase() + '  ·  ' + y;
+        document.getElementById('noteTextarea').value = entry.note || '';
+        selectedColor = entry.color || 'dc-none';
+        document.querySelectorAll('.swatch').forEach(sw => sw.classList.toggle('selected', sw.dataset.color === selectedColor));
+        document.getElementById('modalOverlay').classList.add('open');
+        setTimeout(() => document.getElementById('noteTextarea').focus(), 320);
+    }}
+
+    function closeModal() {{
+        document.getElementById('modalOverlay').classList.remove('open');
+        activeKey = null;
+    }}
+
+    function saveModal() {{
+        if (!activeKey) return;
+        const note = document.getElementById('noteTextarea').value.trim();
+        if (note || selectedColor !== 'dc-none') {{
+            data[activeKey] = {note: note, color: selectedColor };
+        }} else {{
+            delete data[activeKey];
+        }}
+        save(); buildCalendar(); closeModal();
+    }}
+
+    document.getElementById('btnSave').addEventListener('click', saveModal);
+    document.getElementById('btnCancel').addEventListener('click', closeModal);
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {{
+        if (e.target === document.getElementById('modalOverlay')) closeModal();
+    }});
+    document.getElementById('colorSwatches').addEventListener('click', function(e) {{
+        const sw = e.target.closest('.swatch');
+        if (!sw) return;
+        selectedColor = sw.dataset.color;
+        document.querySelectorAll('.swatch').forEach(s => s.classList.toggle('selected', s === sw));
+    }});
+    document.getElementById('prevYear').addEventListener('click', function() {{ currentYear--; buildCalendar(); }});
+    document.getElementById('nextYear').addEventListener('click', function() {{ currentYear++; buildCalendar(); }});
+    document.addEventListener('keydown', function(e) {{
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'Enter' && e.ctrlKey && activeKey) saveModal();
+    }});
+
+    load();
+    buildCalendar();
+</script>
 </body>
 </html>
+

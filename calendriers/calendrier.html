@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Calendrier ✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+        :root{
+            --rose:      #f9a8c9;
+            --rose-deep: #e879a0;
+            --peach:     #fecfb0;
+            --lavender:  #d8b4fe;
+            --mint:      #a7f3d0;
+            --sky:       #bae6fd;
+            --butter:    #fef08a;
+            --blush:     #fce7f3;
+            --cream:     #fffbf7;
+            --ink:       #4a3040;
+            --ink-soft:  #7a5c6a;
+            --ink-pale:  #b899a8;
+            --white:     #ffffff;
+            --shadow:    rgba(232,121,160,.18);
+            --ff-head:   'Playfair Display', Georgia, serif;
+            --ff-body:   'Lato', sans-serif;
+        }
+
+        html{font-size:10px;scroll-behavior:smooth;}
+
+        body{
+            font-family:var(--ff-body);
+            background:var(--cream);
+            color:var(--ink);
+            min-height:100vh;
+            overflow-x:hidden;
+        }
+
+        /* ── Background decoration ── */
+        body::before{
+            content:'';
+            position:fixed;inset:0;z-index:0;pointer-events:none;
+            background:
+                    radial-gradient(ellipse 80% 60% at 10% 10%,  rgba(249,168,201,.22) 0%, transparent 60%),
+                    radial-gradient(ellipse 60% 50% at 90% 85%,  rgba(216,180,254,.25) 0%, transparent 55%),
+                    radial-gradient(ellipse 50% 40% at 50% 50%,  rgba(254,207,176,.18) 0%, transparent 60%);
+        }
+
+        /* ── Floating petals ── */
+        .petal{
+            position:fixed;pointer-events:none;z-index:0;
+            font-size:2rem;opacity:.35;animation:floatPetal linear infinite;
+        }
+        @keyframes floatPetal{
+            0%  {transform:translateY(110vh) rotate(0deg);   opacity:0;}
+            10% {opacity:.35;}
+            90% {opacity:.35;}
+            100%{transform:translateY(-10vh) rotate(720deg); opacity:0;}
+        }
+
+        /* ── Page header ── */
+        .page-header{
+            position:relative;z-index:1;
+            text-align:center;
+            padding:52px 20px 32px;
+        }
+        .page-header .year-label{
+            font-family:var(--ff-head);
+            font-size:clamp(3.6rem,8vw,6.4rem);
+            font-weight:700;
+            color:var(--ink);
+            letter-spacing:-.04em;
+            line-height:1;
+            background: linear-gradient(135deg, var(--rose-deep), var(--lavender));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+        }
+        .page-header .subtitle{
+            font-family:var(--ff-head);
+            font-style:italic;
+            font-size:clamp(1.4rem,2.5vw,1.9rem);
+            color:var(--ink-soft);
+            margin-top:6px;
+            letter-spacing:.06em;
+        }
+        .page-header .deco-line{
+            display:flex;align-items:center;justify-content:center;gap:12px;
+            margin:18px auto 0;max-width:340px;
+        }
+        .page-header .deco-line::before,
+        .page-header .deco-line::after{
+            content:'';flex:1;height:1px;
+            background:linear-gradient(90deg,transparent,var(--rose-deep),transparent);
+        }
+        .page-header .deco-line span{font-size:1.8rem;}
+
+        /* ── Year nav ── */
+        .year-nav{
+            display:flex;align-items:center;justify-content:center;gap:20px;
+            position:relative;z-index:1;
+            margin-bottom:40px;
+        }
+        .year-btn{
+            background:var(--white);
+            border:1.5px solid var(--rose);
+            border-radius:50%;
+            width:40px;height:40px;
+            display:grid;place-items:center;
+            font-size:1.8rem;color:var(--rose-deep);
+            cursor:pointer;
+            transition:background .2s,transform .15s,box-shadow .2s;
+            box-shadow:0 2px 10px var(--shadow);
+        }
+        .year-btn:hover{background:var(--blush);transform:scale(1.1);box-shadow:0 4px 18px var(--shadow);}
+        .year-display{
+            font-family:var(--ff-head);
+            font-size:2rem;font-weight:700;
+            color:var(--ink);letter-spacing:-.02em;
+            min-width:60px;text-align:center;
+        }
+
+        /* ── Grid of 12 months ── */
+        .calendar-grid{
+            position:relative;z-index:1;
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:24px;
+            max-width:1340px;
+            margin:0 auto;
+            padding:0 28px 60px;
+        }
+        @media(max-width:1100px){.calendar-grid{grid-template-columns:repeat(3,1fr);}}
+        @media(max-width:780px) {.calendar-grid{grid-template-columns:repeat(2,1fr);gap:16px;padding:0 16px 50px;}}
+        @media(max-width:480px) {.calendar-grid{grid-template-columns:1fr;}}
+
+        /* ── Month card ── */
+        .month-card{
+            background:var(--white);
+            border-radius:22px;
+            overflow:hidden;
+            box-shadow:0 6px 30px rgba(232,121,160,.12);
+            border:1.5px solid rgba(249,168,201,.3);
+            transition:transform .25s ease,box-shadow .25s ease;
+            animation:cardIn .5s ease both;
+        }
+        .month-card:hover{
+            transform:translateY(-5px);
+            box-shadow:0 16px 48px rgba(232,121,160,.22);
+        }
+        @keyframes cardIn{
+            from{opacity:0;transform:translateY(20px);}
+            to  {opacity:1;transform:translateY(0);}
+        }
+        /* stagger */
+        .month-card:nth-child(1) {animation-delay:.05s}
+        .month-card:nth-child(2) {animation-delay:.1s}
+        .month-card:nth-child(3) {animation-delay:.15s}
+        .month-card:nth-child(4) {animation-delay:.2s}
+        .month-card:nth-child(5) {animation-delay:.25s}
+        .month-card:nth-child(6) {animation-delay:.3s}
+        .month-card:nth-child(7) {animation-delay:.35s}
+        .month-card:nth-child(8) {animation-delay:.4s}
+        .month-card:nth-child(9) {animation-delay:.45s}
+        .month-card:nth-child(10){animation-delay:.5s}
+        .month-card:nth-child(11){animation-delay:.55s}
+        .month-card:nth-child(12){animation-delay:.6s}
+
+        .month-header{
+            padding:14px 16px 12px;
+            text-align:center;
+            position:relative;
+        }
+        /* Accent stripe top */
+        .month-header::before{
+            content:'';
+            position:absolute;top:0;left:0;right:0;height:4px;
+            border-radius:0;
+        }
+        .m-jan .month-header::before{background:linear-gradient(90deg,#fca5a5,#fb7185);}
+        .m-feb .month-header::before{background:linear-gradient(90deg,#f9a8d4,#ec4899);}
+        .m-mar .month-header::before{background:linear-gradient(90deg,#fdba74,#f97316);}
+        .m-apr .month-header::before{background:linear-gradient(90deg,#86efac,#22c55e);}
+        .m-may .month-header::before{background:linear-gradient(90deg,#67e8f9,#06b6d4);}
+        .m-jun .month-header::before{background:linear-gradient(90deg,#a5b4fc,#6366f1);}
+        .m-jul .month-header::before{background:linear-gradient(90deg,#fde68a,#f59e0b);}
+        .m-aug .month-header::before{background:linear-gradient(90deg,#fca5a5,#ef4444);}
+        .m-sep .month-header::before{background:linear-gradient(90deg,#d9f99d,#84cc16);}
+        .m-oct .month-header::before{background:linear-gradient(90deg,#fed7aa,#f97316);}
+        .m-nov .month-header::before{background:linear-gradient(90deg,#c4b5fd,#8b5cf6);}
+        .m-dec .month-header::before{background:linear-gradient(90deg,#bae6fd,#0ea5e9);}
+
+        .month-name{
+            font-family:var(--ff-head);
+            font-size:1.6rem;font-weight:700;
+            color:var(--ink);
+            letter-spacing:-.01em;
+        }
+        .month-emoji{font-size:1.4rem;margin-left:5px;}
+
+        /* ── Day-of-week header ── */
+        .dow-row{
+            display:grid;grid-template-columns:repeat(7,1fr);
+            padding:0 10px 6px;
+            gap:3px;
+        }
+        .dow-cell{
+            text-align:center;
+            font-size:1rem;font-weight:700;
+            text-transform:uppercase;
+            letter-spacing:.08em;
+            color:var(--rose-deep);
+            padding:4px 0;
+        }
+        .dow-cell.weekend{color:var(--lavender);}
+
+        /* ── Days grid ── */
+        .days-grid{
+            display:grid;grid-template-columns:repeat(7,1fr);
+            gap:3px;
+            padding:0 10px 14px;
+        }
+        .day-cell{
+            border-radius:10px;
+            min-height:44px;
+            cursor:pointer;
+            position:relative;
+            transition:transform .15s,box-shadow .15s;
+            display:flex;flex-direction:column;
+            align-items:center;
+            overflow:hidden;
+        }
+        .day-cell:hover{transform:scale(1.08);z-index:2;box-shadow:0 4px 18px rgba(0,0,0,.12);}
+        .day-cell.empty{cursor:default;pointer-events:none;}
+
+        .day-num{
+            font-size:1.2rem;font-weight:700;
+            color:var(--ink);
+            padding:5px 4px 2px;
+            z-index:1;position:relative;
+            line-height:1;
+            transition:color .2s;
+        }
+        .day-cell.today .day-num{
+            color:var(--white);
+        }
+        .day-cell.today::after{
+            content:'';
+            position:absolute;top:3px;left:50%;transform:translateX(-50%);
+            width:28px;height:28px;border-radius:50%;
+            background:var(--rose-deep);
+            z-index:0;
+        }
+        .day-cell.today .day-num{z-index:1;}
+
+        .day-note-preview{
+            font-size:.95rem;
+            color:var(--ink-soft);
+            text-align:center;
+            padding:0 3px 4px;
+            overflow:hidden;
+            max-height:28px;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            width:100%;
+            z-index:1;
+            line-height:1.3;
+        }
+
+        /* Weekend day numbers */
+        .day-cell.weekend .day-num{color:var(--ink-soft);}
+
+        /* ── Color palette for days ── */
+        .dc-none{background:transparent;}
+        .dc-rose{background:rgba(249,168,201,.35);}
+        .dc-red{background:rgba(252,165,165,.4);}
+        .dc-peach{background:rgba(254,207,176,.45);}
+        .dc-butter{background:rgba(254,240,138,.45);}
+        .dc-mint{background:rgba(167,243,208,.4);}
+        .dc-sky{background:rgba(186,230,253,.45);}
+        .dc-lavender{background:rgba(216,180,254,.4);}
+        .dc-lilac{background:rgba(196,181,253,.4);}
+
+        /* ── Modal ── */
+        .modal-overlay{
+            position:fixed;inset:0;z-index:1000;
+            background:rgba(74,48,64,.45);
+            backdrop-filter:blur(8px);
+            -webkit-backdrop-filter:blur(8px);
+            display:grid;place-items:center;
+            padding:20px;
+            opacity:0;pointer-events:none;
+            transition:opacity .25s ease;
+        }
+        .modal-overlay.open{opacity:1;pointer-events:all;}
+
+        .modal{
+            background:var(--white);
+            border-radius:26px;
+            padding:36px 32px 28px;
+            width:100%;max-width:420px;
+            box-shadow:0 24px 80px rgba(232,121,160,.3);
+            border:1.5px solid rgba(249,168,201,.4);
+            transform:translateY(30px) scale(.96);
+            transition:transform .3s cubic-bezier(.34,1.56,.64,1), opacity .25s ease;
+            opacity:0;
+            position:relative;
+            overflow:hidden;
+        }
+        .modal::before{
+            content:'';
+            position:absolute;top:0;left:0;right:0;height:5px;
+            background:linear-gradient(90deg,var(--rose),var(--lavender),var(--peach));
+        }
+        .modal-overlay.open .modal{
+            transform:translateY(0) scale(1);
+            opacity:1;
+        }
+
+        .modal-date{
+            font-family:var(--ff-head);
+            font-size:2.2rem;font-weight:700;
+            color:var(--ink);
+            letter-spacing:-.03em;
+            margin-bottom:20px;
+            text-align:center;
+        }
+        .modal-date span{
+            color:var(--rose-deep);
+            font-style:italic;
+        }
+
+        /* Color picker */
+        .color-label{
+            font-size:1.2rem;font-weight:700;
+            color:var(--ink-soft);
+            text-transform:uppercase;
+            letter-spacing:.1em;
+            margin-bottom:10px;
+        }
+        .color-swatches{
+            display:flex;flex-wrap:wrap;gap:9px;
+            margin-bottom:22px;
+        }
+        .swatch{
+            width:32px;height:32px;border-radius:50%;cursor:pointer;
+            border:3px solid transparent;
+            transition:transform .18s,border-color .18s,box-shadow .18s;
+            position:relative;
+        }
+        .swatch:hover{transform:scale(1.2);box-shadow:0 3px 12px rgba(0,0,0,.18);}
+        .swatch.selected{border-color:var(--ink);box-shadow:0 0 0 3px rgba(74,48,64,.2);}
+        .swatch.selected::after{
+            content:'✓';
+            position:absolute;inset:0;
+            display:grid;place-items:center;
+            font-size:1.4rem;color:var(--ink);font-weight:700;
+        }
+        .swatch.dc-none{background:var(--blush);border:2px dashed var(--rose);}
+        .swatch.dc-rose{background:#f9a8c9;}
+        .swatch.dc-red{background:#fca5a5;}
+        .swatch.dc-peach{background:#fed7aa;}
+        .swatch.dc-butter{background:#fef08a;}
+        .swatch.dc-mint{background:#a7f3d0;}
+        .swatch.dc-sky{background:#bae6fd;}
+        .swatch.dc-lavender{background:#d8b4fe;}
+        .swatch.dc-lilac{background:#c4b5fd;}
+
+        /* Textarea */
+        .note-label{
+            font-size:1.2rem;font-weight:700;
+            color:var(--ink-soft);
+            text-transform:uppercase;
+            letter-spacing:.1em;
+            margin-bottom:10px;
+        }
+        .note-textarea{
+            width:100%;
+            background:#fdf7fa;
+            border:1.5px solid rgba(249,168,201,.5);
+            border-radius:14px;
+            padding:14px 16px;
+            font-family:var(--ff-body);
+            font-size:1.4rem;
+            color:var(--ink);
+            resize:vertical;
+            min-height:110px;
+            outline:none;
+            transition:border-color .2s,box-shadow .2s;
+            line-height:1.65;
+        }
+        .note-textarea:focus{
+            border-color:var(--rose-deep);
+            box-shadow:0 0 0 4px rgba(232,121,160,.12);
+        }
+        .note-textarea::placeholder{color:var(--ink-pale);font-style:italic;}
+
+        .modal-actions{
+            display:flex;gap:12px;
+            margin-top:22px;
+        }
+        .btn-save{
+            flex:1;
+            background:linear-gradient(135deg,var(--rose-deep),var(--lavender));
+            color:var(--white);
+            border:none;border-radius:14px;
+            padding:13px 20px;
+            font-family:var(--ff-body);
+            font-size:1.4rem;font-weight:700;
+            cursor:pointer;
+            letter-spacing:.03em;
+            transition:opacity .2s,transform .15s,box-shadow .2s;
+            box-shadow:0 4px 18px rgba(232,121,160,.35);
+        }
+        .btn-save:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 8px 28px rgba(232,121,160,.4);}
+        .btn-save:active{transform:translateY(0);}
+        .btn-cancel{
+            background:var(--blush);
+            color:var(--ink-soft);
+            border:1.5px solid rgba(249,168,201,.5);
+            border-radius:14px;
+            padding:13px 20px;
+            font-family:var(--ff-body);
+            font-size:1.4rem;font-weight:700;
+            cursor:pointer;
+            transition:background .2s;
+        }
+        .btn-cancel:hover{background:#f8d7e8;}
+
+        /* ── Mobile ── */
+        @media(max-width:480px){
+            .page-header{padding:36px 16px 24px;}
+            .modal{padding:28px 20px 22px;}
+            .modal-date{font-size:1.8rem;}
+        }
+    </style>
+</head>
+<body>
+
+<!-- Floating petals -->
+<div class="petal" style="left:5%;animation-duration:18s;animation-delay:0s;font-size:1.4rem;">🌸</div>
+<div class="petal" style="left:20%;animation-duration:22s;animation-delay:4s;font-size:1rem;">🌷</div>
+<div class="petal" style="left:40%;animation-duration:15s;animation-delay:8s;font-size:1.6rem;">✿</div>
+<div class="petal" style="left:60%;animation-duration:20s;animation-delay:2s;font-size:1.2rem;">🌸</div>
+<div class="petal" style="left:75%;animation-duration:17s;animation-delay:6s;font-size:.9rem;">💮</div>
+<div class="petal" style="left:90%;animation-duration:23s;animation-delay:11s;font-size:1.5rem;">🌺</div>
+
+<!-- Page header -->
+<header class="page-header">
+    <div class="year-label" id="headerYear">2025</div>
+    <div class="subtitle">mon journal du cœur</div>
+    <div class="deco-line"><span>🌸</span></div>
+</header>
+
+<!-- Year nav -->
+<div class="year-nav">
+    <button class="year-btn" id="prevYear">‹</button>
+    <div class="year-display" id="navYear">2025</div>
+    <button class="year-btn" id="nextYear">›</button>
+</div>
+
+<!-- Calendar grid -->
+<div class="calendar-grid" id="calendarGrid"></div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <div class="modal-date" id="modalDate"></div>
+
+        <div class="color-label">🎨 Couleur du jour</div>
+        <div class="color-swatches" id="colorSwatches">
+            <div class="swatch dc-none"  data-color="dc-none"     title="Aucune"></div>
+            <div class="swatch dc-rose"  data-color="dc-rose"     title="Rose"></div>
+            <div class="swatch dc-red"   data-color="dc-red"      title="Rouge doux"></div>
+            <div class="swatch dc-peach" data-color="dc-peach"    title="Pêche"></div>
+            <div class="swatch dc-butter"data-color="dc-butter"   title="Jaune"></div>
+            <div class="swatch dc-mint"  data-color="dc-mint"     title="Menthe"></div>
+            <div class="swatch dc-sky"   data-color="dc-sky"      title="Bleu ciel"></div>
+            <div class="swatch dc-lavender" data-color="dc-lavender" title="Lavande"></div>
+            <div class="swatch dc-lilac" data-color="dc-lilac"    title="Lilas"></div>
+        </div>
+
+        <div class="note-label">✍️ Note du jour</div>
+        <textarea class="note-textarea" id="noteTextarea" placeholder="Écris quelque chose de beau ici…"></textarea>
+
+        <div class="modal-actions">
+            <button class="btn-cancel" id="btnCancel">Annuler</button>
+            <button class="btn-save"   id="btnSave">Enregistrer ✨</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ────────────────────────────────────────────
+    //  State
+    // ────────────────────────────────────────────
+    const STORAGE_KEY = 'girly_cal_v2';
+    let currentYear = new Date().getFullYear();
+    let data = {};      // { "2025-01-05": { note: "...", color: "dc-rose" } }
+    let activeKey = null;
+    let selectedColor = 'dc-none';
+
+    const MONTHS_FR = [
+        'Janvier','Février','Mars','Avril','Mai','Juin',
+        'Juillet','Août','Septembre','Octobre','Novembre','Décembre'
+    ];
+    const MONTH_EMOJIS = ['❄️','💝','🌱','🌸','🌻','☀️','🍦','🎑','🍂','🎃','🦋','🎄'];
+    const MONTH_CLASSES = [
+        'm-jan','m-feb','m-mar','m-apr','m-may','m-jun',
+        'm-jul','m-aug','m-sep','m-oct','m-nov','m-dec'
+    ];
+    const DAYS_FR = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+
+    // ────────────────────────────────────────────
+    //  Persistence
+    // ────────────────────────────────────────────
+    function load(){
+        try{ data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+        catch(e){ data = {}; }
+    }
+    function save(){
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    // ────────────────────────────────────────────
+    //  Render
+    // ────────────────────────────────────────────
+    function pad(n){ return String(n).padStart(2,'0'); }
+
+    function buildCalendar(){
+        const grid = document.getElementById('calendarGrid');
+        grid.innerHTML = '';
+        document.getElementById('headerYear').textContent = currentYear;
+        document.getElementById('navYear').textContent    = currentYear;
+
+        const today = new Date();
+        const ty = today.getFullYear(), tm = today.getMonth(), td = today.getDate();
+
+        for(let m = 0; m < 12; m++){
+            const card = document.createElement('div');
+            card.className = `month-card ${MONTH_CLASSES[m]}`;
+
+            // Header
+            const hdr = document.createElement('div');
+            hdr.className = 'month-header';
+            hdr.innerHTML = `<div class="month-name">${MONTHS_FR[m]} <span class="month-emoji">${MONTH_EMOJIS[m]}</span></div>`;
+            card.appendChild(hdr);
+
+            // Day-of-week row (Mon–Sun)
+            const dowRow = document.createElement('div');
+            dowRow.className = 'dow-row';
+            DAYS_FR.forEach((d,i) => {
+                const cell = document.createElement('div');
+                cell.className = 'dow-cell' + (i >= 5 ? ' weekend' : '');
+                cell.textContent = d;
+                dowRow.appendChild(cell);
+            });
+            card.appendChild(dowRow);
+
+            // Days grid
+            const daysGrid = document.createElement('div');
+            daysGrid.className = 'days-grid';
+
+            // First day of month (0=Sun … 6=Sat) → convert to Mon-based index
+            const firstRaw = new Date(currentYear, m, 1).getDay(); // 0=Sun
+            const firstMon = (firstRaw === 0) ? 6 : firstRaw - 1;  // Mon=0 … Sun=6
+
+            const daysInMonth = new Date(currentYear, m+1, 0).getDate();
+
+            // Empty cells before day 1
+            for(let e = 0; e < firstMon; e++){
+                const ec = document.createElement('div');
+                ec.className = 'day-cell empty';
+                daysGrid.appendChild(ec);
+            }
+
+            // Day cells
+            for(let d = 1; d <= daysInMonth; d++){
+                const key = `${currentYear}-${pad(m+1)}-${pad(d)}`;
+                const entry = data[key] || { note:'', color:'dc-none' };
+
+                const dayIdx = (firstMon + d - 1) % 7; // 0=Mon … 6=Sun
+                const isWeekend = dayIdx >= 5;
+                const isToday   = (currentYear===ty && m===tm && d===td);
+
+                const cell = document.createElement('div');
+                cell.className = `day-cell ${entry.color || 'dc-none'}${isWeekend?' weekend':''}${isToday?' today':''}`;
+                cell.dataset.key = key;
+
+                const num = document.createElement('div');
+                num.className = 'day-num';
+                num.textContent = d;
+                cell.appendChild(num);
+
+                if(entry.note){
+                    const preview = document.createElement('div');
+                    preview.className = 'day-note-preview';
+                    preview.textContent = entry.note;
+                    cell.appendChild(preview);
+                }
+
+                cell.addEventListener('click', () => openModal(key, m));
+                daysGrid.appendChild(cell);
+            }
+
+            card.appendChild(daysGrid);
+            grid.appendChild(card);
+        }
+    }
+
+    // ────────────────────────────────────────────
+    //  Modal
+    // ────────────────────────────────────────────
+    function openModal(key, monthIndex){
+        activeKey = key;
+        const [y, m, d] = key.split('-');
+        const entry = data[key] || { note:'', color:'dc-none' };
+
+        // Date label
+        const dateObj = new Date(+y, +m-1, +d);
+        const dayName = dateObj.toLocaleDateString('fr-FR',{weekday:'long'});
+        document.getElementById('modalDate').innerHTML =
+            `<span>${dayName.charAt(0).toUpperCase()+dayName.slice(1)}</span> ${+d} ${MONTHS_FR[+m-1]} ${y}`;
+
+        // Textarea
+        document.getElementById('noteTextarea').value = entry.note || '';
+
+        // Color swatches
+        selectedColor = entry.color || 'dc-none';
+        document.querySelectorAll('.swatch').forEach(sw => {
+            sw.classList.toggle('selected', sw.dataset.color === selectedColor);
+        });
+
+        // Open
+        document.getElementById('modalOverlay').classList.add('open');
+        setTimeout(() => document.getElementById('noteTextarea').focus(), 320);
+    }
+
+    function closeModal(){
+        document.getElementById('modalOverlay').classList.remove('open');
+        activeKey = null;
+    }
+
+    function saveModal(){
+        if(!activeKey) return;
+        const note  = document.getElementById('noteTextarea').value.trim();
+        if(note || selectedColor !== 'dc-none'){
+            data[activeKey] = { note, color: selectedColor };
+        } else {
+            delete data[activeKey];
+        }
+        save();
+        buildCalendar();
+        closeModal();
+    }
+
+    // ────────────────────────────────────────────
+    //  Events
+    // ────────────────────────────────────────────
+    document.getElementById('btnSave').addEventListener('click', saveModal);
+    document.getElementById('btnCancel').addEventListener('click', closeModal);
+    document.getElementById('modalOverlay').addEventListener('click', e => {
+        if(e.target === document.getElementById('modalOverlay')) closeModal();
+    });
+
+    // Color swatches
+    document.getElementById('colorSwatches').addEventListener('click', e => {
+        const sw = e.target.closest('.swatch');
+        if(!sw) return;
+        selectedColor = sw.dataset.color;
+        document.querySelectorAll('.swatch').forEach(s => s.classList.toggle('selected', s===sw));
+    });
+
+    // Year nav
+    document.getElementById('prevYear').addEventListener('click', () => {
+        currentYear--;
+        buildCalendar();
+    });
+    document.getElementById('nextYear').addEventListener('click', () => {
+        currentYear++;
+        buildCalendar();
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+        if(e.key === 'Escape') closeModal();
+        if(e.key === 'Enter' && e.ctrlKey && activeKey) saveModal();
+    });
+
+    // ────────────────────────────────────────────
+    //  Init
+    // ────────────────────────────────────────────
+    load();
+    buildCalendar();
+</script>
+</body>
+</html>
