@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guides Marketing & Croissance d'Entreprise</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#ffffff;
+    color:#0c0169;
+    min-height:100vh;
+}
+
+.hero{
+    padding:100px 8%;
+    text-align:center;
+    background:
+    radial-gradient(circle at top left,#2563eb55,transparent 40%),
+    radial-gradient(circle at top right,#7c3aed55,transparent 40%);
+}
+
+.hero h1{
+    font-size:clamp(2.5rem,5vw,5rem);
+    margin-bottom:20px;
+    font-weight:900;
+}
+
+.hero p{
+    max-width:800px;
+    margin:auto;
+    color:#8a929c;
+    font-size:1.15rem;
+    line-height:1.8;
+}
+
+.container{
+    width:min(1400px,92%);
+    margin:auto;
+    padding:80px 0;
+}
+
+.section-title{
+    font-size:2rem;
+    margin-bottom:40px;
+    font-weight:800;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:30px;
+}
+
+.article-card{
+    display:block;
+    text-decoration:none;
+    color:white;
+    background:#eb9413;
+    border:1px solid rgba(255, 255, 255, 0);
+    border-radius:24px;
+    overflow:hidden;
+    transition:.35s;
+}
+
+.article-card:hover{
+    transform:translateY(-8px);
+    border-color:#3b83f600;
+    box-shadow:0 25px 60px rgba(37,99,235,.25);
+}
+
+.card-image{
+    height:220px;
+    background:linear-gradient(135deg,#7a87a3,#7b7880);
+}
+
+.card-content{
+    padding:28px;
+}
+
+.badge{
+    display:inline-block;
+    background:#73757a22;
+    color:#050000;
+    padding:8px 14px;
+    border-radius:50px;
+    font-size:.8rem;
+    margin-bottom:18px;
+}
+
+.article-card h3{
+    font-size:1.4rem;
+    margin-bottom:15px;
+    line-height:1.4;
+}
+
+.article-card p{
+    color:#dfe4eb;
+    line-height:1.7;
+}
+
+.read-more{
+    margin-top:20px;
+    color:#092b55;
+    font-weight:600;
+}
+
+footer{
+    padding:60px 20px;
+    text-align:center;
+    color:#64748b;
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+    <h1>Guides Marketing & Croissance</h1>
+    <p>
+        Découvrez nos ressources complètes pour lancer, développer
+        et faire grandir votre entreprise grâce au marketing digital,
+        à la génération de prospects et à l'automatisation.
+    </p>
+</section>
+
+<div class="container">
+
+    <h2 class="section-title">
+        Articles populaires
+    </h2>
+
+    <div class="grid">
+
+        <a href="articles/comment-creer-son-entreprise.html" class="article-card">
+            <!--<div class="card-image"></div>-->
+            <div class="card-content">
+                <span class="badge">Création d'entreprise</span>
+                <h3>Comment créer son entreprise en 2026 : guide complet</h3>
+                <p>
+                    Toutes les étapes pour lancer votre activité,
+                    trouver vos premiers clients et construire
+                    une présence professionnelle.
+                </p>
+                <div class="read-more">Lire l'article →</div>
+            </div>
+        </a>
+
+        <a href="articles/trouver-premiers-clients.html" class="article-card">
+            <!--<div class="card-image"></div>-->
+            <div class="card-content">
+                <span class="badge">Acquisition</span>
+                <h3>Comment trouver ses premiers clients rapidement ?</h3>
+                <p>
+                    Réseaux sociaux, référencement naturel,
+                    publicité et stratégies de prospection.
+                </p>
+                <div class="read-more">Lire l'article →</div>
+            </div>
+        </a>
+
+        <a href="articles/site-web-pourquoi-important.html" class="article-card">
+            <!--<div class="card-image"></div>-->
+            <div class="card-content">
+                <span class="badge">Site Web</span>
+                <h3>Pourquoi chaque entreprise a besoin d'un site web</h3>
+                <p>
+                    Découvrez comment un site web peut générer
+                    des prospects 24h/24 et renforcer votre crédibilité.
+                </p>
+                <div class="read-more">Lire l'article →</div>
+            </div>
+        </a>
+
+        <a href="articles/seo-local.html" class="article-card">
+            <!--<div class="card-image"></div>-->
+            <div class="card-content">
+                <span class="badge">SEO</span>
+                <h3>Comment apparaître sur Google dans votre ville</h3>
+                <p>
+                    Les fondamentaux du référencement local
+                    pour attirer des clients proches de chez vous.
+                </p>
+                <div class="read-more">Lire l'article →</div>
+            </div>
+        </a>
+
+        <a href="articles/publicite-facebook-google.html" class="article-card">
+            <!--<div class="card-image"></div>-->
+            <div class="card-content">
+                <span class="badge">Publicité</span>
+                <h3>Facebook Ads ou Google Ads : lequel choisir ?</h3>
+                <p>
+                    Comprendre les avantages de chaque plateforme
+                    pour investir efficacement votre budget.
+                </p>
+                <div class="read-more">Lire l'article →</div>
+            </div>
+        </a>
+
+        <a href="articles/developper-entreprise.html" class="article-card">
+            <!--<div class="card-image"></div>-->
+            <div class="card-content">
+                <span class="badge">Croissance</span>
+                <h3>10 stratégies pour développer votre entreprise</h3>
+                <p>
+                    Des méthodes concrètes utilisées par les entreprises
+                    qui réussissent à accélérer leur croissance.
+                </p>
+                <div class="read-more">Lire l'article →</div>
+            </div>
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Votre Agence Marketing • Ressources & Guides
+</footer>
+
+</body>
+</html>
