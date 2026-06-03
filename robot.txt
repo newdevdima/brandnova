@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Dissallow: /api/
+Dissallow: /admin/
+
+sitemap: https://marketingdigital.assur-line.fr/sitemap.xml
