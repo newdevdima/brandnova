@@ -781,6 +781,11 @@ body {
     gap: 40px;
 }
 
+.blog-list .card-content {
+    letter-spacing: 1px;
+    line-height: 30px;
+}
+
 .blog-card .card-banner {
     border-radius: var(--radius-20);
     overflow: hidden;
