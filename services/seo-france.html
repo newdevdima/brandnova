@@ -120,6 +120,10 @@
                 </li>
 
                 <li class="navbar-item">
+                      <a href="../blog/index.html" class="navbar-link" data-nav-link>Blog</a>
+                </li>
+
+                <li class="navbar-item">
                     <a href="../index.html#blog" class="navbar-link" data-nav-link>A propos</a>
                 </li>
 
@@ -550,22 +554,22 @@
             </ul>
 
             <ul class="footer-list">
-          <li>
-            <p class="footer-list-title">Brandnova</p>
-          </li>
-          <li>
-            <a href="#blog" class="footer-link">A propos</a>
-          </li>
-          <li>
-            <a href="#contact" class="footer-link">Contact</a>
-          </li>
-          <li>
-            <a href="#" class="footer-link">Mentions légales</a>
-          </li>
-          <li>
-            <a href="#" class="footer-link">Politique de confidentialité</a>
-          </li>
-        </ul>
+                <li>
+                    <p class="footer-list-title">Brandnova</p>
+                </li>
+                <li>
+                    <a href="#blog" class="footer-link">A propos</a>
+                </li>
+                <li>
+                    <a href="#contact" class="footer-link">Contact</a>
+                </li>
+                <li>
+                    <a href="#" class="footer-link">Mentions légales</a>
+                </li>
+                <li>
+                    <a href="#" class="footer-link">Politique de confidentialité</a>
+                </li>
+            </ul>
 
 
             <!-- <ul class="footer-list">
@@ -599,25 +603,18 @@
         </div>
 
         <div class="footer-bottom">
-
             <p class="copyright">
                 &copy; 2026 marketing-digital. Tous droits réservés.
             </p>
-
             <ul class="footer-bottom-list">
-
                 <li>
                     <a href="#" class="footer-bottom-link">Terms and conditions</a>
                 </li>
-
                 <li>
                     <a href="#" class="footer-bottom-link">Privacy policy</a>
                 </li>
-
             </ul>
-
         </div>
-
     </div>
 </footer>
 
@@ -667,28 +664,15 @@
     };
 
     const observer = new IntersectionObserver((entries) => {
-
         entries.forEach(entry => {
-
             if(entry.isIntersecting){
-
                 startCounter(entry.target);
-
                 observer.unobserve(entry.target);
-
             }
-
         });
-
     }, { threshold: 0.5 });
-
     counters.forEach(counter => observer.observe(counter));
-
 </script>
-
-
-
-
 
 <!-- IONICONS -->
 
@@ -720,5 +704,4 @@
 
 </script>
 </body>
-
 </html>
