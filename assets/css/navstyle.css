@@ -51,10 +51,14 @@
     color:var(--dark);
     text-decoration:none;
     font-weight:500;
-
+    font-size: 16px;
     transition:.25s;
 }
+.dropdown-toggle
+{
+    font-size: 16px;
 
+}
 .navbar-link:hover{
     color:var(--blue);
 }
@@ -92,15 +96,11 @@
 .btn-primary{
     background:var(--blue);
     color:white;
-
     padding:12px 22px;
-
     border-radius:50px;
-
     text-decoration:none;
-
     font-weight:600;
-
+    font-size: 16px;
     transition:.3s;
 }
 
@@ -294,8 +294,9 @@
     .navbar-link{
         display:block;
         width:100%;
-
         padding:16px 0;
+        font-family: var(--ff-body) !important;
+        font-size: 1.4rem !important;
     }
 
     .dropdown-menu{

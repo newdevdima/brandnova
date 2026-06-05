@@ -58,6 +58,15 @@
     grid-row:span 2;
 }
 
+.article-image img{
+
+    object-fit:cover;
+    height:220px;
+    grid-row:span 2;
+    width:100%;
+
+}
+
 .latest-content{
     display:flex;
     flex-direction:column;
@@ -603,16 +612,14 @@ body{
           <a href="#" class="logo">Brandnova</a>
 
           <nav class="navbar" data-navbar>
-
-             
               <ul class="navbar-list">
 
                   <li class="navbar-item">
-                      <a href="#home" class="navbar-link" data-nav-link>Home</a>
+                      <a href="../index.html#home" class="navbar-link" data-nav-link>Home</a>
                   </li>
 
                   <li class="navbar-item dropdown">
-                      <a href="#service" style="all: unset;cursor: pointer;">
+                      <a href="../index.html#service" style="all: unset;cursor: pointer;">
                         <button class="navbar-link dropdown-toggle" style="all: unset;cursor: pointer;">
                             Services
                             <ion-icon name="chevron-down-outline" class="hidden-desktop"></ion-icon>
@@ -622,37 +629,37 @@ body{
                       <ul class="dropdown-menu">
 
                           <li>
-                              <a href="services/optimisationMoteursRecherche.html" class="dropdown-link">
+                              <a href="../services/optimisationMoteursRecherche.html" class="dropdown-link">
                                   SEO & Référencement
                               </a>
                           </li>
 
                           <li>
-                              <a href="services/ppc.html" class="dropdown-link">
+                              <a href="../services/ppc.html" class="dropdown-link">
                                   PPC
                               </a>
                           </li>
 
                           <li>
-                              <a href="services/webAndMobileDeveloppement.html" class="dropdown-link">
+                              <a href="../services/webAndMobileDeveloppement.html" class="dropdown-link">
                                   Développement Web & Mobile
                               </a>
                           </li>
 
                           <li>
-                              <a href="services/publiciteReseauSociaux.html" class="dropdown-link">
+                              <a href="../services/publiciteReseauSociaux.html" class="dropdown-link">
                                   Publicité Digitale
                               </a>
                           </li>
 
                           <li>
-                              <a href="services/marketingReseauxSociaux.html" class="dropdown-link">
+                              <a href="../services/marketingReseauxSociaux.html" class="dropdown-link">
                                   Marketing Réseaux Sociaux
                               </a>
                           </li>
 
                           <li>
-                              <a href="services/developpementDeMarque.html" class="dropdown-link">
+                              <a href="../services/developpementDeMarque.html" class="dropdown-link">
                                   Développement de Marque
                               </a>
                           </li>
@@ -666,7 +673,7 @@ body{
                   </li> -->
 
                   <li class="navbar-item">
-                      <a href="#project" class="navbar-link" data-nav-link>Portfolio</a>
+                      <a href="../index.html#project" class="navbar-link" data-nav-link>Portfolio</a>
                   </li>
 
                   <li class="navbar-item">
@@ -678,7 +685,7 @@ body{
                   </li>
 
                   <li class="navbar-item">
-                      <a href="#contact" class="navbar-link" data-nav-link>Contact</a>
+                      <a href="../index.html#contact" class="navbar-link" data-nav-link>Contact</a>
                   </li>
               </ul>
 
@@ -720,126 +727,126 @@ body{
     <section class="featured-layout">
 
         <article class="featured-article">
-
+        <a href = "./articles/article.html?article=comment-creer-son-entreprise" style="all: unset;cursor: pointer;">
             <div class="featured-image"><img src="../assets/images/articles/deventreprise.jpg"/></div>
-
             <div class="featured-content">
-
                 <h2>
                     Comment développer son entreprise en 2026
                 </h2>
-
                 <p>
                     Découvrez les stratégies utilisées par les
                     entreprises qui connaissent une forte croissance.
                 </p>
 
             </div>
-
+        </a>
         </article>
 
 
-<aside class="latest">
+        <aside class="latest">
+            <h3>Derniers articles</h3>
 
-    <h3>Derniers articles</h3>
-
-<a href="articles/comment-creer-son-entreprise.html"
-   class="latest-article">
-<div class="grid">
-    <img
-        src="../assets/images/articles/creer-entreprise-2026.png"
-        alt="Créer son entreprise">
-
-    <div class="latest-content">
-
-        <h4>
-            Comment trouver ses premiers clients ?
-        </h4>
-
-        <p>
-            Découvrez les méthodes utilisées par les
-            entrepreneurs pour décrocher leurs premiers contrats.
-        </p>
-
-    </div>
-</div>
-
-
-</a>
-
-    <a href="articles/seo-local.html" class="latest-article">
-    <div class="grid">
-
-        <img src="../assets/images/articles/apparaitre-dans-recherche.png" alt="">
-
-        <div class="latest-content">
-
-                <h4>
-                    SEO local pour PME
-                </h4>
-
-                <p>
-                    Attirez davantage de clients dans votre région
-                    grâce à Google.
-                </p>
-
-        </div>
-    </div>
-    </a>
-
-    <a href="articles/trouver-premiers-clients.html" class="latest-article">
+        <a href="./articles/article.html?article=demarches-creation-entreprise-2026"
+        class="latest-article">
         <div class="grid">
-            <img src="images/article3.jpg" alt="">
+            <img
+                src="../assets/images/articles/trouver-client.jpg"
+                alt="Créer son entreprise">
 
-            <div class="latest-content">
+                <div class="latest-content">
 
-                <h4>
-                    Comment trouver ses premiers clients rapidement ?
-                </h4>
+                    <h4>
+                        Comment trouver ses premiers clients ?
+                    </h4>
 
-                <p>
-                    Réseaux sociaux, référencement naturel,
-                    publicité et stratégies de prospection.
-                </p>
+                    <p>
+                        Découvrez les méthodes utilisées par les
+                        entrepreneurs pour décrocher leurs premiers contrats.
+                    </p>
 
-            </div>
+                </div>
         </div>
 
-    </a>
 
-</aside>
+        </a>
 
+            <a href="./articles/article.html?article=seo-local-guide-complet" class="latest-article">
+            <div class="grid">
 
+                <img src="../assets/images/articles/seo.jpg" alt="SEO local pour PME">
 
+                <div class="latest-content">
+
+                        <h4>
+                            SEO local pour PME
+                        </h4>
+
+                        <p>
+                            Attirez davantage de clients dans votre région
+                            grâce à Google.
+                        </p>
+
+                </div>
+            </div>
+            </a>
+
+            <a href="articles/article.html?article=facebook-ads-ou-google-ads-maroc" class="latest-article">
+                <div class="grid">
+                    <img src="../assets/images/articles/facebook-google.jpg" alt="Facebook Ads ou Google Ads : lequel choisir ?">
+                    <div class="latest-content">
+                        <h4>
+                            Facebook Ads ou Google Ads : lequel choisir ?
+                        </h4>
+                        <p>
+                            Comprendre les avantages de chaque plateforme
+                            pour investir efficacement votre budget.
+                        </p>
+
+                    </div>
+                </div>
+
+            </a>
+
+        </aside>
     </section>
 
     <section class="article-grid">
+            <article class="article-card">
+                <a href="./articles/article.html?article=ameliorer-referencement-google" style="all: unset;cursor: pointer;">
+                    <div class="article-image">
+                        <img src="../assets/images/articles/renforcement-google.jpg"/>
+                    </div>
+                    <div class="article-content">
+                        <h3>Comment améliorer son référencement Google.</h3>
+                        <p>Et créer un site web professionnel en 2026.</p>
+                    </div>
+                </a>
+            </article>
+
+            <article class="article-card">
+                <a href="./articles/article.html?article=impact-coronavirus-startups-entreprises" style="all: unset;cursor: pointer;">
+                    <div class="article-image">
+                        <img src="../assets/images/articles/corona.jpg" alt="impact coronavirus startups entreprises">
+                    </div>
+                    <div class="article-content">
+                        <h3>C'est quoi l'impact de Corona virus sur les start-up ?</h3>
+                        <p>Les solutions adoptés par les grandes entreprises, et comment les start-up ont réussi a surmonté la pandémie.</p>
+                    </div>
+                </a>
+            </article>
 
         <article class="article-card">
-            <div class="article-image"></div>
-            <div class="article-content">
-                <h3>Créer une entreprise rentable</h3>
-                <p>Guide complet pour les entrepreneurs.</p>
-            </div>
+            <a href="./articles/article.html?article=seo-local-guide-complet" style="all: unset;cursor: pointer;">
+                <div class="article-image">
+                    <img src="../assets/images/articles/apparaitre-dans-recherche.png" alt="">
+                </div>
+                <div class="article-content">
+                    <h3>SEO local</h3>
+                    <p>Attirez des clients dans votre ville.</p>
+                </div>
+            </a>
         </article>
 
-        <article class="article-card">
-            <div class="article-image"></div>
-            <div class="article-content">
-                <h3>Marketing digital</h3>
-                <p>Les bases pour générer des prospects.</p>
-            </div>
-        </article>
-
-        <article class="article-card">
-            <div class="article-image"></div>
-            <div class="article-content">
-                <h3>SEO local</h3>
-                <p>Attirez des clients dans votre ville.</p>
-            </div>
-        </article>
-
-        <!-- Ajouter autant d'articles que nécessaire -->
 
     </section>
 

@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment développer son entreprise en 2026 — Brandnova</title>
+<link rel="stylesheet" href="../../assets/css/navstyle.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ─────────────────────────────────────────
+   RESET & ROOT
+───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --yellow:     #FFD54A;
+  --yellow-dim: rgba(255,213,74,.15);
+  --yellow-mid: rgba(255,213,74,.35);
+  --blue:       #4F7CFF;
+  --blue-dim:   rgba(79,124,255,.12);
+  --blue-mid:   rgba(79,124,255,.28);
+  --purple:     #C9B6FF;
+  --purple-deep:#7C5CDB;
+  --purple-dim: rgba(201,182,255,.18);
+  --bg:         #f8f9ff;
+  --white:      #ffffff;
+  --ink:        #0f1117;
+  --ink-2:      #3d4255;
+  --ink-3:      #667085;
+  --border:     rgba(15,17,23,.08);
+  --radius:     20px;
+  --radius-sm:  12px;
+  --ff-head:    'Fraunces', Georgia, serif;
+  --ff-body:    'DM Sans', sans-serif;
+  --shadow-sm:  0 4px 16px rgba(15,17,23,.06);
+  --shadow-md:  0 10px 40px rgba(15,17,23,.1);
+  --shadow-lg:  0 24px 80px rgba(15,17,23,.14);
+}
+
+html { font-size: 10px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--ff-body);
+  background: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ─────────────────────────────────────────
+   BACKGROUND SHAPES (from index)
+───────────────────────────────────────── */
+.bg-shape {
+  position: fixed; z-index: 0;
+  pointer-events: none; opacity: .15;
+}
+.diamond {
+  width: 220px; height: 220px;
+  transform: rotate(45deg);
+  border-radius: 40px;
+}
+.drop {
+  border-radius: 60% 40% 45% 55% / 45% 60% 40% 55%;
+}
+.d1 { top: 120px; left: -80px; background: var(--yellow); }
+.d2 { bottom: 200px; right: -90px; background: var(--purple); }
+.b1 { width: 320px; height: 320px; top: 350px; right: -120px; background: var(--blue); }
+.b2 { width: 260px; height: 260px; bottom: 350px; left: -100px; background: var(--purple); }
+.b3 { width: 180px; height: 180px; top: 65%; left: 45%; background: var(--yellow); }
+
+/* ─────────────────────────────────────────
+   CONTAINER
+───────────────────────────────────────── */
+.container {
+  width: min(1240px, 94%);
+  margin: auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* ─────────────────────────────────────────
+   FLOATING CONTACT
+───────────────────────────────────────── */
+.floating-contact {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 60px; height: 60px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--blue);
+  color: white; font-size: 26px;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(79,124,255,.4);
+  z-index: 9999;
+  transition: transform .2s, box-shadow .2s;
+}
+.floating-contact:hover {
+  transform: scale(1.1);
+  box-shadow: 0 16px 40px rgba(79,124,255,.5);
+}
+
+/* ─────────────────────────────────────────
+   ARTICLE HERO BANNER
+───────────────────────────────────────── */
+.article-hero {
+  position: relative;
+  margin-bottom: 64px;
+  overflow: hidden;
+}
+
+.hero-image-wrap {
+  width: 100%;
+  height: 480px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+.hero-image-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.03);
+  transition: transform 6s ease;
+}
+.hero-image-wrap:hover img { transform: scale(1); }
+
+/* Dark + yellow gradient overlay */
+.hero-image-wrap::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(15,17,23,.65) 0%,
+    rgba(79,124,255,.18) 50%,
+    rgba(255,213,74,.28) 100%
+  );
+}
+
+/* Text floating over image */
+.hero-text-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 48px;
+  z-index: 2;
+}
+
+.article-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 40px;
+  margin-bottom: 18px;
+}
+
+.article-hero-title {
+  font-family: var(--ff-head);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  max-width: 700px;
+  text-shadow: 0 2px 20px rgba(0,0,0,.3);
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.hero-meta .author {
+  display: flex; align-items: center; gap: 10px;
+}
+.author-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  border: 2px solid rgba(255,255,255,.6);
+  display: grid; place-items: center;
+  font-family: var(--ff-head);
+  font-size: 1.4rem; font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.author-name {
+  font-size: 1.3rem; font-weight: 600; color: #fff;
+}
+.meta-sep {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,255,255,.5);
+}
+.meta-info {
+  font-size: 1.3rem; color: rgba(255,255,255,.75);
+}
+
+@media (max-width: 768px) {
+  .hero-image-wrap { height: 340px; }
+  .hero-text-overlay { padding: 28px 24px; }
+  .article-hero-title { font-size: 2.2rem; }
+}
+
+/* ─────────────────────────────────────────
+   MAIN LAYOUT  (article + sidebar)
+───────────────────────────────────────── */
+.article-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 40px;
+  align-items: start;
+  padding-bottom: 80px;
+}
+@media (max-width: 1024px) {
+  .article-layout { grid-template-columns: 1fr; }
+}
+
+/* ─────────────────────────────────────────
+   ARTICLE BODY
+───────────────────────────────────────── */
+.article-body {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 52px 56px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+@media (max-width: 768px) {
+  .article-body { padding: 32px 24px; }
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 1.25rem; color: var(--ink-3);
+  margin-bottom: 36px;
+}
+.breadcrumb a { color: var(--blue); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb .sep { color: var(--ink-3); opacity: .5; }
+
+/* Reading time + share pills */
+.article-top-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+.read-time {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 1.3rem; color: var(--ink-3);
+}
+.read-time .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--yellow);
+}
+
+.share-btns { display: flex; gap: 8px; }
+.share-btn {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 1.2rem; font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 30px;
+  border: 1.5px solid var(--border);
+  color: var(--ink-2);
+  background: transparent;
+  cursor: pointer;
+  transition: all .18s;
+  font-family: var(--ff-body);
+  text-decoration: none;
+}
+.share-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-dim); }
+.share-btn.twitter:hover { border-color: #1d9bf0; color: #1d9bf0; background: rgba(29,155,240,.08); }
+.share-btn.linkedin:hover { border-color: #0a66c2; color: #0a66c2; background: rgba(10,102,194,.08); }
+
+/* Intro paragraph */
+.article-intro {
+  font-family: var(--ff-head);
+  font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin-bottom: 40px;
+  padding-left: 24px;
+  border-left: 4px solid var(--yellow);
+}
+
+/* Body text */
+.article-body h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -.025em;
+  margin: 48px 0 20px;
+  line-height: 1.2;
+  position: relative;
+}
+.article-body h2::before {
+  content: '';
+  display: block;
+  width: 36px; height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--yellow), var(--purple));
+  margin-bottom: 14px;
+}
+
+.article-body h3 {
+  font-family: var(--ff-head);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 36px 0 14px;
+  letter-spacing: -.015em;
+}
+
+.article-body p {
+  font-size: 1.6rem;
+  line-height: 1.85;
+  color: var(--ink-2);
+  margin-bottom: 22px;
+}
+
+.article-body strong { color: var(--ink); font-weight: 700; }
+
+.article-body ul, .article-body ol {
+  margin: 16px 0 26px 0;
+  padding-left: 0;
+  list-style: none;
+}
+.article-body li {
+  font-size: 1.55rem;
+  line-height: 1.8;
+  color: var(--ink-2);
+  padding: 8px 0 8px 30px;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.article-body li:last-child { border-bottom: none; }
+.article-body li::before {
+  content: '';
+  position: absolute; left: 0; top: 17px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--yellow);
+  box-shadow: 0 0 0 3px var(--yellow-dim);
+}
+.article-body ol { counter-reset: list-counter; }
+.article-body ol li { counter-increment: list-counter; }
+.article-body ol li::before {
+  content: counter(list-counter);
+  background: var(--blue);
+  color: #fff;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  top: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; font-weight: 700;
+  box-shadow: none;
+}
+
+/* Pull quote */
+.pull-quote {
+  background: linear-gradient(135deg, var(--yellow-dim), var(--purple-dim));
+  border-radius: var(--radius-sm);
+  padding: 32px 36px;
+  margin: 40px 0;
+  border-left: 5px solid var(--yellow);
+  position: relative;
+  overflow: hidden;
+}
+.pull-quote::before {
+  content: '\201C';
+  position: absolute; top: -20px; left: 20px;
+  font-family: var(--ff-head);
+  font-size: 12rem; font-weight: 900;
+  color: var(--yellow);
+  opacity: .18;
+  line-height: 1;
+}
+.pull-quote p {
+  font-family: var(--ff-head);
+  font-size: 2rem; font-style: italic; font-weight: 400;
+  color: var(--ink);
+  line-height: 1.5;
+  position: relative; z-index: 1;
+  margin: 0;
+}
+.pull-quote cite {
+  display: block;
+  margin-top: 12px;
+  font-size: 1.3rem; font-style: normal;
+  color: var(--ink-3);
+  font-weight: 600;
+  position: relative; z-index: 1;
+}
+
+/* Highlight box */
+.highlight-box {
+  background: var(--blue-dim);
+  border: 1.5px solid var(--blue-mid);
+  border-radius: var(--radius-sm);
+  padding: 26px 30px;
+  margin: 36px 0;
+}
+.highlight-box .hb-title {
+  font-family: var(--ff-body);
+  font-size: 1.2rem; font-weight: 800;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.highlight-box p { font-size: 1.45rem; margin: 0; }
+
+/* Stats row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 40px 0;
+}
+@media (max-width: 600px) { .stats-row { grid-template-columns: 1fr; } }
+
+.stat-pill {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px 18px;
+  text-align: center;
+  transition: border-color .2s, box-shadow .2s;
+}
+.stat-pill:hover {
+  border-color: var(--yellow);
+  box-shadow: 0 6px 24px var(--yellow-mid);
+}
+.stat-pill .stat-num {
+  font-family: var(--ff-head);
+  font-size: 3rem; font-weight: 900;
+  color: var(--ink);
+  line-height: 1; margin-bottom: 6px;
+  background: linear-gradient(135deg, var(--blue), var(--purple-deep));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-pill .stat-label {
+  font-size: 1.25rem; color: var(--ink-3);
+}
+
+/* Tags */
+.article-tags {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 48px; padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.tag {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 30px;
+  font-size: 1.2rem; font-weight: 600;
+  text-decoration: none;
+  transition: all .18s;
+}
+.tag.y { background: var(--yellow-dim); color: #8b6a00; border: 1.5px solid var(--yellow-mid); }
+.tag.b { background: var(--blue-dim); color: var(--blue); border: 1.5px solid var(--blue-mid); }
+.tag.p { background: var(--purple-dim); color: var(--purple-deep); border: 1.5px solid rgba(201,182,255,.4); }
+.tag:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+
+/* Author card at bottom */
+.author-card {
+  display: flex; align-items: center; gap: 22px;
+  background: linear-gradient(135deg, var(--yellow-dim), var(--purple-dim));
+  border-radius: var(--radius-sm);
+  padding: 28px 30px;
+  margin-top: 40px;
+}
+.author-card-avatar {
+  width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--blue), var(--purple-deep));
+  border: 3px solid var(--white);
+  box-shadow: var(--shadow-sm);
+  display: grid; place-items: center;
+  font-family: var(--ff-head);
+  font-size: 2.2rem; font-weight: 900;
+  color: #fff;
+}
+.author-card-name {
+  font-family: var(--ff-head);
+  font-size: 1.7rem; font-weight: 700;
+  color: var(--ink); margin-bottom: 5px;
+}
+.author-card-bio {
+  font-size: 1.35rem; color: var(--ink-3); line-height: 1.6;
+}
+
+/* ─────────────────────────────────────────
+   SIDEBAR
+───────────────────────────────────────── */
+.sidebar { display: flex; flex-direction: column; gap: 24px; }
+
+/* Sticky on desktop */
+@media (min-width: 1025px) {
+  .sidebar { position: sticky; top: 100px; }
+}
+
+.sidebar-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+.sidebar-title {
+  font-family: var(--ff-head);
+  font-size: 1.7rem; font-weight: 900;
+  color: var(--ink); letter-spacing: -.02em;
+  margin-bottom: 22px;
+  display: flex; align-items: center; gap: 10px;
+}
+.sidebar-title .title-bar {
+  width: 22px; height: 4px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--yellow), var(--purple));
+  flex-shrink: 0;
+}
+
+/* Latest article item */
+.latest-item {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: transform .18s;
+}
+.latest-item:last-child { border-bottom: none; padding-bottom: 0; }
+.latest-item:hover { transform: translateX(4px); }
+
+.latest-thumb {
+  width: 72px; height: 72px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.latest-thumb-placeholder {
+  width: 72px; height: 72px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  display: grid; place-items: center;
+  font-size: 2rem;
+}
+.lt-ph-y { background: var(--yellow-dim); }
+.lt-ph-b { background: var(--blue-dim); }
+.lt-ph-p { background: var(--purple-dim); }
+
+.latest-item-title {
+  font-family: var(--ff-body);
+  font-size: 1.35rem; font-weight: 600;
+  color: var(--ink);
+  line-height: 1.45; margin-bottom: 5px;
+}
+.latest-item-meta {
+  font-size: 1.15rem; color: var(--ink-3);
+}
+
+/* Progress / TOC */
+.toc-list {
+  list-style: none;
+  margin: 0; padding: 0;
+}
+.toc-item {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+.toc-item:last-child { border-bottom: none; }
+.toc-link {
+  font-size: 1.3rem; color: var(--ink-2);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+  transition: color .18s;
+}
+.toc-link:hover { color: var(--blue); }
+.toc-link::before {
+  content: '';
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--yellow);
+  flex-shrink: 0;
+  transition: background .18s;
+}
+.toc-link:hover::before { background: var(--blue); }
+
+/* Newsletter mini */
+.newsletter-mini {
+  background: linear-gradient(135deg, var(--yellow-dim), var(--blue-dim));
+  border-radius: var(--radius-sm);
+  padding: 24px;
+  text-align: center;
+}
+.newsletter-mini p {
+  font-size: 1.35rem; color: var(--ink-2);
+  line-height: 1.65; margin-bottom: 18px;
+}
+.nl-input {
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: 40px;
+  border: 1.5px solid var(--border);
+  font-family: var(--ff-body);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  outline: none;
+  transition: border-color .2s;
+}
+.nl-input:focus { border-color: var(--blue); }
+.nl-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 40px;
+  border: none;
+  background: linear-gradient(135deg, var(--blue), var(--purple-deep));
+  color: #fff;
+  font-family: var(--ff-body);
+  font-size: 1.35rem; font-weight: 700;
+  cursor: pointer;
+  transition: opacity .2s, transform .15s;
+}
+.nl-btn:hover { opacity: .9; transform: translateY(-1px); }
+
+/* ─────────────────────────────────────────
+   LATEST ARTICLES SECTION (bottom)
+───────────────────────────────────────── */
+.section-latest {
+  padding: 80px 0;
+}
+.section-latest-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 44px;
+}
+.section-latest-header h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -.035em;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.section-latest-header h2 em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--blue), var(--purple-deep));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.see-all-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--ff-body);
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--blue);
+  text-decoration: none;
+  border: 2px solid var(--blue-mid);
+  padding: 10px 22px;
+  border-radius: 40px;
+  transition: all .2s;
+  background: var(--blue-dim);
+  white-space: nowrap;
+}
+.see-all-btn:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+.latest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px)  { .latest-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px)  { .latest-grid { grid-template-columns: 1fr; } }
+
+.latest-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: inherit;
+  display: flex; flex-direction: column;
+  transition: transform .25s, box-shadow .25s;
+}
+.latest-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.latest-card-img {
+  height: 190px; overflow: hidden;
+  position: relative;
+}
+.latest-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+.latest-card:hover .latest-card-img img { transform: scale(1.05); }
+
+/* Color accent top border per card */
+.latest-card:nth-child(3n+1) .latest-card-img::before { background: var(--yellow); }
+.latest-card:nth-child(3n+2) .latest-card-img::before { background: var(--blue); }
+.latest-card:nth-child(3n)   .latest-card-img::before { background: var(--purple); }
+.latest-card-img::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  z-index: 1;
+}
+
+.latest-card-body {
+  padding: 22px 24px 26px;
+  flex: 1; display: flex; flex-direction: column;
+}
+.lc-category {
+  font-size: 1.1rem; font-weight: 800;
+  letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.lc-cat-y { color: #8b6a00; }
+.lc-cat-b { color: var(--blue); }
+.lc-cat-p { color: var(--purple-deep); }
+
+.latest-card-body h3 {
+  font-family: var(--ff-head);
+  font-size: 1.75rem; font-weight: 700;
+  color: var(--ink);
+  line-height: 1.35; letter-spacing: -.015em;
+  margin-bottom: 12px;
+}
+.latest-card-body p {
+  font-size: 1.4rem; color: var(--ink-3);
+  line-height: 1.65; flex: 1;
+}
+.lc-footer {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 18px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 1.2rem; color: var(--ink-3);
+}
+.lc-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-3); }
+
+/* ─────────────────────────────────────────
+   HEADER OVERRIDES (match existing navstyle)
+───────────────────────────────────────── */
+.search-box {
+  width: 320px;
+}
+.search-box input {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: 1.5px solid #d1d5db;
+  font-family: var(--ff-body);
+  font-size: 1.4rem;
+  outline: none;
+  transition: border-color .2s;
+}
+.search-box input:focus { border-color: var(--blue); }
+
+/* Page load animation */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: fadeUp .7s ease forwards;
+}
+.fade-up:nth-child(1) { animation-delay: .05s; }
+.fade-up:nth-child(2) { animation-delay: .15s; }
+.fade-up:nth-child(3) { animation-delay: .25s; }
+.fade-up:nth-child(4) { animation-delay: .35s; }
+.fade-up:nth-child(5) { animation-delay: .45s; }
+.fade-up:nth-child(6) { animation-delay: .55s; }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- Background shapes -->
+<div class="bg-shape diamond d1"></div>
+<div class="bg-shape diamond d2"></div>
+<div class="bg-shape drop b1"></div>
+<div class="bg-shape drop b2"></div>
+<div class="bg-shape drop b3"></div>
+
+<!-- ══ NAVBAR (exact copy from provided HTML) ══ -->
+  <header class="header" data-header>
+      <div class="container">
+
+          <a href="#" class="logo">Brandnova</a>
+
+          <nav class="navbar" data-navbar>
+              <ul class="navbar-list">
+
+                  <li class="navbar-item">
+                      <a href="#home" class="navbar-link" data-nav-link>Home</a>
+                  </li>
+
+                  <li class="navbar-item dropdown">
+                      <a href="#service" >
+                        <button class="navbar-link dropdown-toggle" style="border:none; background-color: rgba(255, 255, 255, .0);">
+                            Services
+                            <ion-icon name="chevron-down-outline" class="hidden-desktop"></ion-icon>
+                        </button>
+                      </a>
+
+                      <ul class="dropdown-menu">
+
+                          <li>
+                              <a href="services/optimisationMoteursRecherche.html" class="dropdown-link">
+                                  SEO & Référencement
+                              </a>
+                          </li>
+
+                          <li>
+                              <a href="services/ppc.html" class="dropdown-link">
+                                  PPC
+                              </a>
+                          </li>
+
+                          <li>
+                              <a href="services/webAndMobileDeveloppement.html" class="dropdown-link">
+                                  Développement Web & Mobile
+                              </a>
+                          </li>
+
+                          <li>
+                              <a href="services/publiciteReseauSociaux.html" class="dropdown-link">
+                                  Publicité Digitale
+                              </a>
+                          </li>
+
+                          <li>
+                              <a href="services/marketingReseauxSociaux.html" class="dropdown-link">
+                                  Marketing Réseaux Sociaux
+                              </a>
+                          </li>
+
+                          <li>
+                              <a href="services/developpementDeMarque.html" class="dropdown-link">
+                                  Développement de Marque
+                              </a>
+                          </li>
+
+                      </ul>
+
+                  </li>
+
+                  <!-- <li class="navbar-item">
+                    <a href="#feature" class="navbar-link" data-nav-link>Features</a>
+                  </li> -->
+
+                  <li class="navbar-item">
+                      <a href="#project" class="navbar-link" data-nav-link>Portfolio</a>
+                  </li>
+
+                  <li class="navbar-item">
+                      <a href="#blog" class="navbar-link" data-nav-link>A propos</a>
+                  </li>
+
+                  <li class="navbar-item">
+                      <a href="./blog/index.html" class="navbar-link" data-nav-link>Blog</a>
+                  </li>
+
+                  <li class="navbar-item">
+                      <a href="#contact" class="navbar-link" data-nav-link>Contact</a>
+                  </li>
+              </ul>
+
+          </nav>
+
+
+          <div class="search-box">
+            <input type="search"
+                   placeholder="Rechercher un article...">
+          </div>
+
+          
+
+          <a href="../index.html#contact" class="btn btn-primary has-before has-after">Consulter Nous 👋</a>
+
+          <div class="overlay" data-nav-toggler data-overlay></div>
+                  
+          <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+              <ion-icon name="menu-outline" aria-hidden="true">☰</ion-icon>
+          </button>
+      </div>
+  </header>
+
+<!-- ══ MAIN ══ -->
+<main>
+  <div class="container" style="padding-top: 40px;">
+
+    <!-- ── Article hero ── -->
+    <section class="article-hero fade-up">
+
+    <div class="hero-image-wrap">
+        <img id="hero-image" src="" alt="">
+    </div>
+
+    <div class="hero-text-overlay">
+
+        <div class="article-category" id="hero-category"></div>
+
+        <h1 class="article-hero-title" id="hero-title"></h1>
+
+        <div class="hero-meta">
+
+            <div class="author">
+                <div class="author-avatar" id="hero-avatar"></div>
+                <span class="author-name" id="hero-author"></span>
+            </div>
+
+            <div class="meta-sep"></div>
+
+            <span class="meta-info" id="hero-date"></span>
+
+            <div class="meta-sep"></div>
+
+            <span class="meta-info" id="hero-reading-time"></span>
+
+        </div>
+
+    </div>
+
+</section>
+    <!-- ── Article layout ── -->
+    <div class="article-layout">
+
+      <!-- ── Article body ── -->
+      <article class="article-body fade-up">
+
+    <nav class="breadcrumb" aria-label="Fil d'ariane">
+        <a href="../blog/index.html">Blog</a>
+        <span class="sep">/</span>
+        <a href="#" id="breadcrumb-category"></a>
+        <span class="sep">/</span>
+        <span id="breadcrumb-title"></span>
+    </nav>
+
+    <div class="article-top-meta">
+        <div class="read-time">
+            <div class="dot"></div>
+            <span id="reading-time"></span>
+        </div>
+    </div>
+
+    <p class="article-intro" id="article-intro"></p>
+
+    <div class="stats-row" id="stats-container"></div>
+
+    <div id="article-content"></div>
+
+    <div class="article-tags" id="article-tags"></div>
+
+    <div class="author-card">
+        <div class="author-card-avatar" id="author-avatar"></div>
+        <div>
+            <div class="author-card-name" id="author-name"></div>
+            <div class="author-card-bio" id="author-bio"></div>
+        </div>
+    </div>
+
+</article>
+
+      <!-- ── Sidebar ── -->
+      <aside class="sidebar">
+
+        <!-- Table of contents -->
+        <div class="sidebar-card fade-up">
+          <div class="sidebar-title">
+            <div class="title-bar"></div>
+            Sommaire
+          </div>
+          <ul class="toc-list" id="toc-list"></ul>
+        </div>
+
+        <!-- Latest articles sidebar -->
+        <div class="sidebar-card fade-up">
+          <div class="sidebar-title">
+            <div class="title-bar"></div>
+            Derniers articles
+          </div>
+
+          <a href="articles/comment-creer-son-entreprise.html" class="latest-item">
+            <img src="../../assets/images/articles/creer-entreprise-2026.png" alt="" class="latest-thumb" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+            <div class="latest-thumb-placeholder lt-ph-y" style="display:none">💡</div>
+            <div>
+              <div class="latest-item-title">Comment trouver ses premiers clients ?</div>
+              <div class="latest-item-meta">5 min · Acquisition</div>
+            </div>
+          </a>
+
+          <a href="articles/seo-local.html" class="latest-item">
+            <img src="../../assets/images/articles/apparaitre-dans-recherche.png" alt="" class="latest-thumb" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+            <div class="latest-thumb-placeholder lt-ph-b" style="display:none">🔍</div>
+            <div>
+              <div class="latest-item-title">SEO local pour les PME</div>
+              <div class="latest-item-meta">6 min · SEO</div>
+            </div>
+          </a>
+
+          <a href="articles/publicite-facebook-google.html" class="latest-item">
+            <img src="../../assets/images/articles/google ou facebook.png" alt="" class="latest-thumb" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+            <div class="latest-thumb-placeholder lt-ph-p" style="display:none">📣</div>
+            <div>
+              <div class="latest-item-title">Facebook Ads ou Google Ads ?</div>
+              <div class="latest-item-meta">7 min · PPC</div>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- Newsletter -->
+        <div class="sidebar-card fade-up">
+          <div class="sidebar-title">
+            <div class="title-bar"></div>
+            Newsletter
+          </div>
+          <div class="newsletter-mini">
+            <p>Recevez chaque semaine les meilleures stratégies de croissance directement dans votre boîte mail.</p>
+            <input class="nl-input" type="email" placeholder="votre@email.fr">
+            <button class="nl-btn">Je m'abonne ✨</button>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+
+  <!-- ── Divider ── -->
+  <div class="section-divider"></div>
+
+  <!-- ══ LATEST ARTICLES SECTION ══ -->
+  <section class="section-latest">
+    <div class="container">
+
+      <div class="section-latest-header">
+        <h2>À lire <em>également</em></h2>
+        <a href="../blog/index.html" class="see-all-btn">Voir tous les articles →</a>
+      </div>
+
+      <div class="latest-grid">
+
+        <a href="articles/comment-creer-son-entreprise.html" class="latest-card fade-up">
+          <div class="latest-card-img">
+            <img src="../assets/images/articles/creer-entreprise-2026.png" alt="Trouver ses premiers clients">
+          </div>
+          <div class="latest-card-body">
+            <div class="lc-category lc-cat-y">Acquisition</div>
+            <h3>Comment trouver ses premiers clients ?</h3>
+            <p>Les méthodes concrètes utilisées par les entrepreneurs pour décrocher leurs tout premiers contrats sans budget publicitaire.</p>
+            <div class="lc-footer">
+              <span>Équipe Brandnova</span>
+              <div class="lc-dot"></div>
+              <span>5 min</span>
+              <div class="lc-dot"></div>
+              <span>8 Juin 2026</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="articles/seo-local.html" class="latest-card fade-up">
+          <div class="latest-card-img">
+            <img src="../assets/images/articles/apparaitre-dans-recherche.png" alt="SEO Local">
+          </div>
+          <div class="latest-card-body">
+            <div class="lc-category lc-cat-b">SEO</div>
+            <h3>SEO local pour les PME</h3>
+            <p>Attirez davantage de clients dans votre région grâce à une stratégie Google My Business et de référencement local optimisée.</p>
+            <div class="lc-footer">
+              <span>Équipe Brandnova</span>
+              <div class="lc-dot"></div>
+              <span>6 min</span>
+              <div class="lc-dot"></div>
+              <span>4 Juin 2026</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="articles/publicite-facebook-google.html" class="latest-card fade-up">
+          <div class="latest-card-img">
+            <img src="../assets/images/articles/google ou facebook.png" alt="Facebook vs Google Ads">
+          </div>
+          <div class="latest-card-body">
+            <div class="lc-category lc-cat-p">PPC</div>
+            <h3>Facebook Ads ou Google Ads : lequel choisir ?</h3>
+            <p>Comprendre les avantages et inconvénients de chaque plateforme pour investir efficacement votre budget publicitaire.</p>
+            <div class="lc-footer">
+              <span>Équipe Brandnova</span>
+              <div class="lc-dot"></div>
+              <span>7 min</span>
+              <div class="lc-dot"></div>
+              <span>1 Juin 2026</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="./articles/developper-activite.html" class="latest-card fade-up">
+          <div class="latest-card-img">
+            <img src="../assets/images/articles/enteneurship.jpg" alt="Créer une entreprise rentable">
+          </div>
+          <div class="latest-card-body">
+            <div class="lc-category lc-cat-y">Entrepreneuriat</div>
+            <h3>Créer une entreprise rentable</h3>
+            <p>Guide complet pour les entrepreneurs qui veulent bâtir un business solide dès les premières semaines d'activité.</p>
+            <div class="lc-footer">
+              <span>Équipe Brandnova</span>
+              <div class="lc-dot"></div>
+              <span>9 min</span>
+              <div class="lc-dot"></div>
+              <span>28 Mai 2026</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="latest-card fade-up">
+          <div class="latest-card-img">
+            <img src="../assets/images/articles/pandémie-corona.png" alt="Impact COVID sur startups">
+          </div>
+          <div class="latest-card-body">
+            <div class="lc-category lc-cat-b">Résilience</div>
+            <h3>L'impact de la pandémie sur les start-up</h3>
+            <p>Comment les entreprises innovantes ont survécu et parfois même prospéré malgré la crise sanitaire mondiale.</p>
+            <div class="lc-footer">
+              <span>Équipe Brandnova</span>
+              <div class="lc-dot"></div>
+              <span>10 min</span>
+              <div class="lc-dot"></div>
+              <span>20 Mai 2026</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="articles/seo-local.html" class="latest-card fade-up">
+          <div class="latest-card-img">
+            <img src="../assets/images/articles/apparaitre-dans-recherche.png" alt="Apparaître dans les recherches">
+          </div>
+          <div class="latest-card-body">
+            <div class="lc-category lc-cat-p">Visibilité</div>
+            <h3>Apparaître dans les premières recherches Google</h3>
+            <p>Les techniques SEO on-page et off-page qui font vraiment la différence pour grimper dans les résultats de recherche.</p>
+            <div class="lc-footer">
+              <span>Équipe Brandnova</span>
+              <div class="lc-dot"></div>
+              <span>8 min</span>
+              <div class="lc-dot"></div>
+              <span>14 Mai 2026</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Floating contact -->
+<a href="../index.html#contact" class="floating-contact">💬</a>
+
+<script>
+// Navbar toggle (from provided HTML)
+const openBtn  = document.querySelector('.nav-open-btn');
+const closeBtn = document.querySelector('.nav-close-btn');
+const navbar   = document.querySelector('.navbar');
+
+if (openBtn)  openBtn.addEventListener('click',  () => navbar.classList.add('active'));
+if (closeBtn) closeBtn.addEventListener('click', () => navbar.classList.remove('active'));
+
+// Smooth scroll for TOC
+document.querySelectorAll('.toc-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// Active TOC on scroll
+const headings = document.querySelectorAll('.article-body h2[id]');
+const tocLinks = document.querySelectorAll('.toc-link');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      tocLinks.forEach(l => l.style.color = '');
+      const active = document.querySelector('.toc-link[href="#' + entry.target.id + '"]');
+      if (active) active.style.color = 'var(--blue)';
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+headings.forEach(h => observer.observe(h));
+
+// Newsletter CTA
+document.querySelector('.nl-btn').addEventListener('click', function() {
+  const input = this.previousElementSibling;
+  if (input.value && input.value.includes('@')) {
+    this.textContent = '✅ Inscrit !';
+    this.style.background = 'var(--purple-deep)';
+    input.value = '';
+  } else {
+    input.style.borderColor = '#ef4444';
+    setTimeout(() => input.style.borderColor = '', 2000);
+  }
+});
+</script>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="articles.js"></script>
+
+<script>
+
+const slug =
+new URLSearchParams(window.location.search)
+.get("article");
+
+    const article =
+    articles.articles.find(a => a.slug === slug);
+
+    if (!article) {
+    console.error("Article introuvable :", slug);
+} else {
+
+        /* HERO */
+
+    document.title = article.title + " - Brandnova";
+
+    document.getElementById("hero-title").textContent =
+    article.title;
+
+    document.getElementById("hero-category").textContent =
+    article.category;
+
+    document.getElementById("hero-author").textContent =
+    article.author.name;
+
+    document.getElementById("hero-avatar").textContent =
+    article.author.avatar;
+
+    document.getElementById("hero-date").textContent =
+    article.date;
+
+    document.getElementById("hero-reading-time").textContent =
+    article.readingTime;
+
+    document.getElementById("hero-image").src =
+    article.heroImage;
+
+    /* BREADCRUMB */
+
+    document.getElementById("breadcrumb-category").textContent =
+    article.category;
+
+    document.getElementById("breadcrumb-title").textContent =
+    article.title;
+
+    /* INTRO */
+
+    const intro =
+    article.content.find(x => x.type === "intro");
+
+    document.getElementById("article-intro")
+    .textContent = intro.text;
+
+    document.getElementById("reading-time")
+    .textContent =
+    article.readingTime +
+    " • " +
+    article.wordCount +
+    " mots";
+
+    /* STATS */
+
+    const stats =
+    document.getElementById("stats-container");
+
+    article.stats.forEach(stat => {
+
+        stats.innerHTML += `
+            <div class="stat-pill">
+                <div class="stat-num">
+                    ${stat.value}
+                </div>
+                <div class="stat-label">
+                    ${stat.label}
+                </div>
+            </div>
+        `;
+
+    });
+
+    /* SOMMAIRE */
+
+    const toc =
+    document.getElementById("toc-list");
+
+    article.toc.forEach(item => {
+
+        toc.innerHTML += `
+            <li class="toc-item">
+                <a href="#${item.id}"
+                   class="toc-link">
+                    ${item.title}
+                </a>
+            </li>
+        `;
+
+    });
+
+    /* CONTENU */
+
+    const container =
+    document.getElementById("article-content");
+
+    article.content.forEach(block => {
+
+        if(block.type === "intro") return;
+
+        if(block.type === "section") {
+
+            let html = `
+                <h2 id="${block.id}">
+                    ${block.title}
+                </h2>
+            `;
+
+            if(block.paragraphs){
+
+                block.paragraphs.forEach(p => {
+
+                    html += `<p>${p}</p>`;
+
+                });
+
+            }
+
+            if(block.list){
+
+                html += "<ul>";
+
+                block.list.forEach(item => {
+
+                    html += `<li>${item}</li>`;
+
+                });
+
+                html += "</ul>";
+            }
+
+            if(block.orderedList){
+
+                html += "<ol>";
+
+                block.orderedList.forEach(item => {
+
+                    html += `<li>${item}</li>`;
+
+                });
+
+                html += "</ol>";
+            }
+
+            if(block.highlight){
+
+                html += `
+                    <div class="highlight-box">
+                        <div class="hb-title">
+                            ${block.highlight.title}
+                        </div>
+                        <p>
+                            ${block.highlight.text}
+                        </p>
+                    </div>
+                `;
+            }
+
+            container.innerHTML += html;
+        }
+
+        if(block.type === "quote") {
+
+            container.innerHTML += `
+                <div class="pull-quote">
+                    <p>${block.text}</p>
+                    <cite>${block.author}</cite>
+                </div>
+            `;
+        }
+
+    });
+
+    /* TAGS */
+
+    const tags =
+    document.getElementById("article-tags");
+
+    article.tags.forEach(tag => {
+
+        tags.innerHTML += `
+            <a href="#"
+               class="tag b">
+                ${tag}
+            </a>
+        `;
+
+    });
+
+    /* AUTEUR */
+
+    document.getElementById("author-avatar")
+    .textContent =
+    article.author.avatar;
+
+    document.getElementById("author-name")
+    .textContent =
+    article.author.name;
+
+    document.getElementById("author-bio")
+    .textContent =
+    article.author.bio;
+
+}
+
+
+</script>
+</body>
+</html>
