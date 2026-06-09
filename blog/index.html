@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../assets/css/navstyle.css">
+
 <title>Guides Marketing & Croissance</title>
 
 <style>
@@ -247,10 +247,11 @@ body{
 /* HEADER */
 
 .header{
-    display:flex;
+    /* display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:25px 0;
+    padding:25px 0; */
+    z-index: 999;
 }
 
 .logo{
@@ -394,10 +395,10 @@ body{
 
 @media(max-width:768px){
 
-    .header{
+    /* .header{
         flex-direction:column;
         gap:20px;
-    }
+    } */
 
     .search-box{
         width:100%;
@@ -510,10 +511,10 @@ body{
 
 /* CONTENU AU-DESSUS */
 
-.container{
+/* .container{
     position:relative;
     z-index:10;
-}
+} */
 
 /* FORMES DECORATIVES */
 
@@ -596,6 +597,24 @@ body{
     1fr 2fr;
 }
 </style>
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+.header{
+    /* display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:25px 0; */
+    z-index: 999;
+}
+.special-container{
+    margin-top: 140px;
+    padding-bottom: 20px;
+}
+.dropdown {
+    display: flex;
+    align-items: center;
+}
+</style>
 </head>
 
 <body>
@@ -606,94 +625,84 @@ body{
 <div class="bg-shape drop b1"></div>
 <div class="bg-shape drop b2"></div>
 <div class="bg-shape drop b3"></div>
-  <header class="header" data-header>
-      <div class="container">
-          <a href="#" class="logo">Brandnova</a>
-          <nav class="navbar" data-navbar>
-              <ul class="navbar-list">
-                  <li class="navbar-item">
-                      <a href="../index.html#home" class="navbar-link" data-nav-link>Home</a>
-                  </li>
+<header class="header" data-header>
+    <div class="container" >
+        <a href="#" class="logo">Brandnova</a>
+        <nav class="navbar" data-navbar>
+            <ul class="navbar-list">
+                <li class="navbar-item">
+                    <a href="../index.html#home" class="navbar-link" data-nav-link>Home</a>
+                </li>
 
-                  <li class="navbar-item dropdown">
-                      <a href="../index.html#service" style="all: unset;cursor: pointer;">
-                        <button class="navbar-link dropdown-toggle" style="all: unset;cursor: pointer;">
-                            Services
-                            <ion-icon name="chevron-down-outline" class="hidden-desktop"></ion-icon>
-                        </button>
-                      </a>
-                      <ul class="dropdown-menu">
-                          <li>
-                              <a href="../services/seo-france.html" class="dropdown-link">
-                                  SEO & Référencement
-                              </a>
-                          </li>
+                <li class="navbar-item dropdown">
+                    <a href="../index.html#service" style="all: unset;cursor: pointer;">
+                    <button class="navbar-link dropdown-toggle" style="all: unset;cursor: pointer;">
+                        Services
+                        <ion-icon name="chevron-down-outline" class="hidden-desktop"></ion-icon>
+                    </button>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="../services/seo-france.html" class="dropdown-link">
+                                SEO & Référencement
+                            </a>
+                        </li>
 
-                          <li>
-                              <a href="../services/google-ads.html" class="dropdown-link">
-                                  PPC
-                              </a>
-                          </li>
+                        <li>
+                            <a href="../services/google-ads.html" class="dropdown-link">
+                                PPC
+                            </a>
+                        </li>
 
-                          <li>
-                              <a href="../services/creation-site-web.html" class="dropdown-link">
-                                  Développement Web & Mobile
-                              </a>
-                          </li>
+                        <li>
+                            <a href="../services/creation-site-web.html" class="dropdown-link">
+                                Développement Web & Mobile
+                            </a>
+                        </li>
 
-                          <li>
-                              <a href="../services/publicite-reseaux-sociaux.html" class="dropdown-link">
-                                  Publicité Digitale
-                              </a>
-                          </li>
+                        <li>
+                            <a href="../services/publicite-reseaux-sociaux.html" class="dropdown-link">
+                                Publicité Digitale
+                            </a>
+                        </li>
 
-                          <li>
-                              <a href="../services/gestion-reseaux-sociaux.html" class="dropdown-link">
-                                  Marketing Réseaux Sociaux
-                              </a>
-                          </li>
+                        <li>
+                            <a href="../services/gestion-reseaux-sociaux.html" class="dropdown-link">
+                                Marketing Réseaux Sociaux
+                            </a>
+                        </li>
 
-                          <li>
-                              <a href="../services/branding-identite-visuelle.html" class="dropdown-link">
-                                  Développement de Marque
-                              </a>
-                          </li>
-                      </ul>
-                  </li>
-                  <!-- <li class="navbar-item">
-                    <a href="#feature" class="navbar-link" data-nav-link>Features</a>
-                  </li> -->
+                        <li>
+                            <a href="../services/branding-identite-visuelle.html" class="dropdown-link">
+                                Développement de Marque
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
-                  <li class="navbar-item">
-                      <a href="../index.html#project" class="navbar-link" data-nav-link>Portfolio</a>
-                  </li>
-                  <li class="navbar-item">
-                      <a href="../index.html#about" class="navbar-link" data-nav-link>A propos</a>
-                  </li>
-                  <li class="navbar-item">
-                      <a href="index.html" class="navbar-link" data-nav-link>Blog</a>
-                  </li>
-                  <li class="navbar-item">
-                      <a href="../index.html#contact" class="navbar-link" data-nav-link>Contact</a>
-                  </li>
-              </ul>
-          </nav>
-          <div class="search-box">
-            <input type="search"
-                   placeholder="Rechercher un article...">
-          </div>
-          
-          <a href="../index.html#contact" class="btn btn-primary has-before has-after">Consulter Nous 👋</a>
-          <div class="overlay" data-nav-toggler data-overlay></div>
-          <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
-              <ion-icon name="menu-outline" aria-hidden="true">☰</ion-icon>
-          </button>
-      </div>
-  </header>
-<div class="container">
-
-
-
+                <li class="navbar-item">
+                    <a href="../index.html#project" class="navbar-link" data-nav-link>Portfolio</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="../index.html#about" class="navbar-link" data-nav-link>A propos</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="index.html" class="navbar-link" data-nav-link>Blog</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="../index.html#contact" class="navbar-link" data-nav-link>Contact</a>
+                </li>
+            </ul>
+        </nav>
+        
+        <a href="../index.html#contact" class="btn btn-primary has-before has-after">Consulter Nous 👋</a>
+        <div class="overlay" data-nav-toggler data-overlay></div>
+        <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+            <ion-icon name="menu-outline" aria-hidden="true">☰</ion-icon>
+        </button>
+    </div>
+</header>
+<div class="container special-container" style="margin-top: 140px;padding-top: 20px;">
     <section class="hero">
         <h1>Guides Marketing & Croissance</h1>
         <p>
