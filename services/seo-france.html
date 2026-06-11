@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEO France - Agence de Référencement Naturel | Brandnova</title>
-
+    <title>Agence SEO en France | Référencement Naturel & Audit SEO | Brandnova</title>
+    <meta name="description"
+    content="Agence SEO en France spécialisée en référencement naturel, audit SEO, optimisation technique et stratégie de contenu pour améliorer votre visibilité sur Google.">
     <!--
       - favicon
     -->
@@ -530,22 +531,22 @@
                     <p class="footer-list-title">Nos Services</p>
                 </li>
                 <li>
-                    <a href="services/google-ads.html" class="footer-link">Google Ads</a>
+                    <a href="./google-ads.html" class="footer-link">Google Ads</a>
                 </li>
                 <li>
-                    <a href="services/creation-site-web.html" class="footer-link">Création de Sites Web</a>
+                    <a href="./creation-site-web.html" class="footer-link">Création de Sites Web</a>
                 </li>
                 <li>
-                    <a href="services/branding-identite-visuelle.html" class="footer-link">Branding</a>
+                    <a href=./branding-identite-visuelle.html" class="footer-link">Branding</a>
                 </li>
                 <li>
-                    <a href="services/gestion-reseaux-sociaux.html" class="footer-link">Gestion Réseaux Sociaux</a>
+                    <a href=./gestion-reseaux-sociaux.html" class="footer-link">Gestion Réseaux Sociaux</a>
                 </li>
                 <li>
-                    <a href="services/publicite-reseaux-sociaux.html" class="footer-link">Publicités Réseaux Sociaux</a>
+                    <a href=./publicite-reseaux-sociaux.html" class="footer-link">Publicités Réseaux Sociaux</a>
                 </li>
                 <li>
-                    <a href="services/seo-france.html" class="footer-link">Moteurs de recherche</a>
+                    <a href=./seo-france.html" class="footer-link">Moteurs de recherche</a>
                 </li>
             </ul>
 
@@ -567,37 +568,7 @@
                 </li>
             </ul>
 
-
-            <!-- <ul class="footer-list">
-
-              <li>
-                <p class="footer-list-title">Community</p>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Help Center</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Partners</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Suggestions</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Blog</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Newsletters</a>
-              </li>
-
-            </ul> -->
-
         </div>
-
         <div class="footer-bottom">
             <p class="copyright">
                 &copy; 2026 marketing-digital. Tous droits réservés.
@@ -618,45 +589,25 @@
 <a href="#top" class="back-top-btn has-after active" aria-label="back to top" data-back-top-btn>
     <ion-icon name="arrow-up" aria-hidden="true"></ion-icon>
 </a>
-
-
 <script src="../assets/js/script.js" defer></script>
-
-
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script>
-
     const counters = document.querySelectorAll(".counter");
-
     const startCounter = (counter) => {
-
         const target = +counter.dataset.target;
-
         let count = 0;
-
         const speed = target / 100;
-
         const updateCount = () => {
-
             count += speed;
-
             if(count < target){
-
                 counter.innerText = Math.ceil(count);
-
                 requestAnimationFrame(updateCount);
-
             } else {
-
                 counter.innerText = target + "+";
-
             }
-
         };
-
         updateCount();
-
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -670,26 +621,16 @@
     counters.forEach(counter => observer.observe(counter));
 </script>
 
-<!-- IONICONS -->
-
 <script type="module"
         src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
-
 </script>
 
 <script nomodule
         src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js">
-
 </script>
 
 
-
-
-
-<!-- SCHEMA SEO -->
-
 <script type="application/ld+json">
-
     {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
@@ -697,7 +638,6 @@
         "description": "Agence SEO spécialisée en optimisation moteurs de recherche",
         "serviceType": "SEO"
     }
-
 </script>
 </body>
 </html>
