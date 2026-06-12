@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bâtisseurs Modernité — Construction & Rénovation en France</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --anthracite:  #1C1F24;
+  --concrete:    #E8E0D4;
+  --concrete-2:  #D0C8BB;
+  --steel:       #3A6B8A;
+  --amber:       #C8781A;
+  --amber-dim:   rgba(200,120,26,.12);
+  --offwhite:    #F7F5F1;
+  --ink:         #1C1F24;
+  --ink-2:       #4A4F58;
+  --ink-3:       #8A8F98;
+  --white:       #FFFFFF;
+
+  --ff-display:  'Bebas Neue', Impact, sans-serif;
+  --ff-body:     'DM Sans', sans-serif;
+
+  --radius:      4px;
+  --transition:  .25s cubic-bezier(.4,0,.2,1);
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--ff-body);
+  background: var(--offwhite);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   IMAGE PLACEHOLDER SYSTEM
+═══════════════════════════════════════════ */
+/* Every [data-img] element is a styled placeholder.
+   To replace with a real image, set a background-image
+   or drop an <img> inside and add class .img-loaded      */
+
+[data-img] {
+  position: relative;
+  background: var(--concrete);
+  overflow: hidden;
+}
+[data-img]::before {
+  content: '';
+  position: absolute; inset: 0;
+  
+  pointer-events: none;
+}
+[data-img]::after {
+  content: attr(data-img);
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--ff-body);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(28,31,36,.38);
+  white-space: nowrap;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Corner brackets on placeholders */
+.img-frame::before { background: none; }
+.img-frame .frame-corner {
+  position: absolute;
+  width: 22px; height: 22px;
+  border-color: var(--amber);
+  border-style: solid;
+  z-index: 2;
+  pointer-events: none;
+}
+.img-frame .frame-corner.tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
+.img-frame .frame-corner.tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
+.img-frame .frame-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
+.img-frame .frame-corner.br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+.img-frame .frame-ref {
+  position: absolute;
+  bottom: 14px; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--ff-display);
+  font-size: 1.1rem;
+  letter-spacing: .2em;
+  color: rgba(28,31,36,.3);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════ */
+.container { width: min(1280px, 94%); margin-inline: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 40px;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(28,31,36,.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  transition: background var(--transition);
+}
+.nav-logo {
+  font-family: var(--ff-display);
+  font-size: 2.2rem;
+  letter-spacing: .08em;
+  color: var(--white);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-logo .logo-mark {
+  width: 32px; height: 32px;
+  background: var(--amber);
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  flex-shrink: 0;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 1.3rem; font-weight: 500;
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  transition: color var(--transition);
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--amber);
+  color: var(--white) !important;
+  padding: 9px 22px;
+  border-radius: var(--radius);
+  font-weight: 700 !important;
+  transition: background var(--transition) !important;
+}
+.nav-cta:hover { background: #b06515 !important; }
+
+.nav-burger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 4px;
+}
+.nav-burger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--white);
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+}
+@media (max-width: 600px) { .nav { padding: 0 20px; } }
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero {
+  padding-top: 68px;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  background: var(--anthracite);
+  padding: 90px 64px 90px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 28px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 40px; height: 2px;
+  background: var(--amber);
+  flex-shrink: 0;
+}
+.hero-eyebrow span {
+  font-family: var(--ff-body);
+  font-size: 1.2rem; font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.hero-title {
+  font-family: var(--ff-display);
+  font-size: clamp(5rem, 8vw, 9rem);
+  line-height: .92;
+  letter-spacing: .01em;
+  color: var(--white);
+  margin-bottom: 32px;
+}
+.hero-title .line-accent { color: var(--amber); }
+.hero-title .line-concrete {
+  -webkit-text-stroke: 1.5px rgba(255,255,255,.35);
+  color: transparent;
+}
+
+.hero-desc {
+  font-size: 1.6rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,.6);
+  max-width: 44ch;
+  margin-bottom: 48px;
+}
+
+.hero-actions {
+  display: flex; align-items: center; gap: 20px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--amber);
+  color: var(--white);
+  font-family: var(--ff-body);
+  font-size: 1.45rem; font-weight: 700;
+  letter-spacing: .04em;
+  padding: 15px 32px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.btn-primary:hover {
+  background: #b06515;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(200,120,26,.35);
+}
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent;
+  color: var(--white);
+  font-family: var(--ff-body);
+  font-size: 1.45rem; font-weight: 500;
+  letter-spacing: .04em;
+  padding: 13px 28px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  border: 1.5px solid rgba(255,255,255,.3);
+  transition: border-color var(--transition), background var(--transition);
+}
+.btn-outline:hover {
+  border-color: var(--white);
+  background: rgba(255,255,255,.06);
+}
+
+/* Hero stats strip */
+.hero-stats {
+  display: flex; gap: 36px;
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  flex-wrap: wrap;
+}
+.hero-stat-num {
+  font-family: var(--ff-display);
+  font-size: 3.4rem;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: .02em;
+}
+.hero-stat-num span { color: var(--amber); }
+.hero-stat-label {
+  font-size: 1.2rem; color: rgba(255,255,255,.45);
+  margin-top: 4px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* Hero image half */
+.hero-visual {
+  position: relative;
+}
+.hero-img-placeholder {
+  width: 100%; height: 100%;
+  min-height: 500px;
+}
+
+/* Diagonal clip over image */
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -1px; bottom: 0;
+  width: 60px;
+  background: var(--anthracite);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  z-index: 2;
+}
+
+@media (max-width: 960px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .hero-content { padding: 70px 32px 60px; }
+  .hero-visual { min-height: 360px; }
+  .hero-visual::before { display: none; }
+  .hero-title { font-size: clamp(4.5rem, 14vw, 7rem); }
+}
+
+/* ═══════════════════════════════════════════
+   RIBBON — certification strip
+═══════════════════════════════════════════ */
+.ribbon {
+  background: var(--amber);
+  padding: 14px 0;
+  overflow: hidden;
+}
+.ribbon-track {
+  display: flex; gap: 60px;
+  animation: scrollRibbon 22s linear infinite;
+  width: max-content;
+}
+@keyframes scrollRibbon {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ribbon-item {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--ff-display);
+  font-size: 1.5rem;
+  letter-spacing: .12em;
+  color: var(--white);
+  white-space: nowrap;
+}
+.ribbon-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,.5);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════ */
+.about {
+  padding: 110px 0;
+  background: var(--offwhite);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 260px 200px;
+  gap: 14px;
+}
+.about-img-main {
+  grid-column: 1 / 3;
+}
+.about-img-main, .about-img-sm { width: 100%; height: 100%; }
+
+.about-label {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 20px;
+}
+.about-label::before {
+  content: '';
+  width: 30px; height: 2px;
+  background: var(--amber);
+}
+.about-label span {
+  font-size: 1.2rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--amber);
+}
+.about-title {
+  font-family: var(--ff-display);
+  font-size: clamp(3.8rem, 5vw, 5.5rem);
+  line-height: .95;
+  letter-spacing: .02em;
+  color: var(--anthracite);
+  margin-bottom: 28px;
+}
+.about-body {
+  font-size: 1.55rem;
+  line-height: 1.85;
+  color: var(--ink-2);
+  margin-bottom: 20px;
+}
+.about-values {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-top: 36px;
+}
+.about-value-item {
+  padding: 18px 20px;
+  background: var(--white);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.about-value-title {
+  font-size: 1.35rem; font-weight: 700;
+  color: var(--anthracite); margin-bottom: 5px;
+}
+.about-value-desc {
+  font-size: 1.25rem; color: var(--ink-3); line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 50px; }
+  .about-media { grid-template-rows: 220px 160px; }
+}
+
+/* ═══════════════════════════════════════════
+   SERVICES
+═══════════════════════════════════════════ */
+.services {
+  background: var(--anthracite);
+  padding: 110px 0;
+  position: relative;
+  overflow: hidden;
+}
+.services::before {
+  content: 'SAVOIR-FAIRE';
+  position: absolute;
+  top: -20px; right: -10px;
+  font-family: var(--ff-display);
+  font-size: 18rem;
+  color: rgba(255,255,255,.025);
+  pointer-events: none;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.section-header {
+  margin-bottom: 64px;
+}
+.section-header .label {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px;
+}
+.section-header .label::before {
+  content: '';
+  width: 30px; height: 2px;
+  background: var(--amber);
+}
+.section-header .label span {
+  font-size: 1.2rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--amber);
+}
+.section-title-light {
+  font-family: var(--ff-display);
+  font-size: clamp(3.8rem, 5vw, 5.5rem);
+  letter-spacing: .02em;
+  color: var(--white);
+  line-height: .95;
+}
+.section-title-dark {
+  font-family: var(--ff-display);
+  font-size: clamp(3.8rem, 5vw, 5.5rem);
+  letter-spacing: .02em;
+  color: var(--anthracite);
+  line-height: .95;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.service-card {
+  background: rgba(255,255,255,.04);
+  padding: 44px 36px;
+  border: 1px solid rgba(255,255,255,.07);
+  transition: background var(--transition), border-color var(--transition);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+.service-card:hover {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(200,120,26,.4);
+}
+.service-card:hover .service-num { color: var(--amber); }
+
+.service-num {
+  font-family: var(--ff-display);
+  font-size: 5rem;
+  color: rgba(255,255,255,.08);
+  line-height: 1;
+  margin-bottom: 24px;
+  transition: color var(--transition);
+}
+.service-img {
+  width: 100%;
+  height: 180px;
+  margin-bottom: 24px;
+  border-radius: var(--radius);
+}
+.service-title {
+  font-family: var(--ff-display);
+  font-size: 2.4rem;
+  letter-spacing: .04em;
+  color: var(--white);
+  margin-bottom: 14px;
+  line-height: 1.1;
+}
+.service-desc {
+  font-size: 1.4rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 24px;
+}
+.service-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 1.25rem; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--amber);
+  text-decoration: none;
+}
+.service-link::after {
+  content: '→';
+  transition: transform var(--transition);
+}
+.service-link:hover::after { transform: translateX(5px); }
+
+@media (max-width: 900px) {
+  .services-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card { padding: 32px 24px; }
+}
+
+/* ═══════════════════════════════════════════
+   REALIZATIONS
+═══════════════════════════════════════════ */
+.realizations {
+  padding: 110px 0;
+  background: var(--offwhite);
+}
+
+.realizations-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+.realizations-intro p {
+  font-size: 1.55rem;
+  line-height: 1.8;
+  color: var(--ink-2);
+  align-self: end;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 320px 260px;
+  gap: 14px;
+}
+.project-card { position: relative; overflow: hidden; cursor: pointer; }
+.project-card:nth-child(1) { grid-column: 1/6; grid-row: 1/2; }
+.project-card:nth-child(2) { grid-column: 6/13; grid-row: 1/2; }
+.project-card:nth-child(3) { grid-column: 1/5; grid-row: 2/3; }
+.project-card:nth-child(4) { grid-column: 5/9; grid-row: 2/3; }
+.project-card:nth-child(5) { grid-column: 9/13; grid-row: 2/3; }
+
+.project-img {
+  width: 100%; height: 100%;
+  transition: transform .5s cubic-bezier(.4,0,.2,1);
+}
+.project-card:hover .project-img { transform: scale(1.04); }
+
+.project-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(28,31,36,.88) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.project-card:hover .project-overlay { opacity: 1; }
+
+.project-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 24px 26px;
+  transform: translateY(12px);
+  transition: transform var(--transition);
+}
+.project-card:hover .project-info { transform: translateY(0); }
+
+.project-tag {
+  display: inline-block;
+  background: var(--amber);
+  color: var(--white);
+  font-size: 1.05rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 2px;
+  margin-bottom: 8px;
+}
+.project-name {
+  font-family: var(--ff-display);
+  font-size: 2rem;
+  color: var(--white);
+  letter-spacing: .04em;
+  line-height: 1.1;
+}
+
+@media (max-width: 900px) {
+  .realizations-intro { grid-template-columns: 1fr; }
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .project-card { grid-column: auto !important; grid-row: auto !important; height: 220px; }
+  .project-overlay { opacity: 1; }
+  .project-info { transform: translateY(0); }
+}
+@media (max-width: 600px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card { height: 240px; }
+}
+
+/* ═══════════════════════════════════════════
+   PROCESS
+═══════════════════════════════════════════ */
+.process {
+  background: var(--concrete);
+  padding: 110px 0;
+}
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 60px;
+  position: relative;
+}
+/* Connecting line */
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 38px; left: calc(12.5% + 10px); right: calc(12.5% + 10px);
+  height: 1px;
+  background: linear-gradient(90deg, var(--amber), var(--steel), var(--amber));
+  z-index: 0;
+}
+.process-step {
+  padding: 0 24px;
+  position: relative; z-index: 1;
+}
+.step-num-wrap {
+  width: 76px; height: 76px;
+  background: var(--anthracite);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+  border: 3px solid var(--concrete);
+  position: relative;
+}
+.step-num-wrap::after {
+  content: '';
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 1px dashed rgba(200,120,26,.45);
+}
+.step-num {
+  font-family: var(--ff-display);
+  font-size: 2.6rem;
+  color: var(--amber);
+  letter-spacing: .04em;
+  line-height: 1;
+}
+.step-title {
+  font-family: var(--ff-display);
+  font-size: 2rem;
+  letter-spacing: .04em;
+  color: var(--anthracite);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+.step-desc {
+  font-size: 1.4rem;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+
+@media (max-width: 860px) {
+  .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .process-steps::before { display: none; }
+}
+@media (max-width: 560px) {
+  .process-steps { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════════ */
+.testimonials {
+  padding: 110px 0;
+  background: var(--anthracite);
+  overflow: hidden;
+  position: relative;
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+.testimonial-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  position: relative;
+  transition: border-color var(--transition), background var(--transition);
+}
+.testimonial-card:hover {
+  border-color: rgba(200,120,26,.4);
+  background: rgba(255,255,255,.08);
+}
+.testimonial-card::before {
+  content: '\201C';
+  font-family: Georgia, serif;
+  font-size: 8rem;
+  color: var(--amber);
+  opacity: .3;
+  position: absolute;
+  top: 10px; left: 24px;
+  line-height: 1;
+  pointer-events: none;
+}
+.testimonial-text {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,.75);
+  margin-top: 28px;
+  margin-bottom: 28px;
+  font-style: italic;
+}
+.testimonial-author {
+  display: flex; align-items: center; gap: 14px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+.author-avatar-ph {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.author-name {
+  font-size: 1.35rem; font-weight: 700;
+  color: var(--white);
+}
+.author-company {
+  font-size: 1.2rem; color: var(--amber);
+  margin-top: 2px;
+}
+.stars {
+  display: flex; gap: 3px;
+  margin-bottom: 12px;
+}
+.star { color: var(--amber); font-size: 1.4rem; }
+
+@media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+/* ═══════════════════════════════════════════
+   TEAM
+═══════════════════════════════════════════ */
+.team {
+  padding: 110px 0;
+  background: var(--offwhite);
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+.team-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--concrete-2);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.team-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(28,31,36,.12);
+}
+.team-photo {
+  width: 100%;
+  height: 240px;
+}
+.team-info {
+  padding: 22px 22px 26px;
+  border-top: 3px solid var(--amber);
+}
+.team-name {
+  font-family: var(--ff-display);
+  font-size: 2rem;
+  letter-spacing: .04em;
+  color: var(--anthracite);
+  margin-bottom: 4px;
+}
+.team-role {
+  font-size: 1.3rem;
+  color: var(--ink-3);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) { .team-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .team-grid { grid-template-columns: 1fr 1fr; } }
+
+/* ═══════════════════════════════════════════
+   PARTNERS
+═══════════════════════════════════════════ */
+.partners {
+  padding: 70px 0;
+  background: var(--concrete);
+  border-top: 1px solid var(--concrete-2);
+}
+.partners-label {
+  text-align: center;
+  font-size: 1.2rem; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 40px;
+}
+.partners-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.partner-logo-ph {
+  width: 140px; height: 48px;
+  background: var(--white);
+  border-radius: 4px;
+  opacity: .55;
+  transition: opacity var(--transition);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ff-display);
+  font-size: 1.5rem;
+  letter-spacing: .08em;
+  color: var(--ink-3);
+}
+.partner-logo-ph:hover { opacity: 1; }
+
+/* ═══════════════════════════════════════════
+   CONTACT / CTA SECTION
+═══════════════════════════════════════════ */
+.contact {
+  padding: 110px 0;
+  background: var(--anthracite);
+  position: relative;
+  overflow: hidden;
+}
+.contact::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,120,26,.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-title {
+  font-family: var(--ff-display);
+  font-size: clamp(4rem, 6vw, 6.5rem);
+  letter-spacing: .02em;
+  color: var(--white);
+  line-height: .95;
+  margin-bottom: 24px;
+}
+.contact-title span { color: var(--amber); }
+.contact-desc {
+  font-size: 1.55rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 40px;
+  max-width: 46ch;
+}
+.contact-infos { display: flex; flex-direction: column; gap: 18px; }
+.contact-info-item {
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.contact-info-icon {
+  width: 40px; height: 40px;
+  background: rgba(200,120,26,.15);
+  border: 1px solid rgba(200,120,26,.35);
+  border-radius: var(--radius);
+  display: grid; place-items: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+.contact-info-label {
+  font-size: 1.15rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 3px;
+}
+.contact-info-value {
+  font-size: 1.4rem;
+  color: rgba(255,255,255,.7);
+}
+
+/* Form */
+.contact-form {
+  display: flex; flex-direction: column; gap: 16px;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-label {
+  font-size: 1.2rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+}
+.form-input,
+.form-select,
+.form-textarea {
+  background: rgba(255,255,255,.06);
+  border: 1.5px solid rgba(255,255,255,.12);
+  border-radius: var(--radius);
+  padding: 13px 16px;
+  font-family: var(--ff-body);
+  font-size: 1.4rem;
+  color: var(--white);
+  outline: none;
+  transition: border-color var(--transition), background var(--transition);
+  width: 100%;
+}
+.form-input::placeholder,
+.form-textarea::placeholder { color: rgba(255,255,255,.25); }
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--amber);
+  background: rgba(255,255,255,.09);
+}
+.form-select option { background: var(--anthracite); color: var(--white); }
+.form-textarea { resize: vertical; min-height: 120px; }
+.form-submit {
+  background: var(--amber);
+  color: var(--white);
+  font-family: var(--ff-body);
+  font-size: 1.5rem; font-weight: 700;
+  letter-spacing: .06em;
+  padding: 15px 36px;
+  border: none; border-radius: var(--radius);
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  align-self: flex-start;
+}
+.form-submit:hover {
+  background: #b06515;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(200,120,26,.4);
+}
+
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 50px; }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer {
+  background: #111316;
+  padding: 60px 0 30px;
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand {
+  font-family: var(--ff-display);
+  font-size: 2.8rem;
+  letter-spacing: .08em;
+  color: var(--white);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 16px;
+}
+.footer-brand .logo-mark {
+  width: 28px; height: 28px;
+  background: var(--amber);
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  flex-shrink: 0;
+}
+.footer-tagline {
+  font-size: 1.35rem;
+  color: rgba(255,255,255,.4);
+  line-height: 1.7;
+  max-width: 34ch;
+  margin-bottom: 24px;
+}
+.footer-col-title {
+  font-size: 1.15rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 18px;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a {
+  font-size: 1.4rem;
+  color: rgba(255,255,255,.55);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.footer-links a:hover { color: var(--amber); }
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-copy {
+  font-size: 1.3rem;
+  color: rgba(255,255,255,.3);
+}
+.footer-copy a { color: var(--amber); text-decoration: none; }
+
+.certif-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+.certif-badge {
+  padding: 5px 12px;
+  border: 1px solid rgba(200,120,26,.35);
+  border-radius: 3px;
+  font-size: 1.1rem; font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--amber);
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+@media (max-width: 560px) {
+  .footer-top { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left  { transform: translateX(-30px); }
+.reveal-right { transform: translateX(30px); }
+.reveal-left.visible,
+.reveal-right.visible { transform: translateX(0); }
+
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <div class="logo-mark"></div>
+    BÂTISSEURS MODERNITÉ
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#realizations">Réalisations</a></li>
+    <li><a href="#team">Équipe</a></li>
+    <li><a href="#contact" class="nav-cta">Devis gratuit</a></li>
+  </ul>
+  <button class="nav-burger" aria-label="Menu" id="navBurger">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span>Constructeur depuis 1998</span>
+    </div>
+    <h1 class="hero-title">
+      NOUS<br>
+      <span class="line-accent">BÂTISSONS</span><br>
+      <span class="line-concrete">DEMAIN</span>
+    </h1>
+    <p class="hero-desc">
+      Construction neuve, rénovation et génie civil. Nous livrons des projets d'exception en France métropolitaine, dans les délais et dans le respect de votre budget.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Demander un devis →</a>
+      <a href="#realizations" class="btn-outline">Voir nos réalisations</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">26<span>ans</span></div>
+        <div class="hero-stat-label">D'expérience</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">840<span>+</span></div>
+        <div class="hero-stat-label">Projets livrés</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">98<span>%</span></div>
+        <div class="hero-stat-label">Clients satisfaits</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-img-placeholder img-frame" style="background-image:url('5.jpg');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    " 
+     data-img="">
+      <div class="frame-corner tl"></div>
+      <div class="frame-corner tr"></div>
+      <div class="frame-corner bl"></div>
+      <div class="frame-corner br"></div>
+      <div class="frame-ref">IMG / HERO — 1920 × 1080</div>
+    </div>
+  </div>
+</section>
+
+<!-- Ribbon -->
+<div class="ribbon">
+  <div class="ribbon-track" id="ribbonTrack">
+    <span class="ribbon-item"><span class="ribbon-dot"></span>QUALIBAT CERTIFIÉ</span>
+    <span class="ribbon-item"><span class="ribbon-dot"></span>RGE RECONNU GARANT</span>
+    <span class="ribbon-item"><span class="ribbon-dot"></span>LABEL BBC EFFINERGIE</span>
+    <span class="ribbon-item"><span class="ribbon-dot"></span>ASSURANCE DÉCENNALE</span>
+    <span class="ribbon-item"><span class="ribbon-dot"></span>ISO 9001 : 2015</span>
+    <span class="ribbon-item"><span class="ribbon-dot"></span>MEMBRE FFB</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ribbon-item"><span class="ribbon-dot"></span>QUALIBAT CERTIFIÉ</span>
+    <span class="ribbon-item"><span class="ribbon-dot"></span>RGE RECONNU GARANT</span>
+    <span class="ribbon-item"><span class="ribbon-dot"></span>LABEL BBC EFFINERGIE</span>
+    <span class="ribbon-item"><span class="ribbon-dot"></span>ASSURANCE DÉCENNALE</span>
+    <span class="ribbon-item"><span class="ribbon-dot"></span>ISO 9001 : 2015</span>
+    <span class="ribbon-item"><span class="ribbon-dot"></span>MEMBRE FFB</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-media reveal reveal-left">
+        <div class="about-img-main img-frame" data-img="" style="background-image:url('2.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    " >
+          <div class="frame-corner tl"></div>
+          <div class="frame-corner tr"></div>
+          <div class="frame-corner bl"></div>
+          <div class="frame-corner br"></div>
+        </div>
+        <div class="about-img-sm" data-img="" style="background-image:url('3.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    " ></div>
+        <div class="about-img-sm" data-img="" style="background-image:url('4.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    " ></div>
+      </div>
+
+      <div class="about-content reveal reveal-right">
+        <div class="about-label"><span>Notre histoire</span></div>
+        <h2 class="about-title">EXPERTS DE LA<br>CONSTRUCTION<br>FRANÇAISE</h2>
+        <p class="about-body">
+          Fondée en 1998 à Lyon, Bâtisseurs Modernité s'est imposée comme une référence dans la construction neuve et la rénovation de bâtiments résidentiels, tertiaires et industriels.
+        </p>
+        <p class="about-body">
+          Avec plus de 840 projets livrés en France métropolitaine, nous maîtrisons chaque étape du chantier : conception, gestion de projet, exécution et réception des travaux.
+        </p>
+        <div class="about-values">
+          <div class="about-value-item">
+            <div class="about-value-title">Rigueur</div>
+            <div class="about-value-desc">Normes DTU & Eurocodes respectées à la lettre</div>
+          </div>
+          <div class="about-value-item">
+            <div class="about-value-title">Innovation</div>
+            <div class="about-value-desc">BIM, matériaux biosourcés et solutions bas-carbone</div>
+          </div>
+          <div class="about-value-item">
+            <div class="about-value-title">Transparence</div>
+            <div class="about-value-desc">Suivi de chantier en temps réel pour le client</div>
+          </div>
+          <div class="about-value-item">
+            <div class="about-value-title">Engagement</div>
+            <div class="about-value-desc">Délais garantis par contrat, sans exception</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SERVICES
+════════════════════════════════════════ -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="label"><span>Ce que nous faisons</span></div>
+      <h2 class="section-title-light">NOS DOMAINES<br>D'EXPERTISE</h2>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <div class="service-img" data-img="" style="background-image:url('7.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    "></div>
+        <h3 class="service-title">CONSTRUCTION NEUVE</h3>
+        <p class="service-desc">Maisons individuelles, immeubles collectifs, bâtiments tertiaires. De la fondation à la livraison clé-en-main.</p>
+        <a href="#contact" class="service-link">Demander un devis</a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-num">02</div>
+        <div class="service-img" data-img="" style="background-image:url('6.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    " ></div>
+        <h3 class="service-title">RÉNOVATION</h3>
+        <p class="service-desc">Réhabilitation complète, extension, surélévation. Nous redonnons vie à vos bâtiments existants.</p>
+        <a href="#contact" class="service-link">Demander un devis</a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-num">03</div>
+        <div class="service-img" data-img="" style="background-image:url('10.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    "></div>
+        <h3 class="service-title">GÉNIE CIVIL</h3>
+        <p class="service-desc">Ouvrages d'art, infrastructures, voiries et réseaux. Des structures conçues pour durer des décennies.</p>
+        <a href="#contact" class="service-link">Demander un devis</a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-num">04</div>
+        <div class="service-img" data-img="" style="background-image:url('promotion.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    "></div>
+        <h3 class="service-title">PROMOTION IMMOBILIÈRE</h3>
+        <p class="service-desc">Développement de programmes résidentiels et commerciaux, de la faisabilité à la commercialisation.</p>
+        <a href="#contact" class="service-link">Demander un devis</a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-num">05</div>
+        <div class="service-img" data-img="" style="background-image:url('efficacite_energitique.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    "></div>
+        <h3 class="service-title">EFFICACITÉ ÉNERGÉTIQUE</h3>
+        <p class="service-desc">Rénovation thermique RE2020, isolation, pompes à chaleur. Réduisez vos factures et votre empreinte carbone.</p>
+        <a href="#contact" class="service-link">Demander un devis</a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-num">06</div>
+        <div class="service-img" data-img="" style="background-image:url('maitre-doeuvre.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    "></div>
+        <h3 class="service-title">MAÎTRISE D'ŒUVRE</h3>
+        <p class="service-desc">Coordination des corps de métier, suivi de chantier et contrôle qualité. Votre projet entre de bonnes mains.</p>
+        <a href="#contact" class="service-link">Demander un devis</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     REALIZATIONS
+════════════════════════════════════════ -->
+<section class="realizations" id="realizations">
+  <div class="container">
+    <div class="realizations-intro">
+      <div class="reveal">
+        <div class="about-label"><span>Portfolio</span></div>
+        <h2 class="section-title-dark">NOS<br>RÉALISATIONS</h2>
+      </div>
+      <p class="reveal">
+        Chaque projet est unique. Découvrez une sélection de nos réalisations en construction neuve, rénovation et génie civil à travers toute la France.
+      </p>
+    </div>
+
+    <!-- GRILLE PROJETS — 5 images à remplacer -->
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-img img-frame" data-img="" style="background-image:url('projet1.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    ">
+          <div class="frame-corner tl"></div>
+          <div class="frame-corner tr"></div>
+          <div class="frame-corner bl"></div>
+          <div class="frame-corner br"></div>
+        </div>
+        <div class="project-overlay"></div>
+        <div class="project-info">
+          <div class="project-tag">Construction neuve</div>
+          <div class="project-name">Résidence Les Arènes — Lyon</div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img" data-img="" style="background-image:url('projet2.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    "></div>
+        <div class="project-overlay"></div>
+        <div class="project-info">
+          <div class="project-tag">Tertiaire</div>
+          <div class="project-name">Immeuble Bureaux — La Défense</div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img" data-img="" style="background-image:url('projet3.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    "></div>
+        <div class="project-overlay"></div>
+        <div class="project-info">
+          <div class="project-tag">Génie civil</div>
+          <div class="project-name">Viaduc A47 — Loire</div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img" data-img="" style="background-image:url('projet4.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    "></div>
+        <div class="project-overlay"></div>
+        <div class="project-info">
+          <div class="project-tag">Rénovation</div>
+          <div class="project-name">Haussmann Réhabilité — Bordeaux</div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img" data-img="" style="background-image:url('projet5.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    "></div>
+        <div class="project-overlay"></div>
+        <div class="project-info">
+          <div class="project-tag">Éco-quartier</div>
+          <div class="project-name">Îlot Vert — Nantes</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:48px;">
+      <a href="#contact" class="btn-primary" style="display:inline-flex;">Voir tous nos projets →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     PROCESS
+════════════════════════════════════════ -->
+<section class="process">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:0;">
+      <div class="about-label" style="justify-content:center;"><span>Comment on travaille</span></div>
+      <h2 class="section-title-dark" style="text-align:center;">NOTRE MÉTHODE</h2>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num-wrap"><span class="step-num">01</span></div>
+        <h3 class="step-title">ÉTUDE &amp; DEVIS</h3>
+        <p class="step-desc">Analyse de votre projet, visite de terrain, étude technique et remise d'un devis détaillé sous 5 jours ouvrés.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num-wrap"><span class="step-num">02</span></div>
+        <h3 class="step-title">CONCEPTION</h3>
+        <p class="step-desc">Plans architecturaux, maquette BIM 3D, dépôt des permis de construire et consultation des entreprises sous-traitantes.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num-wrap"><span class="step-num">03</span></div>
+        <h3 class="step-title">RÉALISATION</h3>
+        <p class="step-desc">Exécution des travaux avec reporting hebdomadaire, accès au tableau de bord chantier et réunions de suivi régulières.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num-wrap"><span class="step-num">04</span></div>
+        <h3 class="step-title">LIVRAISON</h3>
+        <p class="step-desc">Réception contradictoire, levée des réserves, remise des DOE et garantie décennale activée dès le premier jour.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════ -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="label"><span>Ce que disent nos clients</span></div>
+      <h2 class="section-title-light">ILS NOUS FONT<br>CONFIANCE</h2>
+    </div>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card reveal">
+        <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="testimonial-text">
+          "Bâtisseurs Modernité a livré notre résidence de 48 logements avec 3 semaines d'avance sur le planning. La qualité d'exécution et la communication tout au long du chantier étaient exemplaires."
+        </p>
+        <div class="testimonial-author">
+          <!-- IMAGE AVATAR 1 -->
+          <div class="author-avatar-ph" data-img="👤"></div>
+          <div>
+            <div class="author-name">Marc Lefebvre</div>
+            <div class="author-company">Promoteur — SCI Les Cèdres</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="testimonial-text">
+          "La rénovation complète de notre immeuble haussmannien à Bordeaux a été menée avec une maîtrise technique et un soin du détail remarquables. Je recommande sans réserve."
+        </p>
+        <div class="testimonial-author">
+          <!-- IMAGE AVATAR 2 -->
+          <div class="author-avatar-ph" data-img="👤"></div>
+          <div>
+            <div class="author-name">Sophie Mercier</div>
+            <div class="author-company">Propriétaire — Syndicat de copropriété</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="testimonial-text">
+          "Un partenaire de confiance pour nos projets d'infrastructure. Leur maîtrise du génie civil et la rigueur de leur suivi qualité en font un acteur incontournable dans la région."
+        </p>
+        <div class="testimonial-author">
+          <!-- IMAGE AVATAR 3 -->
+          <div class="author-avatar-ph" data-img="👤"></div>
+          <div>
+            <div class="author-name">Éric Dupont</div>
+            <div class="author-company">DST — Métropole de Lyon</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     TEAM
+════════════════════════════════════════ -->
+<section class="team" id="team">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;">
+      <div class="label" style="justify-content:center;"><span>Les hommes &amp; femmes du projet</span></div>
+      <h2 class="section-title-dark">NOTRE ÉQUIPE</h2>
+    </div>
+
+    <div class="team-grid">
+
+      <div class="team-card reveal">
+        <!-- IMAGE ÉQUIPE 1 — portrait photo -->
+        <div class="team-photo" data-img="" style="background-image:url('directeur.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    "></div>
+        <div class="team-info">
+          <div class="team-name">JEAN-PIERRE MARTIN</div>
+          <div class="team-role">Directeur Général</div>
+        </div>
+      </div>
+
+      <div class="team-card reveal">
+        <!-- IMAGE ÉQUIPE 2 -->
+        <div class="team-photo" data-img="" style="background-image:url('directrice_technique.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    "></div>
+        <div class="team-info">
+          <div class="team-name">ISABELLE FONTAINE</div>
+          <div class="team-role">Directrice Technique</div>
+        </div>
+      </div>
+
+      <div class="team-card reveal">
+        <!-- IMAGE ÉQUIPE 3 -->
+        <div class="team-photo" data-img="" style="background-image:url('chef_projet.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    "></div>
+        <div class="team-info">
+          <div class="team-name">THOMAS GIRARD</div>
+          <div class="team-role">Chef de Projets Senior</div>
+        </div>
+      </div>
+
+      <div class="team-card reveal">
+        <!-- IMAGE ÉQUIPE 4 -->
+        <div class="team-photo" data-img="" style="background-image:url('ingénieure_structure.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    "></div>
+        <div class="team-info">
+          <div class="team-name">NADIA BENALI</div>
+          <div class="team-role">Ingénieure Structure</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     PARTNERS
+════════════════════════════════════════ -->
+<section class="partners">
+  <div class="container">
+    <p class="partners-label">Ils nous font confiance &amp; nos partenaires</p>
+    <div class="partners-logos">
+      <!-- IMAGE LOGO PARTENAIRE : remplacez par vos logos réels -->
+      <div class="partner-logo-ph" data-img="">VINCI</div>
+      <div class="partner-logo-ph" data-img="">BOUYGUES</div>
+      <div class="partner-logo-ph" data-img="">NEXITY</div>
+      <div class="partner-logo-ph" data-img="">AXA</div>
+      <div class="partner-logo-ph" data-img="">LAFARGE</div>
+      <div class="partner-logo-ph" data-img="">SAINT-GOBAIN</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="reveal reveal-left">
+        <h2 class="contact-title">PARLONS DE<br>VOTRE <span>PROJET</span></h2>
+        <p class="contact-desc">
+          Un devis gratuit et sans engagement sous 48h. Notre équipe technique analyse votre projet et vous propose la solution la plus adaptée à vos besoins et à votre budget.
+        </p>
+        <div class="contact-infos">
+          <div class="contact-info-item">
+            <div>
+              <div class="contact-info-label">Siège social</div>
+              <div class="contact-info-value">12 Rue des Bâtisseurs, 69003 Lyon</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div>
+              <div class="contact-info-label">Téléphone</div>
+              <div class="contact-info-value">+33 (0)4 72 00 00 00</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div>
+              <div class="contact-info-label">Email</div>
+              <div class="contact-info-value">contact@batisseurs-modernite.fr</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div>
+              <div class="contact-info-label">Horaires</div>
+              <div class="contact-info-value">Lun–Ven : 8h00–18h00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form reveal reveal-right" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Prénom</label>
+            <input type="text" class="form-input" placeholder="Jean">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nom</label>
+            <input type="text" class="form-input" placeholder="Dupont">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="jean.dupont@exemple.fr">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Téléphone</label>
+          <input type="tel" class="form-input" placeholder="+33 6 00 00 00 00">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Type de projet</label>
+          <select class="form-select">
+            <option value="" disabled selected>Sélectionnez…</option>
+            <option>Construction neuve — résidentiel</option>
+            <option>Construction neuve — tertiaire</option>
+            <option>Rénovation</option>
+            <option>Génie civil &amp; infrastructure</option>
+            <option>Efficacité énergétique</option>
+            <option>Maîtrise d'œuvre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Décrivez votre projet</label>
+          <textarea class="form-textarea" placeholder="Surface, localisation, budget estimé, délai souhaité…"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Envoyer ma demande →</button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <div class="logo-mark"></div>
+          BÂTISSEURS MODERNITÉ
+        </div>
+        <p class="footer-tagline">Construction neuve, rénovation et génie civil en France métropolitaine depuis 1998.</p>
+        <div class="certif-badges">
+          <span class="certif-badge">Qualibat</span>
+          <span class="certif-badge">RGE</span>
+          <span class="certif-badge">Décennale</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#">Construction neuve</a></li>
+          <li><a href="#">Rénovation</a></li>
+          <li><a href="#">Génie civil</a></li>
+          <li><a href="#">Efficacité énergétique</a></li>
+          <li><a href="#">Maîtrise d'œuvre</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Entreprise</div>
+        <ul class="footer-links">
+          <li><a href="#">À propos</a></li>
+          <li><a href="#">Équipe</a></li>
+          <li><a href="#">Réalisations</a></li>
+          <li><a href="#">Recrutement</a></li>
+          <li><a href="#">Presse</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Zones d'intervention</div>
+        <ul class="footer-links">
+          <li><a href="#">Auvergne-Rhône-Alpes</a></li>
+          <li><a href="#">Île-de-France</a></li>
+          <li><a href="#">Nouvelle-Aquitaine</a></li>
+          <li><a href="#">PACA</a></li>
+          <li><a href="#">Occitanie</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        © 2026 <a href="#">Bâtisseurs Modernité SAS</a> — SIRET 123 456 789 00012 — 
+        <a href="#">Mentions légales</a> · <a href="#">Politique de confidentialité</a>
+      </p>
+      <p class="footer-copy" style="color:rgba(255,255,255,.18);">Vitrine réalisée par Brandnova</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+// ── Scroll reveal ──
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObserver.observe(el));
+
+// ── Nav scroll background ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.style.background = window.scrollY > 60
+    ? 'rgba(28,31,36,.98)'
+    : 'rgba(28,31,36,.92)';
+});
+
+// ── Mobile burger (simple toggle hint — implement full nav as needed) ──
+document.getElementById('navBurger').addEventListener('click', () => {
+  const links = document.querySelector('.nav-links');
+  const isOpen = links.style.display === 'flex';
+  if (isOpen) {
+    links.style.display = '';
+  } else {
+    links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:#1C1F24;padding:24px 32px;gap:20px;border-bottom:1px solid rgba(255,255,255,.1);z-index:99;';
+  }
+});
+
+// ── Smooth scroll for anchor links ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ── Contact form ──
+document.querySelector('.form-submit').addEventListener('click', function() {
+  const inputs = document.querySelectorAll('.form-input, .form-select, .form-textarea');
+  let valid = true;
+  inputs.forEach(inp => {
+    if (!inp.value.trim()) {
+      inp.style.borderColor = '#e05a2b';
+      valid = false;
+      setTimeout(() => inp.style.borderColor = '', 2000);
+    }
+  });
+  if (valid) {
+    this.textContent = '✓ Demande envoyée !';
+    this.style.background = '#1a7a4a';
+    setTimeout(() => {
+      this.textContent = 'Envoyer ma demande →';
+      this.style.background = '';
+    }, 4000);
+  }
+});
+</script>
+</body>
+</html>
